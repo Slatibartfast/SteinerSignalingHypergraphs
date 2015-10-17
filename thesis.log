@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 OCT 2015 22:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  16 OCT 2015 18:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -367,114 +367,119 @@ Underfull \vbox (badness 1502) has occurred while \output is active []
 
 ]
 Chapter 1.
-./thesis.tex:129: Misplaced alignment tab character &.
-l.129 Stuff about hypergraphs &
-                                hyperpaths. Justification for use.
-? 
+
+Overfull \hbox (1.71298pt too wide) in paragraph at lines 134--135
+[]\OT1/cmr/m/n/12 One area of cell-signaling that be-comes par-tic-u-larly prob
+-lem-atic in stan-dard graphs
+ []
+
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 14.49998pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[4] [5] [6]
+[4] [5] [6] [7] [8
+
+]
 Chapter 2.
 
 Package amsmath Warning: Foreign command \over;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 188.
+(amsmath)                 on input line 199.
 
-[7
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 245--248
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 256--259
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 252.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 263.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 252.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 263.
 
-Underfull \hbox (badness 10000) in paragraph at lines 249--257
+Underfull \hbox (badness 10000) in paragraph at lines 260--268
 
  []
 
-[8]
-Overfull \hbox (8.35866pt too wide) in paragraph at lines 278--279
+[10]
+Overfull \hbox (8.35866pt too wide) in paragraph at lines 289--290
 \OT1/cmr/m/n/12 You will prob-a-bly find the re-sources at $\OT1/cmtt/m/n/12 ht
 tp : / / www . lecb . ncifcrf . gov / []toms / latex .
  []
 
-[9] [10
+[11] [12
 
 ]
 Chapter 3.
 
-./thesis.tex:285: LaTeX Error: Unknown float option `d'.
+./thesis.tex:296: LaTeX Error: Unknown float option `d'.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.285 \begin{table}[htdp]
+l.296 \begin{table}[htdp]
                           % begins the table floating environment. This enab...
 
 ? 
-[11] [12
+[13] [14
 
-] [13] <subdivision.pdf, id=116, 220.825pt x 89.33376pt>
+] [15] <subdivision.pdf, id=122, 220.825pt x 89.33376pt>
 File: subdivision.pdf Graphic file (type pdf)
 
 <use subdivision.pdf>
-Package pdftex.def Info: subdivision.pdf used on input line 421.
+Package pdftex.def Info: subdivision.pdf used on input line 432.
 (pdftex.def)             Requested size: 220.82445pt x 89.33353pt.
- [14 <./subdivision.pdf>]
+ [16 <./subdivision.pdf>]
 File: subdivision.pdf Graphic file (type pdf)
  <use subdivision.pdf>
-Package pdftex.def Info: subdivision.pdf used on input line 434.
+Package pdftex.def Info: subdivision.pdf used on input line 445.
 (pdftex.def)             Requested size: 110.41222pt x 44.66676pt.
 File: subdivision.pdf Graphic file (type pdf)
 
 <use subdivision.pdf>
-Package pdftex.def Info: subdivision.pdf used on input line 446.
+Package pdftex.def Info: subdivision.pdf used on input line 457.
 (pdftex.def)             Requested size: 72.26979pt x 72.26979pt.
 File: subdivision.pdf Graphic file (type pdf)
  <use subdivision.pdf>
-Package pdftex.def Info: subdivision.pdf used on input line 457.
+Package pdftex.def Info: subdivision.pdf used on input line 468.
 (pdftex.def)             Requested size: 110.41222pt x 44.66676pt.
- [15
+ [17
 
-] [16
+] [18
 
-] [17] [18
+] [19] [20
 
 ]
 Appendix A.
-[19] [20
+[21] [22
 
 ]
 Appendix B.
-[21] [22
+[23] [24
 
-] (./thesis.bbl [23
+] (./thesis.bbl [25
 
-]) [24] (./thesis.aux) ) 
+]) [26] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
  3449 strings out of 493089
  45308 string characters out of 6134842
- 142971 words of memory out of 5000000
+ 142973 words of memory out of 5000000
  6837 multiletter control sequences out of 15000+600000
  13612 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,17n,45p,969b,306s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,17n,45p,1303b,306s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/am
@@ -491,10 +496,10 @@ fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pf
 b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10
 .pfb>
-Output written on thesis.pdf (42 pages, 236822 bytes).
+Output written on thesis.pdf (44 pages, 242771 bytes).
 PDF statistics:
- 227 PDF objects out of 1000 (max. 8388607)
- 159 compressed objects within 2 object streams
+ 234 PDF objects out of 1000 (max. 8388607)
+ 164 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  12 words of extra memory for PDF output out of 10000 (max. 10000000)
 

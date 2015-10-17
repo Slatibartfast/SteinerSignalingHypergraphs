@@ -63,7 +63,7 @@
 \thedivisionof{The Interdisciplinary Committee for Mathematics \& Biology}
 % if you want the approval page to say "Approved for the Committee",
 % uncomment the next line
-%\approvedforthe{Committee}
+\approvedforthe{Committee}
 
 \setlength{\parskip}{0pt}
 %%
@@ -122,16 +122,27 @@
 
 \section{Traditional Representations of Cell Signaling}
 
+
+
 \section{Graphs of Cell Signaling Networks}
 
 	
     \chapter{Hypergraphs \& Hyperpaths}
-Stuff about hypergraphs & hyperpaths. Justification for use.
+    
+While standard graphs are useful for many applications, they are severely limited in their ability to represent cell-signaling interactions.  Since they can only show pairwise interactions between nodes, whenever there is an interaction that requires more than two connections, the visualization of the graph becomes confusing, and biologically meaningless.  Furthermore, interactions involving multiple molecules require an enormous amount of different edges to represent all of the sub-interactions that take place.  Determining whether two edges are part of the same biological event is a non-trivial problem, and requires manual curation to solve, at this time.
+
+One area of cell-signaling that becomes particularly problematic in standard graphs is the formation, interaction, and destruction of protein complexes.  The only way that complexes can be represented in standard graphs is by creating a complete subgraph of all of the elements of the protein complex.  On their own, these complete subgraphs can yield useful information about the make-up of a protein complex, but once they begin interacting with other elements of the graph, the graph becomes much more complex, as all of the proteins in the complex must be represented independently.  In the case of interactions between multiple large complexes, it becomes the case that the standard graph representation of this interaction is a large complete subgraph that contains nodes for all of the proteins involved in either complex.  It is then computationally impossible to distinguish whether the entity being described by the subgraph is the interaction between multiple protein complexes, or simply one large complex that contains all of the components of both complexes.  Furthermore, since the complete subgraphs which represent complexes are undirected, it is not possible \textit{(is this the case?)} to tell what the inputs or outputs of a biochemical reaction may be. 
+
+Another shortcoming of standard graphs in representing complex biological interactions is that there is no way in which to represent positive or negative regulation of interactions.  Since there is a standardized way in which edges interact with nodes, there is no way to differentiate types of interactions between nodes.  This poses a challenge when there are regulators or catalysts present that are necessary for a reaction, but are not part of the inputs or outputs of the reaction.  If regulators are to be included in a standard graph representation of a cell-signaling network, they become indistinguishable from any other types of interactions that are taking place.  This lack of specificity is problematic, as it treats all interactions as equal, and hides potentially useful information from the graph.
+
+To resolve the issues presented by standard graphs, we instead use a generalization called a \textit{hypergraph} that allows for the addition of more detail  and specificity within the data structure than standard graphs allow for.  In particular, hypergraphs allow for both the representation of protein complexes in the form of \textit{hypernodes}, which we think of simply as a set of one or more nodes, and for the representation of complex, directed interactions that can have multiple inputs and outputs.  We represent these interactions with the use of \textit{hyperedges}, which define a set of one or more hypernodes.  Since a hyperedge may include more than two hypernodes, we gain the ability to represent both multi-protein interactions, as well as to define the notions of regulation on reactions.
 
 \section{Hypergraph Definitions}
-Where a directed graph represents directed, pairwise interactions between, we can use \textit{directed hypergraph} to represent directed interactions between sets of vertices (nodes). We define a directed hypergraph $\mathcal{H}$ as a pair $(V,E)$, where $V$ is a finite set of vertices and $E \subseteq 2^V \times 2^V$ is a finite set of \textit{hyperedges} connecting members of $V$ such that, for every $e=(T(e),H(e)) \in E$, $T(e) \cap H(e) = \emptyset$, and $T(e)$, $H(e) \neq \emptyset$.  We refer to $T(e)$ as the \textit{tail} of the hyperedge, and to $H(e)$ as the \textit{head} of the hyperedge.
+Where a directed graph represents directed, pairwise interactions between only two vertices, we can use \textit{directed hypergraph} to represent directed interactions between sets of vertices (nodes). We formally define a directed hypergraph, $\mathcal{H}$, as a pair $(V,E)$, where $V$ is a finite set of vertices and $E \subseteq 2^V \times 2^V$ is a finite set of \textit{directed hyperedges} connecting members of $V$ such that, for every $e=(T(e),H(e)) \in E$, $T(e) \cap H(e) = \emptyset$, and $T(e)$, $H(e) \neq \emptyset$.  We refer to $T(e)$ as the \textit{tail} of the hyperedge, and to $H(e)$ as the \textit{head} of the hyperedge.
 
-Furthermore, we can define sets of two or more nodes as \textit{hypernodes}, which are members of the power set of $V$.  These can be incorporated into a directed hypergraph to form a \textit{complexed directed hypergraph}.  We define a complexed directed hypergraph $\mathcal{H}$ as the triple $(V,U,E)$ in which $V$ is a finite set of vertices, $U \subseteq 2^V$ is a finite set of hypernodes, and $E \subseteq 2^U \times 2^U$ is a finite set of hyperedges such that, for every $e=(T(e),H(e)) \in E$, $T(e) \cap H(e) = \emptyset$ and $T(e)$, $H(e) \neq \emptyset$.
+Furthermore, we can define sets of two or more nodes as a hypernode, which are members of the power set of $V$.  These can be incorporated into a directed hypergraph to form a \textit{complexed directed hypergraph}.  We define a \textit{complexed directed hypergraph}, $\mathcal{H}$, as the triple $(V,U,E)$ in which $V$ is a finite set of vertices, $U \subseteq 2^V$ is a finite set of hypernodes, and $E \subseteq 2^U \times 2^U$ is a finite set of hyperedges such that, for every $e=(T(e),H(e)) \in E$, $T(e) \cap H(e) = \emptyset$ and $T(e)$, $H(e) \neq \emptyset$.
+
+It is important to note that a standard directed graph is a special case of a directed hypergraph.  This is the case if every hypernode in the graph contains only one element, and if each edge has exactly one head element, and one tail element.  This has two important implications for algorithms that run on directed hypergraphs.  First, this means that there is no loss in functionality caused by using a hypergraph representation of a cell network, since anything that could be computed on a standard directed graph can be recreated exactly using the special case of the hypergraph. Secondly, this is important, because it means that anything that can be computed on a standard graph will be at least as computationally difficult to compute when generalized to a hypergraph.  In fact, we find that many tasks that are computationally easy on standard graphs become very difficult when generalized to hypergraphs \textit{(cite Anna's paper on K shortest hyperpaths)}.
 
 \section{Hyperpath Definitions}
 In order to find the shortest route between two vertices, in a directed hypergraph, we define the notion of a \textit{hyperpath}, $P$, on the directed hypergraph $\mathcal{H}$.  We think of $P$ as the list of vertices and hyperedges that one must pass through in order to traverse through the directed hypergraph from vertex $s$ to get to $t$.
