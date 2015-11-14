@@ -45,8 +45,8 @@
 
 % \usepackage{times} % other fonts are available like times, bookman, charter, palatino
 
-\title{Implementation of Prize-Collecting Steiner Trees in Signaling Hypergraphs}
-\author{Barney Isaksen Potter}
+\title{Winning the Clay Prize in Mathematics feat. Barney Potter}
+\author{B-dog}
 % The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
 \date{May 2016}
 
@@ -126,7 +126,8 @@
 
 \section{Graphs of Cell Signaling Networks}
 
-	
+    \chapter{Notes, Comments, \& Changelog}
+    	
     \chapter{Hypergraphs \& Hyperpaths}
     
 While standard graphs are useful for many applications, they are severely limited in their ability to represent cell-signaling interactions.  Since they can only show pairwise interactions between nodes, whenever there is an interaction that requires more than two connections, the visualization of the graph becomes confusing, and biologically meaningless.  Furthermore, interactions involving multiple molecules require an enormous amount of different edges to represent all of the sub-interactions that take place.  Determining whether two edges are part of the same biological event is a non-trivial problem, and requires manual curation to solve, at this time.
@@ -144,12 +145,60 @@ Furthermore, we can define sets of two or more nodes as a hypernode, which are m
 
 It is important to note that a standard directed graph is a special case of a directed hypergraph.  This is the case if every hypernode in the graph contains only one element, and if each edge has exactly one head element, and one tail element.  This has two important implications for algorithms that run on directed hypergraphs.  First, this means that there is no loss in functionality caused by using a hypergraph representation of a cell network, since anything that could be computed on a standard directed graph can be recreated exactly using the special case of the hypergraph. Secondly, this is important, because it means that anything that can be computed on a standard graph will be at least as computationally difficult to compute when generalized to a hypergraph.  In fact, we find that many tasks that are computationally easy on standard graphs become very difficult when generalized to hypergraphs \textit{(cite Anna's paper on K shortest hyperpaths)}.
 
-\section{Hyperpath Definitions}
+\section{Hyperpaths}
 In order to find the shortest route between two vertices, in a directed hypergraph, we define the notion of a \textit{hyperpath}, $P$, on the directed hypergraph $\mathcal{H}$.  We think of $P$ as the list of vertices and hyperedges that one must pass through in order to traverse through the directed hypergraph from vertex $s$ to get to $t$.
 
-\subsection{Finding Hyperpaths}
+\subsection{Definition}
 
-\subsection{Hyperpath Algorithms}
+\subsection{Finding \textit{k}-Shortest Hyperpaths}
+
+\section{Algorithms on Hypergraphs}
+
+\subsection{Integer Linear Programming}
+
+	\chapter{The Prize-Collecting Steiner Problem}
+	
+\section{Definition of Prize-Collecting Steiner Trees}
+
+\subsection{Prize-Collecting Steiner Forests}
+
+\chapter{PCST in Directed Signaling Hypergraphs}
+
+\section{ILP Formulation}
+
+Given an input hypergraph $\mathcal{H}$, and a set of target nodes, $T$, we construct a Steiner Hypertree (define) using an ILP which encodes the definition of a Steiner Hypertree.  In order to accomplish this, we 
+
+We find the Steiner Hypergraph $\mathcal{S} = \{x,e\}$ by optimizing the function:
+
+\begin{equation} \label{eq:ilpsum}
+ \max_{\alpha , \delta} \sum_{x \in V} g_x \alpha_x - \sum_{e \in E} c_e \alpha_e - \sum_{x \in V} h_x \delta_x
+\end{equation}
+
+Subject to:
+
+\begin{equation} \label{eq:ilpT}
+ \alpha_x \geq 1 \qquad \forall x \in T
+\end{equation}
+
+\begin{equation} \label{eq:ilpinchead}
+ \sum_{x \in H_e} \alpha_x \leq \lvert H_e\rvert \alpha_e
+\end{equation}
+
+\begin{equation} \label{eq:ilpinctail}
+ \sum_{x \in T_e} \alpha_x \leq \lvert T_e\rvert \alpha_e
+\end{equation}
+
+\begin{equation} \label{eq:ilpdang1}
+ \delta_x \leq \alpha_x \qquad \forall x \in \mathcal{S}
+\end{equation}
+
+\begin{equation} \label{eq:ilpdang2}
+ \delta_x \geq 1 - \sum_{e:x \in H_e} \alpha_e \qquad \forall x,e \in \mathcal{S}
+\end{equation}
+
+\begin{equation} \label{eq:ilpdang3}
+ 0 \leq \delta_x \leq 1 \qquad \forall x \in \mathcal{S}
+\end{equation}
 	
 \section{References, Labels, Custom Commands and Footnotes}
 It is easy to refer to anything within your document using the \texttt{label} and \texttt{ref} tags.  Labels must be unique and shouldn't use any odd characters; generally sticking to letters and numbers (no spaces) should be fine. Put the label on whatever you want to refer to, and put the reference where you want the reference. \LaTeX\ will keep track of the chapter, section, and figure or table numbers for you. 
@@ -250,36 +299,6 @@ $$
 \int_{A_e} (\,\cdot\,) dx dy = \int_{-1}^1\!\int_{-1}^1 (\,\cdot\,) \det[J] d\xi d\eta.
 $$
 
-\section{Chemistry 101: Symbols}
-Chemical formulas will look best if they are not italicized. Get around math mode's automatic italicizing by using the argument \verb=$\mathrm{formula here}$=, with your formula inside the curly brackets.
-
-So, $\mathrm{Fe_2^{2+}Cr_2O_4}$ is written \verb=$\mathrm{Fe_2^{2+}Cr_2O_4}$=\\
-Exponent or Superscript: O$^{-}$\\
-Subscript: CH$_{4}$\\
-
-To stack numbers or letters as in $\mathrm{Fe_2^{2+}}$, the subscript is defined first, and then the superscript is defined.\\
-Angstrom: {\AA}\\
-Bullet: CuCl $\bullet$ 7H${_2}$O\\
-Double Dagger: \ddag \/\\
-Delta: $\Delta$\\
-Reaction Arrows: $\longrightarrow$ or  $\xrightarrow{solution}$\\
-Resonance Arrows: $\leftrightarrow$\\
-Reversible Reaction Arrows: $\rightleftharpoons$ or $\xrightleftharpoons[ ]{solution}$ (the latter requires the chemarr package)\\
-
-
-\subsection{Typesetting reactions}
-You may wish to put your reaction in a figure environment, which means that LaTeX will place the reaction where it fits and you can have a figure legend if desired:
-\begin{figure}[htbp]
-\begin{center}
-$\mathrm{C_6H_{12}O_6  + 6O_2} \longrightarrow \mathrm{6CO_2 + 6H_2O}$
-\caption{Combustion of glucose}
-\label{combustion of glucose}
-\end{center}
-\end{figure}
-
-\subsection{Other examples of reactions}
-$\mathrm{NH_4Cl_{(s)}} \rightleftharpoons \mathrm{NH_{3(g)}+HCl_{(g)}}$\\
-$\mathrm{MeCH_2Br + Mg} \xrightarrow[below]{above} \mathrm{MeCH_2\bullet Mg \bullet Br}$
 
 \section{Physics}
 
