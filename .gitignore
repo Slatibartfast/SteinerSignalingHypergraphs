@@ -1,0 +1,13 @@
+# Things for thesis LATEX version
+thesis.pdf
+*.aux
+*.log
+*.bbl
+*.toc
+*.lof
+*.synctex.gz
+*.DS_Store
+
+# Zipped things
+*.zip
+*.bz2
