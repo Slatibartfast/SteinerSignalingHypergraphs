@@ -1,0 +1,8 @@
+name;prize;penalty
+A;14;100
+B;3;6
+C;6;13
+D;17;12
+E;3;1
+F;1;inf
+G;9;inf

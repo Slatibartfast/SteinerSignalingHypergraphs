@@ -1,0 +1,9 @@
+name;tail;head;cost
+e1;A;B;16
+e2;E;A;5
+e3;A;C,D;31
+e4;B;C,D;1
+e5;D;A,E,F2;
+e6;E;F;27
+e7;G;D,F;22
+e8;D;G;51
