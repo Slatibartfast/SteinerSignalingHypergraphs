@@ -31,9 +31,9 @@ def build_lp(Hypergraph):
 
     # Write the first line of the .lp file.
     # This can be "Maximize\n" or "Minimize\n".
-    lp_file.write("Maximize\n")
+    lp_file.write("Minimize\n")
     # Begin the line for the objective function.
-    lp_file.write(" obj: 0")
+    lp_file.write(" obj: ")
 
     # Create three lists of the variables present in the linear program.
     xVariables = []
@@ -41,11 +41,19 @@ def build_lp(Hypergraph):
     eVariables = []
 
     # First, write sum_{v \in V}{g_{v}'a_{v}}
+
+    isFirst = True
     for n in Hypergraph.node_iterator():
-        lp_file.write(" + ")
-        lp_file.write(str(Hypergraph.get_node_attribute(n,"prize")))
-        lp_file.write(" ")
-        lp_file.write(str(n)+"x")
+        if isFirst == True:
+            lp_file.write(str(Hypergraph.get_node_attribute(n,"prize")))
+            lp_file.write(" ")
+            lp_file.write(str(n)+"x")
+            isFirst = False
+        else:
+            lp_file.write(" + ")
+            lp_file.write(str(Hypergraph.get_node_attribute(n,"prize")))
+            lp_file.write(" ")
+            lp_file.write(str(n)+"x")
 
 
         xVariables.append(str(n)+"x")
@@ -133,7 +141,7 @@ def build_lp(Hypergraph):
         lp_file.write(str(n)+"d")
 
         for edge in Hypergraph.get_backward_star(n):
-            lp_file.write(" - "+str(edge))
+            lp_file.write(" + "+str(edge))
 
         lp_file.write(" >= 1\n")
 
