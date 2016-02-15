@@ -1,8 +1,13 @@
+#!/usr/bin/python
+
 from directed_hypergraph import *
 
 # Specify the name of the file containing the nodes and edges
-nodeFile = "../examples/ex-nodes.txt"
-edgeFile = "../examples/ex-edges.txt"
+title = input("What is the title of the input/output files? ");
+print("...\n...\n...")
+nodeFile = "../examples/"+title+"-nodes.txt"
+edgeFile = "../examples/"+title+"-edges.txt"
+outputFile = title+".lp"
 
 H = DirectedHypergraph()
 
@@ -27,11 +32,11 @@ def build_lp(Hypergraph):
     # Open a new text file (default 'text.lp').
     # Edit this name to make a new file based on which hypergraph
     # is being used for the example.
-    lp_file = open("text.lp", "w")
+    lp_file = open("outputFiles/"+outputFile, "w")
 
     # Write the first line of the .lp file.
     # This can be "Maximize\n" or "Minimize\n".
-    lp_file.write("Minimize\n")
+    lp_file.write("Maximize\n")
     # Begin the line for the objective function.
     lp_file.write(" obj: ")
 
@@ -90,6 +95,8 @@ def build_lp(Hypergraph):
     # Done writing the objective function
     lp_file.write("\n")
     print("Objective function written successfully.")
+    print("...\n...\n...")
+
 
     # Begin the linear constraints.
     lp_file.write("Subject To\n")
@@ -112,7 +119,7 @@ def build_lp(Hypergraph):
                 lp_file.write(str(tail)+"x")
 
         lp_file.write(" - "+str(len(Hypergraph.get_hyperedge_tail(e)))
-                                        +" "+e+" <= 0\n")
+                                        +" "+e+" >= 0\n")
 
         lp_file.write(" c43_"+str(e)+": ")
 
@@ -128,7 +135,7 @@ def build_lp(Hypergraph):
                 lp_file.write(str(head)+"x")
 
         lp_file.write(" - "+str(len(Hypergraph.get_hyperedge_head(e)))
-                                        +" "+e+" <= 0\n")
+                                        +" "+e+" >= 0\n")
 
     # 4.5
     for i in range(len(xVariables)):
@@ -138,15 +145,17 @@ def build_lp(Hypergraph):
     # 4.6
     for n in Hypergraph.node_iterator():
         lp_file.write(" c46_"+str(n)+": ")
-        lp_file.write(str(n)+"d")
+        lp_file.write(str(n)+"d - "+str(n)+"x")
 
         for edge in Hypergraph.get_backward_star(n):
             lp_file.write(" + "+str(edge))
 
-        lp_file.write(" >= 1\n")
+        lp_file.write(" >= 0\n")
 
     # Done writing the linear constraints.
     print("Linear constraints written successfully.")
+    print("...\n...\n...")
+
 
     # Begin writing bounds.
     lp_file.write("Bounds\n")
@@ -157,6 +166,9 @@ def build_lp(Hypergraph):
             lp_file.write(" "+str(n)+"d = 0\n")
 
     #Done writing the bounds.
+    print("Bounds written successfully.")
+    print("...\n...\n...")
+
 
     # Write which binary variables are being optimized.
     lp_file.write("Binary\n")
@@ -174,6 +186,7 @@ def build_lp(Hypergraph):
 
     # End the .lp file
     lp_file.write("End\n")
+    print("Done.")
     lp_file.close()
 
 build_lp(H)
