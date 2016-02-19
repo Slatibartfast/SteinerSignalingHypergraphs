@@ -11,3 +11,6 @@ thesis.pdf
 # Zipped things
 *.zip
 *.bz2
+
+# .owl files
+*.owl
