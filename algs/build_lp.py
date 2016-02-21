@@ -1,25 +1,28 @@
 #!/usr/bin/python
-
+import sys
 from directed_hypergraph import *
 
-# Specify the name of the file containing the nodes and edges
-title = input("What is the title of the input/output files? ");
-print("...\n...\n...")
-nodeFile = "../examples/"+title+"-nodes.txt"
-edgeFile = "../examples/"+title+"-edges.txt"
-outputFile = title+".lp"
+def main(argv):
+    # Specify the name of the file containing the nodes and edges
+    title = input("What is the title of the input/output files? ");
+    print("...\n...\n...")
+    nodeFile = "../examples/"+title+"-nodes.txt"
+    edgeFile = "../examples/"+title+"-edges.txt"
+    out = title+".lp"
 
-H = DirectedHypergraph()
+    H = DirectedHypergraph()
 
-node_delimeter = ","
-column_delimeter = ";"
+    node_delimeter = ","
+    column_delimeter = ";"
 
-# Read the edge and node files to create a weighted hypergraph.
-H.read(edgeFile, node_delimeter, column_delimeter)
-H.weight_nodes(nodeFile, node_delimeter, column_delimeter)
+    # Read the edge and node files to create a weighted hypergraph.
+    H.read(edgeFile, node_delimeter, column_delimeter)
+    H.weight_nodes(nodeFile, node_delimeter, column_delimeter)
+
+    build_lp(H,out)
 
 
-def build_lp(Hypergraph):
+def build_lp(Hypergraph,outputFile):
 
     """ Defines a function that will build a .lp file after being Given
     a hypergraph. The hypergraph must be weighted with
@@ -59,7 +62,6 @@ def build_lp(Hypergraph):
             lp_file.write(str(Hypergraph.get_node_attribute(n,"prize")))
             lp_file.write(" ")
             lp_file.write(str(n)+"x")
-
 
         xVariables.append(str(n)+"x")
 
@@ -189,4 +191,5 @@ def build_lp(Hypergraph):
     print("Done.")
     lp_file.close()
 
-build_lp(H)
+if __name__ == "__main__":
+    main(sys.argv)
