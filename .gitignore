@@ -14,3 +14,6 @@ thesis.pdf
 
 # .owl files
 *.owl
+
+# Image files that have not been rastered.
+*.svg
