@@ -184,6 +184,13 @@ Furthermore, we can define sets of two or more nodes as a hypernode, which are m
 
 It is important to note that a standard directed graph is a special case of a directed hypergraph.  This is the case if every hypernode in the graph contains only one element, and if each edge has exactly one head element, and one tail element.  This has two important implications for algorithms that run on directed hypergraphs.  First, this means that there is no loss in functionality caused by using a hypergraph representation of a cell network, since anything that could be computed on a standard directed graph can be recreated exactly using the special case of the hypergraph. Secondly, this is important, because it means that anything that can be computed on a standard graph will be at least as computationally difficult to compute when generalized to a hypergraph.  In fact, we find that many tasks that are computationally easy on standard graphs become very difficult when generalized to hypergraphs \textit{(cite Anna's paper on K shortest hyperpaths)}.
 
+\begin{figure}
+  \begin{center}
+    \includegraphics{example-hypergraph-weighted}
+  \caption{The same hypergraph from above, now weighted with node prizes and dangling penalties.}
+  \end{center}
+\end{figure}
+
 \section{Hyperpaths \& Connectivity}
 In order to find the shortest route between two vertices, in a directed hypergraph, we define the notion of a \textit{hyperpath}, $P$, on the directed hypergraph $\mathcal{H}$.  We think of $P$ as the list of vertices and hyperedges that one must pass through in order to traverse through the directed hypergraph from vertex $u$ to get to $v$. The existence of a hyperpath between two nodes encodes the notion of ``connectivity" between those nodes.  If a hyperpath exists between nodes $u$ and $v$, we say that they are \textit{connected}. Furthermore, we refer to the set of all nodes in a hypergraph that are connected to each other by some hyperpath as a \textit{connected subnetwork} of the hypergraph. This is a useful definition, because it allows us the notion of a \textit{connected hypergraph}, a hypergraph in which every node is connected by some hyperpath to every other node in the hypergraph.
 
