@@ -56,8 +56,8 @@
 
 % \usepackage{times} % other fonts are available like times, bookman, charter, palatino
 
-\title{Winning the Clay Prize in Mathematics feat. Barney Potter}
-\author{\#bdawg}
+\title{Prize-Collecting Steiner Trees in Directeded Signaling Hypergraphs}
+\author{Barney Isaksen Potter}
 % The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
 \date{May 2016}
 
@@ -89,8 +89,21 @@
 
 % Acknowledgements (Acceptable American spelling) are optional
 % So are Acknowledgments (proper English spelling)
-    \chapter*{Acknowledgements}
-	I want to thank a few people.
+    \chapter*{Acknowledgments}
+	I want to thank a few people:
+
+  \begin{itemize}
+    \item{Mom and Dad}
+    \item{Far Far}
+    \item{Sam, Will, Rich, and ext. family}
+    \item{Helen and Melvin}
+    \item{Mari}
+    \item{Michael and Caleb}
+    \item{Anna and Jim}
+    \item{Sarah, Jeremy, Leigh, and the Schaack Lab}
+    \item{My benefactor}
+    \item{A.T \& A.L}
+  \end{itemize}
 
 % The preface is optional
 % To remove it, comment it out or delete it.
@@ -198,7 +211,7 @@ In order to find the shortest route between two vertices, in a directed hypergra
 
 \subsection{Definition}
 
-\subsection{Finding \textit{k}-Shortest Hyperpaths}
+\subsection{Finding (\textit{k}-Shortest) Hyperpaths}
 
 \section{Algorithms on Hypergraphs}
 
@@ -252,6 +265,8 @@ We now can define the Steiner Hypertree, $\mathcal{S}$, to be the set of hyperno
 	\end{figure}
 
 \section{Steiner Hypertree ILP}
+
+To solve for solutions to the Prize Collecting Steiner Tree
 
 Given an input hypergraph $\mathcal{H}=(V,E)$, and a set of target nodes, $T$, we construct a Steiner Hypertree, (DEFINE) $\mathcal{S}= (V^\prime,E^\prime)$, where $V^\prime \subseteq V$ and $E^\prime \subseteq E$.  We build $\mathcal{S}$ using an ILP which encodes the definition of a Steiner Hypertree.  In order to accomplish this, we define three indicator variables, $\alpha_v$, $\alpha_e$, and $\delta_v$, where $v$ and $e$ are hypernodes or hyperedges in $\mathcal{H}$.  If hypernode $x$ is in the solution of the ILP, $\alpha_v$ will have a value of 1, otherwise it will be equal to 0.  Similarly, if edge $e$ is present in the solution, $\alpha_e$ will take a value of 1. The value of $\delta_v$ will be determined by whether a hypernode is dangling, as described above (DESCRIBE ABOVE).\\
 
