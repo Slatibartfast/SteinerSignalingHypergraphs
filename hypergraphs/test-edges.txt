@@ -1,0 +1,5 @@
+name;tail;head;cost
+BiochemicalReaction7401;Protein16694,SmallMolecule123,Protein2881;Protein16698,SmallMolecule124;1
+BiochemicalReaction7400;Protein16690,SmallMolecule123,Complex1352;Protein16694,SmallMolecule124;1
+BiochemicalReaction7403;SmallMolecule1205,SmallMolecule123,Complex7726;SmallMolecule124,SmallMolecule635;1
+BiochemicalReaction7402;Protein16698,Protein5412,None;Complex7726;1

@@ -38,6 +38,8 @@
 \usepackage{rotating}
 \usepackage{natbib}
 \usepackage{todonotes}
+\usepackage{hyperref}
+\usepackage{verbatim}
 
 %% Added for comments
 \usepackage{color}
@@ -156,11 +158,16 @@
  \section{Representations of PPI Networks}
 
 
+
  \section{Graph Theory}
+
+ \section{The Steiner Tree Problem}
+
+  \subsection{Prize-Collecting Steiner Tree Problem}
 
 \chapter{Protein-Protein Interaction Networks}
 
-Since the discovery of cells by Robert Hooke in 1665, biologists have worked tirelessly to unlock the mysteries of cell function. Over the last half-century, our knowledge of how cells function has grown tremendously.
+Since the discovery of cells by Robert Hooke in 1665, biologists have worked tirelessly to unlock the mysteries of cell function. Over the last half-century, our knowledge of how cells function has grown tremendously. An important and growing part of this field has been the 
 
 \chapter{Notes, Comments, \& Changelog}
 
@@ -218,19 +225,6 @@ In order to find the shortest route between two vertices, in a directed hypergra
 \subsection{Integer Linear Programming}
 
 \subsection{NP-Hardness}
-
-	\chapter{The Prize-Collecting Steiner Problem}
-
-	\anna{Motivate this by the biological application.  Why do we want to try to do this instead of computing paths?  What does this gain us?}
-
-\section{Prize-Collecting Steiner Trees}
-
-\subsection{Prize-Collecting Steiner Forests}
-
-
-\chapter{PCST in Directed Signaling Hypergraphs}
-
-\section{PCSHT(Define) Formulation}
 
 \anna{Seems like you haven't committed an ``annotated'' version yet.  Some high-level comments:
 \begin{itemize}
@@ -295,7 +289,15 @@ Constraint \eqref{eq:ilpT} encodes that every target node in $T$ is in the solut
 
 To assess the efficacy of this ILP in generating the correct Prize Collecting Steiner Hypertree, it is first necessary to perform a series of benchmarking tests on known datasets and hypergraphs.  This will allow us to determine if the algorithm is performing as expected, and generating results that can be corroborated manually.
 
-\chapter{Application to PPI Data}
+\chapter{Implementation of PCSHT in PPI Data}
+
+  \section{Network Construction}
+
+  In order to construct directed signaling hypergraphs of biological pathways, we use pathway data from preexisting, curated protein-protein interaction networks, available publically. For this, pathway signaling information was downloaded from \url{reactome.org}(cite), and parsed into two flat files containing node and edge information necessary to construct the hypergraph (See Appendix B).
+
+  \section{Network Weighting}
+
+    \subsection{Benchmarking?}
 
 \chapter{}
 %\section{References, Labels, Custom Commands and Footnotes}
@@ -612,6 +614,21 @@ And here's some other random info: the first paragraph after a chapter title or 
     \appendix
       \chapter{Algorithms \& Programs}
       \chapter{Benchmarking Graphs \& Supplemental Data}
+
+        The constructor \verb|build_lp.py| builds a \texttt{.lp} file that can be optimized by the ILP solver CPLEX. The constructor takes the following files as arguments, as well as a column delimeter (default ``\texttt{;}") and a node delimeter (default ``\texttt{,}").
+
+        Edge file (\texttt{ex-edges.txt}):\\
+        \rule{\textwidth}{1pt}
+        \verbatiminput{../examples/ex-edges.txt}
+        \rule{\textwidth}{1pt}
+
+        \newpage
+
+        Node file (\texttt{ex-nodes.txt}):\\
+        \rule{\textwidth}{1pt}
+        \verbatiminput{../examples/ex-nodes.txt}
+        \rule{\textwidth}{1pt}
+
       \chapter{Biological Data}
 
 
