@@ -4,25 +4,23 @@
 \BOOKMARK [1][-]{section.0.3}{The Steiner Tree Problem}{chapter*.8}% 4
 \BOOKMARK [2][-]{subsection.0.3.1}{Prize-Collecting Steiner Tree Problem}{section.0.3}% 5
 \BOOKMARK [0][-]{chapter.1}{Chapter 1: Protein-Protein Interaction Networks}{}% 6
-\BOOKMARK [0][-]{chapter.2}{Chapter 2: Notes, Comments, \046 Changelog}{}% 7
-\BOOKMARK [0][-]{chapter.3}{Chapter 3: Hypergraphs \046 Hyperpaths}{}% 8
-\BOOKMARK [1][-]{section.3.1}{Hypergraph Definitions}{chapter.3}% 9
-\BOOKMARK [1][-]{section.3.2}{Hyperpaths \046 Connectivity}{chapter.3}% 10
-\BOOKMARK [2][-]{subsection.3.2.1}{Definition}{section.3.2}% 11
-\BOOKMARK [2][-]{subsection.3.2.2}{Finding \(k-Shortest\) Hyperpaths}{section.3.2}% 12
-\BOOKMARK [1][-]{section.3.3}{Algorithms on Hypergraphs}{chapter.3}% 13
-\BOOKMARK [2][-]{subsection.3.3.1}{Integer Linear Programming}{section.3.3}% 14
-\BOOKMARK [2][-]{subsection.3.3.2}{NP-Hardness}{section.3.3}% 15
-\BOOKMARK [1][-]{section.3.4}{Steiner Hypertree ILP}{chapter.3}% 16
-\BOOKMARK [0][-]{chapter.4}{Chapter 4: Benchmarking \(\046 Proof??\)}{}% 17
-\BOOKMARK [0][-]{chapter.5}{Chapter 5: Implementation of PCSHT in PPI Data}{}% 18
-\BOOKMARK [1][-]{section.5.1}{Network Construction}{chapter.5}% 19
-\BOOKMARK [1][-]{section.5.2}{Network Weighting}{chapter.5}% 20
-\BOOKMARK [2][-]{subsection.5.2.1}{Benchmarking?}{section.5.2}% 21
-\BOOKMARK [0][-]{chapter.6}{Chapter 6: }{}% 22
-\BOOKMARK [0][-]{chapter.7}{Chapter 7: Future Directions}{}% 23
-\BOOKMARK [0][-]{chapter*.9}{Conclusion}{}% 24
-\BOOKMARK [1][-]{section.4.1}{More info}{chapter*.9}% 25
-\BOOKMARK [0][-]{appendix.A}{Appendix A: Algorithms \046 Programs}{}% 26
-\BOOKMARK [0][-]{appendix.B}{Appendix B: Benchmarking Graphs \046 Supplemental Data}{}% 27
-\BOOKMARK [0][-]{appendix.C}{Appendix C: Biological Data}{}% 28
+\BOOKMARK [0][-]{chapter.2}{Chapter 2: Hypergraphs \046 Hyperpaths}{}% 7
+\BOOKMARK [1][-]{section.2.1}{Hypergraph Definition}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.2}{Hyperpaths \046 Connectivity}{chapter.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.1}{Directed Hyperpaths}{section.2.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.2}{Integer Linear Programming}{section.2.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.3}{NP-Hardness}{section.2.2}% 12
+\BOOKMARK [0][-]{chapter.3}{Chapter 3: Formulation of ILP}{}% 13
+\BOOKMARK [1][-]{section.3.1}{Steiner Hypertree ILP}{chapter.3}% 14
+\BOOKMARK [0][-]{chapter.4}{Chapter 4: Implementation of PCSHT in PPI Data}{}% 15
+\BOOKMARK [1][-]{section.4.1}{Network Construction HOW DO I REFERENCE HALP}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.2}{Network Weighting}{chapter.4}% 17
+\BOOKMARK [2][-]{subsection.4.2.1}{Efficiency}{section.4.2}% 18
+\BOOKMARK [0][-]{chapter.5}{Chapter 5: Efficacy \(\046 Proof??\)}{}% 19
+\BOOKMARK [0][-]{chapter.6}{Chapter 6: Future Directions}{}% 20
+\BOOKMARK [0][-]{chapter*.9}{Conclusion}{}% 21
+\BOOKMARK [1][-]{section.4.1}{More info}{chapter*.9}% 22
+\BOOKMARK [0][-]{appendix.A}{Appendix A: Algorithms \046 Programs}{}% 23
+\BOOKMARK [0][-]{appendix.B}{Appendix B: Benchmarking Graphs \046 Supplemental Data}{}% 24
+\BOOKMARK [0][-]{appendix.C}{Appendix C: Biological Data}{}% 25
+\BOOKMARK [0][-]{appendix*.10}{References}{}% 26
