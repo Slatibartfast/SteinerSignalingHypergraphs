@@ -3,53 +3,48 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: APA/apa-good.bst
 Database file #1: thesis.bib
-Warning--missing school in Ausiello1992a
 Warning--there's a number but no volume in Ausiello1992
-Warning--empty journal in Bateni2011
-Warning--empty journal in Gallagher2013
-Warning--empty journal in Meysman2015
+Warning--empty journal in Conant2008
 Warning--there's a number but no volume in Meysman2015
-Warning--empty journal in Ritz2014
-Warning--empty journal in Ritz2014b
-You've used 21 entries,
+You've used 50 entries,
             2804 wiz_defined-function locations,
-            742 strings with 11418 characters,
-and the built_in function-call counts, 20265 in all, are:
-= -- 1352
-> -- 1599
-< -- 8
-+ -- 600
-- -- 576
-* -- 1909
-:= -- 3191
-add.period$ -- 63
-call.type$ -- 21
-change.case$ -- 296
-chr.to.int$ -- 18
-cite$ -- 29
-duplicate$ -- 1223
-empty$ -- 1081
-format.name$ -- 647
-if$ -- 3744
-int.to.chr$ -- 4
+            941 strings with 18421 characters,
+and the built_in function-call counts, 40819 in all, are:
+= -- 2952
+> -- 2691
+< -- 23
++ -- 1005
+- -- 954
+* -- 3653
+:= -- 6352
+add.period$ -- 148
+call.type$ -- 50
+change.case$ -- 568
+chr.to.int$ -- 49
+cite$ -- 53
+duplicate$ -- 2646
+empty$ -- 2452
+format.name$ -- 1118
+if$ -- 7676
+int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 327
-newline$ -- 126
-num.names$ -- 84
-pop$ -- 653
+missing$ -- 648
+newline$ -- 279
+num.names$ -- 200
+pop$ -- 1232
 preamble$ -- 1
-purify$ -- 276
+purify$ -- 518
 quote$ -- 0
-skip$ -- 329
+skip$ -- 798
 stack$ -- 0
-substring$ -- 696
-swap$ -- 824
-text.length$ -- 4
+substring$ -- 1673
+swap$ -- 1691
+text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 189
-warning$ -- 8
-while$ -- 100
+type$ -- 450
+warning$ -- 3
+while$ -- 249
 width$ -- 0
-write$ -- 286
-(There were 8 warnings)
+write$ -- 674
+(There were 3 warnings)

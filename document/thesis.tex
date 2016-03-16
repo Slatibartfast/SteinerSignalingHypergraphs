@@ -40,12 +40,17 @@
 \usepackage{todonotes}
 \usepackage{hyperref}
 \usepackage{verbatim}
+\usepackage{epigraph}
+\usepackage{lmodern}
 
 %% Added for comments
 \usepackage{color}
 \newcommand{\anna}[1]{{\color{blue}[AR: #1]}}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
+
+%% Preface quote stuff
+\newlength\longest
 
 %% Graphics path
 \graphicspath{ {figures/} }
@@ -98,21 +103,38 @@
 
   \begin{itemize}
     \item{Mom and Dad}
+    \item{Mari}
     \item{Far Far}
     \item{Sam, Will, Rich, and ext. family}
     \item{Helen and Melvin}
-    \item{Mari}
     \item{Michael and Caleb}
     \item{Anna and Jim}
     \item{Sarah, Jeremy, Leigh, and the Schaack Lab}
     \item{My benefactor}
-    \item{A.T \& A.L}
+    \item{A.T \& A.L} %Turing and Lovelace
   \end{itemize}
 
 % The preface is optional
 % To remove it, comment it out or delete it.
     \chapter*{Preface}
-	This is an example of a thesis setup to use the reed thesis document class.
+	%\epigraph{We can only see a short distance ahead, but we can see plenty there that needs to be done.}{\textit{Alan Turing}}
+  \null\vfill
+
+\settowidth\longest{\huge\itshape just as his inclination leads him;}
+\begin{center}
+\parbox{\longest}{%
+  \raggedright{\huge\itshape%
+   We can only see \\
+  a short distance ahead, \\
+  but we can see plenty there \\
+  that needs to be done.\par\bigskip
+  }
+  \raggedleft\Large\MakeUppercase{Alan Turing}\par%
+}
+\end{center}
+
+\vfill\vfill
+
 
     \tableofcontents
 % if you want a list of tables, optional
@@ -146,12 +168,9 @@
 \onehalfspacing
 % \doublespacing
 
-	Cell function is governed by countless interactions between proteins, nucleic acids, lipids, carbohydrates, and many other small molecules.  The interactions between all of these components form what we call \textit{cell signaling networks}, which are responsible for almost every process within a cell.  Cell signaling networks are used to describe how many of the most basic reactions within cells interact with each other.  Some of the most important types of interactions that we see in cell signaling networks include the assembly and destruction of protein complexes, how small molecules such as ATP interact with proteins, the cascade of events that can occur after a membrane-bound protein is bound by a ligand, or where negative feedback loops exist that can have an effect on cell function.  We often refer to these cell signaling networks at protein-protein interaction (PPI) networks.  Historically, PPI networks have been a useful tool for compiling knowledge about individual interactions that have been studied \textit{in situ}, so that larger scale patterns of interaction can be examined, and both communicated easily and   In recent years, there has been a push to find ways to accurately model these networks so that they can be used to predict potential areas of future research (CITATION).\par
+Since the discovery of cells by Robert Hooke in 1665, biologists have worked tirelessly to unlock the mysteries of cell function. Over the last half-century, our knowledge of how cells function has grown tremendously. An important and growing part of this field has been the
 
-
- \section{Representations of PPI Networks}
-
-
+ \section{Network Representations}
 
  \section{Graph Theory}
 
@@ -159,29 +178,32 @@
 
   \subsection{Prize-Collecting Steiner Tree Problem}
 
+ \section{Integer Linear Programming}
+
 \chapter{Protein-Protein Interaction Networks}
 
-Since the discovery of cells by Robert Hooke in 1665, biologists have worked tirelessly to unlock the mysteries of cell function. Over the last half-century, our knowledge of how cells function has grown tremendously. An important and growing part of this field has been the
+Cell function is governed by countless interactions between proteins, nucleic acids, lipids, carbohydrates, and many other small molecules.  The interactions between all of these components form what we call \textit{cell signaling networks}, which are responsible for almost every process within a cell.  Cell signaling networks are used to describe how many of the most basic reactions within cells interact with each other.  Some of the most important types of interactions that we see in cell signaling networks include the assembly and destruction of protein complexes, how small molecules such as ATP interact with proteins, the cascade of events that can occur after a membrane-bound protein is bound by a ligand, or where negative feedback loops exist that can have an effect on cell function.  We often refer to these cell signaling networks at protein-protein interaction (PPI) networks.  Historically, PPI networks have been a useful tool for compiling knowledge about individual interactions that have been studied \textit{in situ}, so that larger scale patterns of interaction can be examined, and both communicated easily and   In recent years, there has been a push to find ways to accurately model these networks so that they can be used to predict potential areas of future research (CITATION).\par
+
 
 \chapter{Hypergraphs \& Hyperpaths}
 
-While standard graphs are useful for many applications, they are severely limited in their ability to represent cell-signaling interactions.  Since they can only show pairwise interactions between nodes, whenever there is an interaction that requires more than two connections, the visualization of the graph becomes confusing, and biologically meaningless.  Furthermore, interactions involving multiple molecules require an enormous amount of different edges to represent all of the sub-interactions that take place.  Determining whether two edges are part of the same biological event is a non-trivial problem, and requires manual curation to solve, at this time.\par
+While standard\footnote{The term ``standard" is used to describe traditional graphs, since the terms ``regular" and ``normal," which would be natural choices, both refer to specific types of graphs.} graphs are useful for many applications, they are severely limited in their ability to represent cell-signaling interactions.  Since they can only show pairwise interactions between nodes, whenever there is an interaction that requires more than two connections, the visualization of the graph becomes confusing, and biologically meaningless.  Furthermore, interactions involving multiple molecules require an enormous amount of different edges to represent all of the sub-interactions that take place.  Determining whether two edges are part of the same biological event is a non-trivial problem, and requires manual curation to solve, at this time.\par
 
 \begin{figure}[thbp]
   \begin{center}
     \includegraphics{example-standard-graph}
-  \caption{An example of a standard graph. All edges directed pairwise interactions between two nodes. Biologically, it is difficult to extract meaningful signaling pathway information from this graph, since protein complex formation and degradation is ambiguous.}
+  \caption{An example of a standard graph. All edges represent directed, pairwise interactions between two nodes. Biologically, it is difficult to extract meaningful signaling pathway information from this graph, since protein complex formation and degradation is ambiguous.}
   \label{fig:example-standard-graph}
   \end{center}
 \end{figure}
 
 One area of cell-signaling that becomes particularly problematic in standard graphs is the formation, interaction, and destruction of protein complexes.  The only way that complexes can be represented in standard graphs is by creating a complete subgraph of all of the elements of the protein complex.  On their own, these complete subgraphs can yield useful information about the make-up of a protein complex, but once they begin interacting with other elements of the graph, the graph becomes much more complex, as all of the proteins in the complex must be represented independently.  In the case of interactions between multiple large complexes, it becomes the case that the standard graph representation of this interaction is a large complete subgraph that contains nodes for all of the proteins involved in either complex.  It is then computationally impossible to distinguish whether the entity being described by the subgraph is the interaction between multiple protein complexes, or simply one large complex that contains all of the components of both complexes.  Furthermore, since the complete subgraphs which represent complexes are undirected, it is extremely difficult to tell what the inputs or outputs of a biochemical reaction may be.\par
 
-Another shortcoming of standard graphs\footnote{The term ``standard" is used to describe traditional graphs, since the terms ``regular" and ``normal," which would be natural choices, both refer to specific types of graphs.} in representing complex biological interactions is that there is no way in which to represent positive or negative regulation of interactions.  Since there is a standardized way in which edges interact with nodes, there is no way to differentiate types of interactions between nodes.  This poses a challenge when there are regulators or catalysts present that are necessary for a reaction, but are not part of the inputs or outputs of the reaction.  If regulators are to be included in a standard graph representation of a cell-signaling network, they become indistinguishable from any other types of interactions that are taking place.  This lack of specificity is problematic, as it treats all interactions as equal, and hides potentially useful information from the graph.\par
+Another shortcoming of standard graphs in representing complex biological interactions is that there is no way in which to represent positive or negative regulation of interactions.  Since there is a standardized way in which edges interact with nodes, there is no way to differentiate types of interactions between nodes.  This poses a challenge when there are regulators or catalysts present that are necessary for a reaction, but are not part of the inputs or outputs of the reaction.  If regulators are to be included in a standard graph representation of a cell-signaling network, they become indistinguishable from any other types of interactions that are taking place.  This lack of specificity is problematic, as it treats all interactions as equal, and hides potentially useful information from the graph.\par
 
 To resolve the issues presented by standard graphs, we instead use a generalization called a \textit{hypergraph} that allows for the addition of more detail  and specificity within the data structure than standard graphs allow for.  In particular, hypergraphs allow for both the representation of protein complexes in the form of \textit{hypernodes}, which we think of simply as a set of one or more nodes, and for the representation of complex, directed interactions that can have multiple inputs and outputs.  We represent these interactions with the use of \textit{hyperedges}, which define a set of one or more hypernodes.  Since a hyperedge may include more than two hypernodes, we gain the ability to represent both multi-protein interactions, as well as to define the notions of regulation on reactions.\par
 
-\section{Hypergraph Definition}
+\section{Prize-Collecting Steiner Hypertrees}
 
 Where a directed graph represents directed, pairwise interactions between only two vertices, we can use \textit{directed hypergraph} to represent directed interactions between sets of vertices (nodes). We formally define a directed hypergraph, $\mathcal{H}$, as a pair $(V,E)$, where $V$ is a finite set of vertices and $E \subseteq 2^V \times 2^V$ is a finite set of \textit{directed hyperedges} connecting members of $V$ such that, for every $e=(T(e),H(e)) \in E$, $T(e) \cap H(e) = \emptyset$, and $T(e)$, $H(e) \neq \emptyset$.  We refer to $T(e)$ as the \textit{tail} of the hyperedge, and to $H(e)$ as the \textit{head} of the hyperedge.\par
 
@@ -208,29 +230,31 @@ It is important to note that a standard directed graph is a special case of a di
 \section{Hyperpaths \& Connectivity}
 In order to find the shortest route between two vertices, in a directed hypergraph, we define the notion of a \textit{hyperpath}, $P$, on the directed hypergraph $\mathcal{H}$.  We think of $P(s,t)$ as the list of vertices and hyperedges that one must pass through in order to traverse through the directed hypergraph from vertex $s$ to $t$. The existence of a hyperpath between two nodes encodes the notion of ``connectivity" between those nodes.  If a hyperpath exists between nodes $s$ and $t$, we say that they are \textit{connected}. Furthermore, given some root hypernode, $u$, we refer to the set of all nodes, $V$ in a hypergraph for which there exists some $P(u,v)$ (where $v \in V$) as a \textit{hypertree}. This is a useful definition, because it allows us the notion of a \textit{connected hypergraph}, a hypergraph in which every node is connected by some hyperpath to every other node in the hypergraph.\par
 
-\anna{How does defining hyperpaths contribute to your ``story'' for Steiner Hypertrees?  You might not need to go into a ton of detail here, you really want to use it to motivate Steiner hypertrees.}\\
-
 \subsection{Directed Hyperpaths}
 
 There are many ways in which we can define hyperpaths, but for the purposes of finding Steiner Trees in directed hypergraphs, we must define a simple \textit{directed hyperpath} between nodes $s$ and $t$. We can think of a directed hyperpath $P(s,t)=\{s,e_2,v_3,...,e_{n-1},t\}$ as an ordered list of nodes and edges, beginning with $s$ and ending with $t$ such that for any edge, $e_i$, in the path, $v_{i-1}$ is in the tail of $e_i$, and $v_{i+1}$ is in the head of $e_i$.\par
 
-\subsection{Integer Linear Programming}
+\section{Definition of PCSHT}
 
-\subsection{NP-Hardness}
-
-\chapter{Formulation of ILP}
-
-In order for us define and develop a Prize-Collecting Steiner Hyptertree, we begin by formulating the notion of a \textit{Steiner Hypertree}.  To make our Steiner Hypertree, $\mathcal{S}$, we begin with a ``parent" hypergraph, $\mathcal{H} = (V,E)$, and a set of target nodes, such that $T \subseteq V$.  We refer to each hypernode as some $x$ such that $x \in V$\footnote{We use ``$x$" as an element of $V$, rather than lowercase ``$v$" to avoid the visual confusion between lowercase $v$ and uppercase $V$ (REMOVE THIS IF CHANGING TO V'S LOOKS OKAY)}, and each edge is some $e$ such that $e \in E$.  When building $\mathcal{H}$, we initially seed the hypergraph.  Each hyperedge is assigned a weight, that is, a cost associated with including that edge in $\mathcal{S}$.  We then assign each hypernode in $\mathcal{H}$ two values, a prize for being included in $\mathcal{S}$, as well as a penalty associated with being a \textit{dangling} hypernode.  We say a hypernode is dangling if it is included in $\mathcal{S}$, and it has no incoming hyperedge which is also included in $\mathcal{S}$ (i.e. the vertex is not in the head of any edge in $\mathcal{S}$).\par
-
-We now can define the Steiner Hypertree, $\mathcal{S}$, to be the set of hypernodes and hyperedges for which total vertex prizes are maximized, and total edge weights (and dangling penalties) are minimized.  The Steiner Hypertree produced should satisfy the following properties:
+We now can define the Prize-Collecting Steiner Hypertree (PCSHT), $\mathcal{S} = (V^\prime,E^\prime)$, to be the set of hypernodes and hyperedges for which total vertex prizes are maximized, and total edge weights (and dangling penalties) are minimized.  The Steiner Hypertree produced should satisfy the following properties:
 
 \begin{itemize}
-  \item{There should be no simple cycles.}
-  \item{The value of all prizes included in the solution should be maximal.}
+  \item{There should be no simple cycles between nodes in $\mathcal{S}$.}
+  \item{The value of all prizes included in $\mathcal{S}$ should be maximal.}
   \item{The solution should minimal with respect to edges. \textit{(Should this be defined?)}}
   \item{The solution should consist of one or more parallel subnetworks. \textit{(Define this in the HYPERPATHS AND CONNECTIVITY section)}}
   \item{If an edge is included in the solution, every hypernode that is incident on that edge should also be included.}
 \end{itemize}
+
+In addition to these properties, it is also necessary for us to define two classes of nodes that may be present in a PCSHT: danging nodes and chads (\textit{names subject to change}).  We say a node is \textit{dangling} if it is present in a PCSHT and does not have any incoming hyperedge in the PCSHT (that is, it is not in the tail of any edge in the hypergraph). We can define a dangling node, $d$ as any node such $d \in V^\prime$ and $d \notin T(e)$ for all $e \in \mathcal{S}$. Similarly, we say a node is a \textit{chad} if it is present in a PCSHT, and not in the head of any edge in the hypergraph. A chad, $c$, is defined as any node $c \in V^\prime$ and $c \notin T(e)$ for all $e \in \mathcal{S}$.\par
+
+\textit{PUT IN AN IMAGE SHOWING DANGLERS AND CHADS}
+
+\chapter{Formulation of ILP}
+
+In order for us define and develop a Prize-Collecting Steiner Hyptertree, we begin by formulating the notion of a \textit{Steiner Hypertree}.  To make our Steiner Hypertree, $\mathcal{S}$, we begin with a ``parent" hypergraph, $\mathcal{H} = (V,E)$, and a set of target nodes, such that $T \subseteq V$.  We refer to each hypernode as some $x$ such that $x \in V$\footnote{We use ``$x$" as an element of $V$, rather than lowercase ``$v$" to avoid the visual confusion between lowercase $v$ and uppercase $V$ (REMOVE THIS IF CHANGING TO V'S LOOKS OKAY)}, and each edge is some $e$ such that $e \in E$.  When building $\mathcal{H}$, we initially seed the hypergraph.  Each hyperedge is assigned a weight, that is, a cost associated with including that edge in the solution hypergraph, $\mathcal{S}$.  We then assign each hypernode in $\mathcal{H}$ two values, a prize for being included in $\mathcal{S}$, as well as a penalty associated with being a \textit{dangling} hypernode.\par
+
+
 
 % \begin{itemize}
 % 	\item The prizes for vertices included in $\mathcal{S}$ should be maximized.
@@ -257,7 +281,7 @@ We now can define the Steiner Hypertree, $\mathcal{S}$, to be the set of hyperno
 
 To solve for solutions to the Prize Collecting Steiner Tree
 
-Given an input hypergraph $\mathcal{H}=(V,E)$, and a set of target nodes, $T$, we construct a Steiner Hypertree, (DEFINE) $\mathcal{S}= (V^\prime,E^\prime)$, where $V^\prime \subseteq V$ and $E^\prime \subseteq E$.  We build $\mathcal{S}$ using an ILP which encodes the definition of a Steiner Hypertree.  In order to accomplish this, we define three indicator variables, $\alpha_v$, $\alpha_e$, and $\delta_v$, where $v$ and $e$ are hypernodes or hyperedges in $\mathcal{H}$.  If hypernode $x$ is in the solution of the ILP, $\alpha_v$ will have a value of 1, otherwise it will be equal to 0.  Similarly, if edge $e$ is present in the solution, $\alpha_e$ will take a value of 1. The value of $\delta_v$ will be determined by whether a hypernode is dangling, as described above (DESCRIBE ABOVE).\par
+Given an input hypergraph $\mathcal{H}=(V,E)$, and a set of target nodes, $T$, we construct a Steiner Hypertree, (DEFINE) $\mathcal{S}= (V^\prime,E^\prime)$, where $V^\prime \subseteq V$ and $E^\prime \subseteq E$.  We build $\mathcal{S}$ using an ILP which encodes the definition of a Steiner Hypertree.  In order to accomplish this, we define three indicator variables, $\alpha_v$, $\alpha_e$, and $\delta_v$, where $v$ and $e$ are hypernodes or hyperedges in $\mathcal{H}$.  If hypernode $x$ is in the solution of the ILP, $\alpha_v$ will have a value of 1, otherwise it will be equal to 0.  Similarly, if edge $e$ is present in the solution, $\alpha_e$ will take a value of 1. The value of $\delta_v$ will be determined by whether a hypernode is dangling.\par
 
 We find the Steiner Hypergraph $\mathcal{S}$ by optimizing the function:
 

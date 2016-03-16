@@ -1,15 +1,15 @@
 \BOOKMARK [0][-]{chapter*.8}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.0.1}{Representations of PPI Networks}{chapter*.8}% 2
+\BOOKMARK [1][-]{section.0.1}{Network Representations}{chapter*.8}% 2
 \BOOKMARK [1][-]{section.0.2}{Graph Theory}{chapter*.8}% 3
 \BOOKMARK [1][-]{section.0.3}{The Steiner Tree Problem}{chapter*.8}% 4
 \BOOKMARK [2][-]{subsection.0.3.1}{Prize-Collecting Steiner Tree Problem}{section.0.3}% 5
-\BOOKMARK [0][-]{chapter.1}{Chapter 1: Protein-Protein Interaction Networks}{}% 6
-\BOOKMARK [0][-]{chapter.2}{Chapter 2: Hypergraphs \046 Hyperpaths}{}% 7
-\BOOKMARK [1][-]{section.2.1}{Hypergraph Definition}{chapter.2}% 8
-\BOOKMARK [1][-]{section.2.2}{Hyperpaths \046 Connectivity}{chapter.2}% 9
-\BOOKMARK [2][-]{subsection.2.2.1}{Directed Hyperpaths}{section.2.2}% 10
-\BOOKMARK [2][-]{subsection.2.2.2}{Integer Linear Programming}{section.2.2}% 11
-\BOOKMARK [2][-]{subsection.2.2.3}{NP-Hardness}{section.2.2}% 12
+\BOOKMARK [1][-]{section.0.4}{Integer Linear Programming}{chapter*.8}% 6
+\BOOKMARK [0][-]{chapter.1}{Chapter 1: Protein-Protein Interaction Networks}{}% 7
+\BOOKMARK [0][-]{chapter.2}{Chapter 2: Hypergraphs \046 Hyperpaths}{}% 8
+\BOOKMARK [1][-]{section.2.1}{Prize-Collecting Steiner Hypertrees}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.2}{Hyperpaths \046 Connectivity}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.1}{Directed Hyperpaths}{section.2.2}% 11
+\BOOKMARK [1][-]{section.2.3}{Definition of PCSHT}{chapter.2}% 12
 \BOOKMARK [0][-]{chapter.3}{Chapter 3: Formulation of ILP}{}% 13
 \BOOKMARK [1][-]{section.3.1}{Steiner Hypertree ILP}{chapter.3}% 14
 \BOOKMARK [0][-]{chapter.4}{Chapter 4: Implementation of PCSHT in PPI Data}{}% 15
