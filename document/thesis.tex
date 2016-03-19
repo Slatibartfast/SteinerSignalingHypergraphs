@@ -269,14 +269,14 @@ To make our Steiner Hypertree, $\mathcal{S}$, we begin with a ``parent" hypergra
 % 	\end{itemize}
 % 	\item Hanging penalties for dangling nodes included in $\mathcal{S}$ are minimized.
 % \end{itemize}
-
-\begin{figure}[thbp]
-  \begin{center}
-    \includegraphics{example-hypergraph-weighted-after-ILP}
-  \caption{The output of our ILP, when it is run on the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}. The dashed arrows indicate a dangling hypernode.}
-  \label{fig:example-hypergraph-weighted-after-ILP}
-  \end{center}
-\end{figure}
+%
+% \begin{figure}[thbp]
+%   \begin{center}
+%     \includegraphics{dummy-before}
+%   \caption{A simple hypergraph.}
+%   \label{fig:dummy-before}
+%   \end{center}
+% \end{figure}
 
 \section{Steiner Hypertree ILP}
 
@@ -287,22 +287,114 @@ Given an input hypergraph $\mathcal{H}=(V,E)$, and a set of target nodes, $T$, w
 We find the Steiner Hypergraph $\mathcal{S}$ by optimizing the function:
 
 \begin{equation} \label{eq:ilpsum}
- \argmax_{\alpha , \delta} \sum_{v \in V} g_v \alpha_v - \sum_{e \in E} c_e \alpha_e - \sum_{v \in V} h_v \delta_v
+ \argmax_{\alpha, \delta} \sum_{v \in V} g_v \alpha_v - \sum_{e \in E} c_e \alpha_e - \sum_{v \in V} h_v \delta_v
 \end{equation}
 
-Subject to the set of linear constraints:
+Subject to the set of linear constraints (\emph{Would it be a good idea to change these so that they all use $\leq$, rather than a mix of $\leq$ and $\geq$?}):
 
 \begin{align}
-        \alpha_v \geq 1 \qquad\qquad &\forall\; v \in T\label{eq:ilpT}\\
-        \sum_{v \in H_e} \alpha_v \geq \lvert H_e\rvert \alpha_e \qquad\qquad &\forall\; v \in H_V , e \in H_E\label{eq:ilpinchead}\\
-        \sum_{v \in T_e} \alpha_v \geq \lvert T_e\rvert \alpha_e\qquad\qquad &\forall\; v \in H_V , e \in H_E\label{eq:ilpinctail}\\
-        \delta_v \leq \alpha_v \qquad\qquad &\forall\; v \in \mathcal{H}\label{eq:ilpdang1}\\
-        \delta_v \geq \alpha_{v} - \sum_{e:v \in H_e} \alpha_e \qquad\qquad &\forall\; v \in \mathcal{H}\label{eq:ilpdang2}\\
-        0 \leq \delta_v \leq 1 \qquad\qquad &\forall\; v \in \mathcal{H}\label{eq:ilpdang3}%
+ \alpha_v \geq 1 \qquad\qquad &\forall\; v \in T\label{eq:ilpT}\\
+ \sum_{v \in H(e)} \alpha_v \geq \lvert H(e)\rvert \alpha_e \qquad\qquad &\forall\; e \in E\label{eq:ilpinchead}\\
+ \sum_{v \in T(e)} \alpha_v \geq \lvert T(e)\rvert \alpha_e\qquad\qquad &\forall\; e \in E\label{eq:ilpinctail}\\
+ \delta_v \leq \alpha_v \qquad\qquad &\forall\; v \in V\label{eq:ilpdang1}\\
+ \delta_v \geq \alpha_{v} - \sum_{e:v \in H(e)} \alpha_e \qquad\qquad &\forall\; v \in V\label{eq:ilpdang2}\\
+0 \leq \delta_v \leq 1 \qquad\qquad &\forall\; v \in V\label{eq:ilpdang3}%
 \end{align}%
 
 
-Constraint \eqref{eq:ilpT} encodes that every target node in $T$ is in the solution, $\mathcal{S}$.  Constraints \eqref{eq:ilpinchead} and \eqref{eq:ilpinctail} ensure that if an edge is in $\mathcal{S}$, any nodes incident on that edge (i.e. in the head or tail of that edge) will also be in $\mathcal{S}$.  Finally, constraints \eqref{eq:ilpdang1}, \eqref{eq:ilpdang2}, and \eqref{eq:ilpdang3} encode the ability for nodes to dangle if they do not have an incoming edge.  Though this formulation encodes all of the properties of a Steiner Hypertree, on some hypergraphs, it can yield subtrees that are trivial, due to the possibility of simple cycles between target nodes and Steiner nodes.  We solve this problem by introducing one more variable to the program to impose a topological ordering on the nodes.\par
+Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\alpha_v$), edges ($\alpha_e$), and dangling nodes ($\delta_v$) that maximize the sums of node prizes ($g_v$), minimize the sums of edge costs ($c_e$), and minimize the sums of dangling penalties ($h_v$). Constraint \eqref{eq:ilpT} encodes that every target node in $T$ is in the solution, $\mathcal{S}$.  Constraints \eqref{eq:ilpinchead} and \eqref{eq:ilpinctail} ensure that if an edge is in $\mathcal{S}$, any nodes incident on that edge (i.e. in the head or tail of that edge) will also be in $\mathcal{S}$.  Finally, constraints \eqref{eq:ilpdang1}, \eqref{eq:ilpdang2}, and \eqref{eq:ilpdang3} encode the ability for nodes to dangle if they do not have an incoming edge.\par
+
+\begin{figure}[!htbp]
+  \begin{minipage}[b]{0.60\linewidth}
+    \centering
+    \includegraphics{dummy-before}
+    \par\vspace{0pt}
+  \end{minipage}%
+  \begin{minipage}[b]{0.30\linewidth}
+    \centering%
+    \begin{tabular}{ |l|l|l| }%
+      \hline%
+      \multicolumn{3}{|c|}{Nodes} \\%
+      \hline \hline
+      Node & $g_v$ &  $h_v$ \\ \hline%
+      A & 10 &  1\\ \hline%
+      B & 10 &  1\\ \hline%
+      C & 1 &  10\\ \hline%
+      D & 10 &  10\\ \hline%
+    \end{tabular}%
+    \par\vspace{0pt}
+  \end{minipage}
+  \begin{minipage}[b]{0.30\linewidth}
+    \centering%
+    \begin{tabular}{ |l|l| }%
+      \hline%
+      \multicolumn{2}{|c|}{Edges} \\%
+      \hline \hline
+      Edge & $c_e$ \\ \hline%
+      $E_1$ & 1 \\ \hline%
+      $E_2$ & 10 \\ \hline%
+    \end{tabular}%
+    \par\vspace{0pt}
+  \end{minipage}
+\caption{A simple hypergraph, and its associated node and edge weights. \emph{This obviously needs to be re-formatted to not look terrible.}}
+\label{fig:dummy-before}
+\end{figure}
+
+\emph{Should I start a new subsection here?}\par
+
+Consider the hypergraph shown in Figure \ref{fig:dummy-before}. For this hypergraph, the PCSHT that comes from this graph should consist of hypernodes $A$, $B$, and $D$, as well as hyperedge $E_1$. This is obvious, since nodes $A$ and $B$, which will be dangling in the solution, both have low dangling penalties and high prizes, while node $C$ has a very large dangling penalty relative to its prize. Similarly, $E_1$ has a relatively low cost, whereas $E_2$ has a very high cost. Finally, $D$ is considered a target, in this case, and is therefore automatically included in the solution. Knowing what the solution should be, we can use this hypergraph to demonstrate the effect of each linear constrain in our ILP.\par
+
+We now know that, for the optimal PCSHT, $\alpha_A$, $\alpha_D$, $\alpha_D$, and $\alpha_{E_1}$ are all equal to 1 (that is, they are included in the solution), and $\alpha_C$ and $\alpha_{E_2}$ are equal 0. Additionally, we know that in this solution $A$ and $B$ are dangling nodes, therefore $\delta_A$ and $\delta_B$ are both 1, and $\delta_C$ and $\delta_D$ are both 0. Finally, we are given that $D$ is a target node, hence $T=\{D\}$.\par
+
+First let us look at the objective function, Equation (\emph{not actually an equation. Does this matter?}) \eqref{eq:ilpsum}. We can call each of the three sums included the equation which calculate the total node prizes, edge costs, and dangling penalties $\Xi$, $\Phi$, and $\Psi$, respectively. Given the values of $\alpha_v$, $\alpha_e$, and $\delta_v$ that we know should yield the PCSHT, we get find:
+\begin{gather*}
+ \Xi = 30\\
+ \Phi = 1\\
+ \Psi = 2\\
+ \implies \Xi - \Phi - \Psi = 27\\
+\end{gather*}%
+If $C$ or $E_2$ were to be added, or any node or edge were removed from the PCSHT, the total value of the objective function would decrease, therefore yielding a suboptimal solution to the ILP.\par
+
+Now, we can begin to look at how each linear constraint governs the behavior of the ILP. Let's begin with constraint \eqref{eq:ilpT}. For our hypergraph, $T$ only has one element, $D$, constraint \eqref{eq:ilpT} only needs to be checked for one node. We know that $\alpha_D = 1$, therefore constraint \eqref{eq:ilpT} simplifies to:
+\begin{align*}
+  \alpha_D &\geq 1\\
+  1 &\geq 1\\
+\end{align*}
+We see that constraint \eqref{eq:ilpT} holds for all $v$ in $T$, therefore we know that all members of the target set are included in the PCSHT.\par
+
+Next, we can look at constraints \eqref{eq:ilpinchead} and \eqref{eq:ilpinctail}. Since these constraints are the same, except for whether they are concerned with the head or tail of a hyperedge, we can evaluate the effect of just constraint \eqref{eq:ilpinchead}, and assume that constraint \eqref{eq:ilpinctail} works in the same way (\emph{Is this an okay assumption? Should I change it to look at the tails since there is a little more going on with those?}). To assess this constraint, we must see how if the inequality holds for all edges in the hypergraph. We begin by looking at $E_1$. We know that $H({E_1})=D$, and that $\lvert H(e) \rvert = 1$, therefore we can check:
+\begin{align*}
+  \alpha_D &\geq 1 \times \alpha_{E_1}\\
+  1 &\geq 1 \times 1\\
+  1 &\geq 1\\
+\end{align*}%
+So, we see that constraint \eqref{eq:ilpinchead} holds for $E_1$. Now, we can check for $E_2$ (whose head is also only $D$):
+\begin{align*}
+  \alpha_D &\geq 1 \times \alpha{E_2}\\
+  1 &\geq 1 \times 0\\
+  1 &\geq 0\\
+\end{align*}%
+We see that this inequality also holds. This means that, since the inequality holds for all hyperedges, that for every edge in the hypergraph, its head is also included in the hypergraph. We can easily extend this to see that \eqref{eq:ilpinctail} enforces the same for the tails of every hyperedge.\par
+
+Finally, we can look at the three constraints that allow hypernodes to be dangling: constraints \eqref{eq:ilpdang1}, \eqref{eq:ilpdang2}, and \eqref{eq:ilpdang3}. First, we look at constraint \eqref{eq:ilpdang1} \emph{I need to figure out the proper way to align these.}:
+\begin{alignat*}{4}
+  \delta_A &\leq \alpha_A \qquad \delta_B &&\leq \alpha_B \qquad \delta_C &&\leq \alpha_C \qquad \delta_D &&\leq \alpha_D\\
+  1 &\leq 1 \qquad 1 &&\leq 1 \qquad 0 &&\leq 0 \qquad 0 &&\leq 1\\
+\end{alignat*}
+Now, we see that constraint \eqref{eq:ilpdang1} holds for all nodes in the PCSHT. \emph{I will get the other two constraints up soon.}\par
+
+\section{Danglers and Chads Problem}
+
+When we implement the ILP in a more complex hypergraph, such as the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}, we find that it creates a hypergraph that consists of multiple smaller hypergraphs (Figure \ref{fig:example-hypergraph-weighted-after-ILP}), rather than a continuous subnetwork. Our original implementatioin ends up returning a group of disconnected hypergraphs that represent regions with high prize to edge/dangling cost ratios, separated by gaps where they parent hypergraph had regions of low prize to edge/dangling cost ratios. While this result is intersting, in itself, it will not necessarily create a soltion that is biologically interesting, once we begin looking for PCSHTs in pathway signaling data.\par
+
+To fix this problem, we must incorporate the notion of hyperpaths and connectedness to our implementation of the PCSHT.
+\begin{figure}[thbp]
+  \begin{center}
+    \includegraphics{example-hypergraph-weighted-after-ILP}
+  \caption{The output of our ILP, when it is run on the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}. The dashed arrows indicate a dangling hypernode.}
+  \label{fig:example-hypergraph-weighted-after-ILP}
+  \end{center}
+\end{figure}
 
 \chapter{Implementation of PCSHT in PPI Data}
 
