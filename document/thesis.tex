@@ -180,9 +180,33 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
 
  \section{Integer Linear Programming}
 
-\chapter{Protein-Protein Interaction Networks}
+\chapter{Cell Signaling Networks}
 
-Cell function is governed by countless interactions between proteins, nucleic acids, lipids, carbohydrates, and many other small molecules.  The interactions between all of these components form what we call \textit{cell signaling networks}, which are responsible for almost every process within a cell.  Cell signaling networks are used to describe how many of the most basic reactions within cells interact with each other.  Some of the most important types of interactions that we see in cell signaling networks include the assembly and destruction of protein complexes, how small molecules such as ATP interact with proteins, the cascade of events that can occur after a membrane-bound protein is bound by a ligand, or where negative feedback loops exist that can have an effect on cell function.  We often refer to these cell signaling networks at protein-protein interaction (PPI) networks.  Historically, PPI networks have been a useful tool for compiling knowledge about individual interactions that have been studied \textit{in situ}, so that larger scale patterns of interaction can be examined, and both communicated easily and   In recent years, there has been a push to find ways to accurately model these networks so that they can be used to predict potential areas of future research (CITATION).\par
+Cell function is governed by countless interactions between proteins, nucleic acids, lipids, carbohydrates, and many other small molecules.  The interactions between all of these components form what we call \textit{cell signaling networks}, which are responsible for almost every process within a cell.  Cell signaling networks are used to describe how many of the most basic reactions within cells cause propagations of information, and the results of thse signals.  Some of the most important types of interactions that we see in cell signaling networks (also refered to as protein-protein interaction or signal transduction networks) include the assembly and destruction of protein complexes, how small molecules such as ATP interact with proteins, the cascade of events that can occur after a membrane-bound protein is bound by a ligand, or where negative feedback loops exist that can have an effect on cell function.  We often refer to these cell signaling networks at protein-protein interaction (PPI) networks.  Historically, PPI networks have been a useful tool for compiling knowledge about individual interactions that have been studied \textit{in situ}, so that larger scale patterns of interaction can be examined, and both communicated easily and analyzed algorithmically. In recent years, there has been a push to find ways to accurately model these networks so that they can be used to predict potential areas of future research (CITATION), in particular, by using graph-based methods (\cite{Aittokallio2006}).\par
+
+Generally speaking, there are a few key steps to a cell signling network. First, a trans-membrane protein will undergo a conformational change in response to a particular ligand. Typically, this signal will be some sort of messenger molecule to which the cell needs to respond. The change in conformation results in a cascade of interaction between proteins and other small molecules within the cell. Some of the changes that can result from this cascade of signaling are protein complex assembly, complex degradation, conformational changes to other proteins, phosphorylation, or dephosphorylation (among many other reactions). The ultimate result of this signaling cascade is a change in one or more transcription factors, proteins that bind to DNA, and regulate the rate of transcription of DNA to mRNA.\par
+
+\section{PPI Databases}
+
+In recent years, there has been a push to start curating what is already known about cell signaling, and publishing these networks online (\cite{Bauer-Mehren2009}, \cite{Cusick2009}). Many of these databases have been made available to the public, so that the data that they contain can be used collaboratively by anyone. Some of these networks are the Reactome database (\texttt{reactome.org}, \cite{Matthews2009}), NetPath (\texttt{netpath.org}, \cite{Kandasamy2010}), and SPIKE (\texttt{http://spike.cs.tau.ac.il/spike2/}, \cite{Paz2010}).\par
+The purpose of signaling pathway databases is twofold: to create repositories of known interactions, so that they can be easily referred to viewed in a zooomable, searchable manner (\cite{Hu2007}), and so that researchers can take advantage of the computational tools that alerady exist to find novel areas of research from these manually-curated networks (\cite{Karlebach2008}, \cite{Battle2010}).\par
+
+\section{Signaling by \emph{Hedgehog}}
+\emph{I decided to go with Hh, because a. it is a less complicated pathway, so it is easier to discuss without leaving a ton out, and b. because it has more orthologs in A. thaliana. Also, I realized that Hh disregulations are most closely associated with the kind of skin cancer that I had.}
+
+One example of a cell signaling pathway that has a variety of biological consequences is the \textit{Hedgehog} (Hh) signal transduction network. Hedgehog is a protein that helps regulate limb formation during early development, cell development and differentiation, and the development of neural tubes (\cite{Hiu2011})
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics{Hh-Np_secretion}
+  \caption{Hh-Np secretion, as shown by \texttt{reactome.org}.}
+  \label{fig:Hh-Np_secretion}
+  \end{center}
+\end{figure}
+
+\subsection{\emph{Hedgehog} Signaling in \emph{Homo sapiens}}
+
+\subsection{\emph{Hedgehog} Signaling in \emph{Arabidopsis thaliana}}
 
 
 \chapter{Hypergraphs \& Hyperpaths}

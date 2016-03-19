@@ -4,24 +4,28 @@
 \BOOKMARK [1][-]{section.0.3}{The Steiner Tree Problem}{chapter*.8}% 4
 \BOOKMARK [2][-]{subsection.0.3.1}{Prize-Collecting Steiner Tree Problem}{section.0.3}% 5
 \BOOKMARK [1][-]{section.0.4}{Integer Linear Programming}{chapter*.8}% 6
-\BOOKMARK [0][-]{chapter.1}{Chapter 1: Protein-Protein Interaction Networks}{}% 7
-\BOOKMARK [0][-]{chapter.2}{Chapter 2: Hypergraphs \046 Hyperpaths}{}% 8
-\BOOKMARK [1][-]{section.2.1}{Prize-Collecting Steiner Hypertrees}{chapter.2}% 9
-\BOOKMARK [1][-]{section.2.2}{Hyperpaths \046 Connectivity}{chapter.2}% 10
-\BOOKMARK [2][-]{subsection.2.2.1}{Directed Hyperpaths}{section.2.2}% 11
-\BOOKMARK [1][-]{section.2.3}{Definition of PCSHT}{chapter.2}% 12
-\BOOKMARK [0][-]{chapter.3}{Chapter 3: Formulation of ILP}{}% 13
-\BOOKMARK [1][-]{section.3.1}{Steiner Hypertree ILP}{chapter.3}% 14
-\BOOKMARK [1][-]{section.3.2}{Danglers and Chads Problem}{chapter.3}% 15
-\BOOKMARK [0][-]{chapter.4}{Chapter 4: Implementation of PCSHT in PPI Data}{}% 16
-\BOOKMARK [1][-]{section.4.1}{Network Construction HOW DO I REFERENCE HALP}{chapter.4}% 17
-\BOOKMARK [1][-]{section.4.2}{Network Weighting}{chapter.4}% 18
-\BOOKMARK [2][-]{subsection.4.2.1}{Efficiency}{section.4.2}% 19
-\BOOKMARK [0][-]{chapter.5}{Chapter 5: Efficacy \(\046 Proof??\)}{}% 20
-\BOOKMARK [0][-]{chapter.6}{Chapter 6: Future Directions}{}% 21
-\BOOKMARK [0][-]{chapter*.9}{Conclusion}{}% 22
-\BOOKMARK [1][-]{section.4.1}{More info}{chapter*.9}% 23
-\BOOKMARK [0][-]{appendix.A}{Appendix A: Algorithms \046 Programs}{}% 24
-\BOOKMARK [0][-]{appendix.B}{Appendix B: Benchmarking Graphs \046 Supplemental Data}{}% 25
-\BOOKMARK [0][-]{appendix.C}{Appendix C: Biological Data}{}% 26
-\BOOKMARK [0][-]{appendix*.10}{References}{}% 27
+\BOOKMARK [0][-]{chapter.1}{Chapter 1: Cell Signaling Networks}{}% 7
+\BOOKMARK [1][-]{section.1.1}{PPI Databases}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.2}{Signaling by Hedgehog}{chapter.1}% 9
+\BOOKMARK [2][-]{subsection.1.2.1}{Hedgehog Signaling in Homo sapiens}{section.1.2}% 10
+\BOOKMARK [2][-]{subsection.1.2.2}{Hedgehog Signaling in Arabidopsis thaliana}{section.1.2}% 11
+\BOOKMARK [0][-]{chapter.2}{Chapter 2: Hypergraphs \046 Hyperpaths}{}% 12
+\BOOKMARK [1][-]{section.2.1}{Prize-Collecting Steiner Hypertrees}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.2}{Hyperpaths \046 Connectivity}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.2.1}{Directed Hyperpaths}{section.2.2}% 15
+\BOOKMARK [1][-]{section.2.3}{Definition of PCSHT}{chapter.2}% 16
+\BOOKMARK [0][-]{chapter.3}{Chapter 3: Formulation of ILP}{}% 17
+\BOOKMARK [1][-]{section.3.1}{Steiner Hypertree ILP}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.2}{Danglers and Chads Problem}{chapter.3}% 19
+\BOOKMARK [0][-]{chapter.4}{Chapter 4: Implementation of PCSHT in PPI Data}{}% 20
+\BOOKMARK [1][-]{section.4.1}{Network Construction HOW DO I REFERENCE HALP}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.2}{Network Weighting}{chapter.4}% 22
+\BOOKMARK [2][-]{subsection.4.2.1}{Efficiency}{section.4.2}% 23
+\BOOKMARK [0][-]{chapter.5}{Chapter 5: Efficacy \(\046 Proof??\)}{}% 24
+\BOOKMARK [0][-]{chapter.6}{Chapter 6: Future Directions}{}% 25
+\BOOKMARK [0][-]{chapter*.9}{Conclusion}{}% 26
+\BOOKMARK [1][-]{section.4.1}{More info}{chapter*.9}% 27
+\BOOKMARK [0][-]{appendix.A}{Appendix A: Algorithms \046 Programs}{}% 28
+\BOOKMARK [0][-]{appendix.B}{Appendix B: Benchmarking Graphs \046 Supplemental Data}{}% 29
+\BOOKMARK [0][-]{appendix.C}{Appendix C: Biological Data}{}% 30
+\BOOKMARK [0][-]{appendix*.10}{References}{}% 31

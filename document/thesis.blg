@@ -3,12 +3,14 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: APA/apa-good.bst
 Database file #1: thesis.bib
+Warning--I didn't find a database entry for "Kandasamy2010"
+Warning--I didn't find a database entry for "Paz2010"
 Warning--there's a number but no volume in Ausiello1992
 Warning--empty journal in Conant2008
 Warning--there's a number but no volume in Meysman2015
 You've used 50 entries,
             2804 wiz_defined-function locations,
-            941 strings with 18421 characters,
+            945 strings with 18461 characters,
 and the built_in function-call counts, 40819 in all, are:
 = -- 2952
 > -- 2691
@@ -47,4 +49,4 @@ warning$ -- 3
 while$ -- 249
 width$ -- 0
 write$ -- 674
-(There were 3 warnings)
+(There were 5 warnings)
