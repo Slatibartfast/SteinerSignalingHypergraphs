@@ -7,7 +7,7 @@
 \BOOKMARK [0][-]{chapter.1}{Chapter 1: Cell Signaling Networks}{}% 7
 \BOOKMARK [1][-]{section.1.1}{PPI Databases}{chapter.1}% 8
 \BOOKMARK [1][-]{section.1.2}{Signaling by Hedgehog}{chapter.1}% 9
-\BOOKMARK [2][-]{subsection.1.2.1}{Hedgehog Signaling in Arabidopsis thaliana}{section.1.2}% 10
+\BOOKMARK [1][-]{section.1.3}{Signaling Networks in Arabidopsis thaliana}{chapter.1}% 10
 \BOOKMARK [0][-]{chapter.2}{Chapter 2: Hypergraphs \046 Hyperpaths}{}% 11
 \BOOKMARK [1][-]{section.2.1}{Prize-Collecting Steiner Hypertrees}{chapter.2}% 12
 \BOOKMARK [1][-]{section.2.2}{Hyperpaths \046 Connectivity}{chapter.2}% 13
@@ -21,10 +21,15 @@
 \BOOKMARK [1][-]{section.4.2}{Network Weighting}{chapter.4}% 21
 \BOOKMARK [2][-]{subsection.4.2.1}{Efficiency}{section.4.2}% 22
 \BOOKMARK [0][-]{chapter.5}{Chapter 5: Efficacy \(\046 Proof??\)}{}% 23
-\BOOKMARK [0][-]{chapter.6}{Chapter 6: Future Directions}{}% 24
-\BOOKMARK [0][-]{chapter*.9}{Conclusion}{}% 25
-\BOOKMARK [1][-]{section.4.1}{More info}{chapter*.9}% 26
-\BOOKMARK [0][-]{appendix.A}{Appendix A: Algorithms \046 Programs}{}% 27
-\BOOKMARK [0][-]{appendix.B}{Appendix B: Benchmarking Graphs \046 Supplemental Data}{}% 28
-\BOOKMARK [0][-]{appendix.C}{Appendix C: Biological Data}{}% 29
-\BOOKMARK [0][-]{appendix*.10}{References}{}% 30
+\BOOKMARK [1][-]{section.5.1}{Simple Example Hypergraphs}{chapter.5}% 24
+\BOOKMARK [1][-]{section.5.2}{Special Cases}{chapter.5}% 25
+\BOOKMARK [1][-]{section.5.3}{PCSHT in Real Data}{chapter.5}% 26
+\BOOKMARK [2][-]{subsection.5.3.1}{Human Cancer Data}{section.5.3}% 27
+\BOOKMARK [2][-]{subsection.5.3.2}{Arabidopsis thaliana WGD Data}{section.5.3}% 28
+\BOOKMARK [0][-]{chapter.6}{Chapter 6: Future Directions}{}% 29
+\BOOKMARK [0][-]{chapter*.9}{Conclusion}{}% 30
+\BOOKMARK [1][-]{section.4.1}{More info}{chapter*.9}% 31
+\BOOKMARK [0][-]{appendix.A}{Appendix A: Algorithms \046 Programs}{}% 32
+\BOOKMARK [0][-]{appendix.B}{Appendix B: Benchmarking Graphs \046 Supplemental Data}{}% 33
+\BOOKMARK [0][-]{appendix.C}{Appendix C: Biological Data}{}% 34
+\BOOKMARK [0][-]{appendix*.10}{References}{}% 35
