@@ -192,19 +192,19 @@ In recent years, there has been a push to start curating what is already known a
 The purpose of signaling pathway databases is twofold: to create repositories of known interactions, so that they can be easily referred to viewed in a zooomable, searchable manner (\cite{Hu2007}), and so that researchers can take advantage of the computational tools that alerady exist to find novel areas of research from these manually-curated networks (\cite{Karlebach2008}, \cite{Battle2010}).\par
 
 \section{Signaling by \emph{Hedgehog}}
-\emph{I decided to go with Hh, because a. it is a less complicated pathway, so it is easier to discuss without leaving a ton out, and b. because it has more orthologs in A. thaliana. Also, I realized that Hh disregulations are most closely associated with the kind of skin cancer that I had.}
+\emph{I decided to go with Hh, because a. it is a less complicated pathway, so it is easier to discuss without leaving a ton out, and b. because it has more orthologs in A. thaliana. Also, I realized that Hh disregulations are most closely associated with the kind of skin cancer that I had.}\par
 
-One example of a cell signaling pathway that has a variety of biological consequences is the \textit{Hedgehog} (Hh) signal transduction network. Hedgehog is a protein that helps regulate limb formation during early development, cell development and differentiation, and the development of neural tubes (\cite{Hiu2011})
+One example of a cell signaling pathway that has a variety of biological consequences is the \textit{Hedgehog} (Hh) signal transduction network. Hedgehog is a protein that helps regulate limb formation during early development, cell development and differentiation, and the development of neural tubes (\cite{Hiu2011}). Hedgehog has been implicated in the development of basal cell carcinoma (BCC\footnote{Basal cell carcinoma is thought to be the most common form of cancer in humans.}) when it is overexpressed (\cite{Beachy2004}). Additionally, it has been shown that Hh has very powerful effects on the proper layout and development of tissues in mammals, and it has been proposed that Hh is responsible for assisting with stem cell assisted tissue regeneration in adult mammals (\emph{CITATION}).
 
 \begin{figure}[h]
   \begin{center}
-    \includegraphics{Hh-Np_secretion}
-  \caption{Hh-Np secretion, as shown by \texttt{reactome.org}.}
+    \includegraphics[width=\textwidth]{Hh-Np_secretion}
+  \caption{Hh-Np secretion, as shown by \texttt{reactome.org} in \textit{Homo sapiens}.}
   \label{fig:Hh-Np_secretion}
   \end{center}
 \end{figure}
 
-\subsection{\emph{Hedgehog} Signaling in \emph{Homo sapiens}}
+The Hedgehog signaling pathway makes a useful example for modeling graph (or hypergraph) algorithms, since the network is small enough to look at manually, but also complex enough that its analysis is nontrivial. Furthermore, because it has been implicated with BCC, along with many other forms of cancer, data for weighting signaling networks are available through public databases such as The Cancer Genome Atlas (\texttt{http://cancergenome.nih.gov/}). These factors make it an excellent choice as an example network for testing new hypergraph algorithms.\par
 
 \subsection{\emph{Hedgehog} Signaling in \emph{Arabidopsis thaliana}}
 
