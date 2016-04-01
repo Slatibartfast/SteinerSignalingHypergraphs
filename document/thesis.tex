@@ -42,10 +42,12 @@
 \usepackage{verbatim}
 \usepackage{epigraph}
 \usepackage{lmodern}
+\usepackage{caption}
 
 %% Added for comments
 \usepackage{color}
 \newcommand{\anna}[1]{{\color{blue}[AR: #1]}}
+\newcommand{\new}[2]{{\color{orange}#1 [#2]}}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
@@ -171,23 +173,26 @@
 
 Since the discovery of cells by Robert Hooke in 1665, biologists have worked tirelessly to unlock the mysteries of cell function. Over the last half-century, our knowledge of how cells function has grown tremendously. An important and growing part of this field has been the
 
+ \section{Signaling Pathways}
+
  \section{Network Representations}
 
- \section{Graph Theory}
-
- \section{The Steiner Tree Problem}
-
-  \subsection{Prize-Collecting Steiner Tree Problem}
+ \section{Other Modeling Approaches}
 
  \section{Integer Linear Programming}
 
+ \section{Goals of this Thesis}
+
 \chapter{Cell Signaling Networks}
 
-Cell function is governed by countless interactions between proteins, nucleic acids, lipids, carbohydrates, and many other small molecules.  The interactions between all of these components form what we call \textit{cell signaling networks}, which are responsible for almost every process within a cell.  Cell signaling networks are used to describe how many of the most basic reactions within cells cause propagations of information, and the results of thse signals.  Some of the most important types of interactions that we see in cell signaling networks (also refered to as protein-protein interaction or signal transduction networks) include the assembly and destruction of protein complexes, how small molecules such as ATP interact with proteins, the cascade of events that can occur after a membrane-bound protein is bound by a ligand, or where negative feedback loops exist that can have an effect on cell function.  We often refer to these cell signaling networks at protein-protein interaction (PPI) networks.  Historically, PPI networks have been a useful tool for compiling knowledge about individual interactions that have been studied \textit{in situ}, so that larger scale patterns of interaction can be examined, and both communicated easily and analyzed algorithmically. In recent years, there has been a push to find ways to accurately model these networks so that they can be used to predict potential areas of future research (CITATION), in particular, by using graph-based methods (\cite{Aittokallio2006}).\par
+\new{Everything that I've written since the last draft is in orange now, and the bracketed bit will explain why the change was made, that way there aren't contradictory edits being made}{Anna's idea}
 
-Generally speaking, there are a few key steps to a cell signling network. First, a trans-membrane protein will undergo a conformational change in response to a particular ligand. Typically, this signal will be some sort of messenger molecule to which the cell needs to respond. The change in conformation results in a cascade of interaction between proteins and other small molecules within the cell. Some of the changes that can result from this cascade of signaling are protein complex assembly, complex degradation, conformational changes to other proteins, phosphorylation, or dephosphorylation (among many other reactions). The ultimate result of this signaling cascade is a change in one or more transcription factors, proteins that bind to DNA, and regulate the rate of transcription of DNA to mRNA.\par
+Cell function is governed by countless interactions between proteins, nucleic acids, lipids, carbohydrates, and many other small molecules.  The interactions between all of these components form what we call \new{\textit{protein-protein interaction} (PPI) networks}{Using PPI to refer to the interactome and ``signaling pathway" to mean the subnetwork.}, which are responsible for almost every process within a cell. Furthermore, we often think about specific sub-networks that explain important biological phenomena (hormone secretion, transcriptional regulation of a gene, or response to a particular stimuli are all examples). We refer to these subsets of the larger PPI network as \textit{cell signaling pathways}. We use cell signaling pathways to describe how many of the most basic reactions within cells cause propagations of information, and the results of thse signals.  Some of the most important types of interactions that we see in cell signaling networks include the assembly and destruction of protein complexes, how small molecules such as ATP interact with proteins, the cascade of events that can occur after a membrane-bound protein is bound by a ligand, or where negative feedback loops exist that can have an effect on cell function.  Historically, PPI networks have been a useful tool for compiling knowledge about individual interactions that have been studied \textit{in situ}, so that larger scale patterns of interaction can be examined, and both communicated easily and analyzed algorithmically. In recent years, there has been a push to find ways to accurately model these networks so that they can be used to predict potential areas of future research (\cite{papers}), in particular, by using graph-based methods (\cite{Aittokallio2006}).\par
 
-Signaling pathways are of particular importance because they are often disregulated in heterogenous diseases such as cancer. Because of this, researchers' ability to obtain accurate information about signaling pathways, and their ability to interpret that information may help them to deduce interactions whose disregulation may be implicated in a particular disease. As these networks grow and become more accurate, we will become increasingly able to develop computational methods to mine these networks for novel areas to research, that may help explain or treat heterogenous diseases. Additionally, as the databases become more complete, cross-pathway interactions may begin to be documented that would not otherwise be apparent upon studying individual pathways. The development of new computational techniques to elucidate regulatory changes in areas where different pathways, once modeled as discrete, crosstalk. If areas like these, could be identified, they could lead to new hypotheses that researchers could investigate \textit{in situ}. Furthermore, while past research has found many individual proteins and pathways that are implicated in particular diseases, our ability to observe or quantify certain elements that could be playing an important role in pathway disregulation is limited by our current sampling methods (RNA-Seq, microarray, etc). The development of more nuanced algorithms could increase our ability to implicate proteins that we cannot currently observe being disregulated because of the ways that we currently quantify protein expression in cells.\par
+There are a multitude of different forms of cell signaling pathways\footnote{As well as extracellular signaling networks and metabolic cell functions that are not triggered externally.}, responsible for many types of cell functions, but we will use the example of a cell changing its gene expression in response to an external stimuli as a general model for signaling pathways. In these cases, there are a few key steps that result in signal transduction throughout the cell. First, a trans-membrane protein will undergo a conformational change in response to a particular ligand. Typically, this signal will be some sort of messenger molecule to which the cell needs to respond. The change in conformation results in a cascade of interaction between proteins and other small molecules within the cell. Some of the changes that can result from this cascade of signaling are protein complex assembly, complex degradation, conformational changes to other proteins, phosphorylation, or dephosphorylation (among many other reactions). The ultimate result of this signaling cascade is a change in one or more transcription factors, proteins that bind to DNA, and regulate the rate of transcription of DNA to mRNA. The ultimate result of this pathway will be a change in the expression of some gene within the cell, and possibly the start of new signaling pathways.\par
+
+\paragraph{\new{Computational Methods.}{Anna}}
+Signaling pathways are of particular importance because they are often disregulated in heterogenous diseases such as cancer (\cite{papers}). Because of this, researchers' ability to obtain accurate information about signaling pathways, and their ability to interpret that information may help them to deduce interactions whose disregulation may be implicated in a particular disease. As these networks grow and become more accurate, we will become increasingly able to develop computational methods to mine these networks for novel areas to research, that may help explain or treat heterogenous diseases. Additionally, as the databases become more complete, cross-pathway interactions may begin to be documented that would not otherwise be apparent upon studying individual pathways. The development of new computational techniques to elucidate regulatory changes in areas where different pathways, once modeled as discrete, crosstalk. If areas like these, could be identified, they could lead to new hypotheses that researchers could investigate \textit{in situ}. Furthermore, while past research has found many individual proteins and pathways that are implicated in particular diseases, our ability to observe or quantify certain elements that could be playing an important role in pathway disregulation is limited by our current sampling methods (RNA-Seq, microarray, etc). The development of more nuanced algorithms could increase our ability to implicate proteins that we cannot currently observe being disregulated because of the ways that we currently quantify protein expression in cells.\par
 
 Beyond individual signal transduction pathways, it is useful to think of the set of all known interactions, together. We refer to this object as an \textit{interactome}, and our ability to analyze it computationally could lead to discovery (or at least postulation) of completely novel signaling networks. By examining the interactome for a species, and weighting it appropriately, it may be the case that we are able to elucidate sets of interactions that had been observed separately, but actually to be correlated with each other. A simple case of this would be if we find that one signaling pathway were to lead directly into another, that is, the outputs of the first pathway were the inputs to the other. Though interactions between multiple networks as simple as that are likely to have already been observed, it could be the case that an algorithm could find that there is some ``chain" of connections between one network and another, or that there were some form of crosstalk between some of the components of two networks. If we could find this type of interactions, it would help researchers understand the extent to which a change in one network may affect another.\par
 
@@ -201,13 +206,13 @@ Beyond individual signal transduction pathways, it is useful to think of the set
 
 \section{PPI Databases}
 
-In recent years, there has been a push to start curating what is already known about cell signaling, and publishing these networks online (\cite{Bauer-Mehren2009}, \cite{Cusick2009}). Many of these databases have been made available to the public, so that the data that they contain can be used collaboratively by anyone. Some of these networks are the Reactome database (\texttt{reactome.org}, \cite{Matthews2009}), NetPath (\texttt{netpath.org}, \cite{Kandasamy2010}), and SPIKE (\texttt{http://spike.cs.tau.ac.il/spike2/}, \cite{Paz2011} \emph{Need to fix this URL}).\par
-The purpose of signaling pathway databases is twofold: to create repositories of known interactions, so that they can be easily referred to viewed in a zooomable, searchable manner (\cite{Hu2007}), and so that researchers can take advantage of the computational tools that alerady exist to find novel areas of research from these manually-curated networks (\cite{Karlebach2008}, \cite{Battle2010}).\par
+In recent years, there has been a push to start curating what is already known about cell signaling, and publishing these networks online (\cite{Bauer-Mehren2009}, \cite{Cusick2009}). Many of these databases have been made available to the public, so that the data that they contain can be used collaboratively by anyone. Some of these networks are the Reactome database (\texttt{reactome.org}, \cite{Matthews2009}), NetPath (\texttt{netpath.org}, \cite{Kandasamy2010}), and SPIKE (\texttt{http://spike.cs.tau.ac.il/spike2/} (\new{\emph{How can I make this line wrap?}}{}), \cite{Paz2011} \emph{Need to fix this URL}).\par
+The purpose of signaling pathway databases is twofold: to create repositories of known interactions, so that they can be easily referred to viewed in a zooomable, searchable manner (\cite{Hu2007}), and so that researchers can take advantage of the computational tools that alerady exist to find novel areas of research from these manually-curated networks (\cite{Karlebach2008}, \cite{Battle2010}). \new{These more modern pathway interaction databases are much smaller than their earlier, non-curated counterparts, but they contain much higher confidence interactions, making them better candidates for applying computational methods.}{Anna}\par
 
-\section{Signaling by \emph{Hedgehog}}
+\section{Signaling by \emph{Hedgehog}\new{: A Case Study}{Anna}}
 \emph{I decided to go with Hh, because a. it is a less complicated pathway, so it is easier to discuss without leaving a ton out, and b. because it has more orthologs in A. thaliana. Also, I realized that Hh disregulations are most closely associated with the kind of skin cancer that I had.}\par
 
-One example of a cell signaling pathway that has a variety of biological consequences is the \textit{Hedgehog} (Hh) signal transduction network. Hedgehog is a protein that helps regulate limb formation during early development, cell development and differentiation, and the development of neural tubes (\cite{Hui2011}). Hedgehog has been implicated in the development of basal cell carcinoma (BCC\footnote{Basal cell carcinoma is thought to be the most common form of cancer in humans.}) when it is overexpressed (\cite{Beachy2004} \emph{Issue importing bib reference. Need to fix.}). Additionally, it has been shown that Hh has very powerful effects on the proper layout and development of tissues in mammals, and it has been proposed that Hh is responsible for assisting with stem cell assisted tissue regeneration in adult mammals (\emph{CITATION}).
+One example of a cell signaling pathway that has a variety of biological consequences is the \textit{Hedgehog} (Hh) signal transduction network. Hedgehog is a protein that helps regulate limb formation during early development, cell development and differentiation, and the development of neural tubes (\cite{Hui2011}). Hedgehog has been implicated in the development of basal cell carcinoma (BCC\footnote{Basal cell carcinoma is thought to be the most common form of cancer in humans\cite{paper}.}) when it is overexpressed (\cite{Beachy2004} \emph{Issue importing bib reference. Need to fix.}). Additionally, it has been shown that Hh has very powerful effects on the proper layout and development of tissues in mammals, and it has been proposed that Hh is responsible for assisting with stem cell assisted tissue regeneration in adult mammals (\emph{CITATION}).
 
 \begin{figure}[h]
   \begin{center}
@@ -217,11 +222,11 @@ One example of a cell signaling pathway that has a variety of biological consequ
   \end{center}
 \end{figure}
 
-The Hedgehog signaling pathway makes a useful example for modeling graph (or hypergraph) algorithms, since the network is small enough to look at manually, but also complex enough that its analysis is nontrivial. Furthermore, because it has been implicated with BCC, along with many other forms of cancer, data for weighting signaling networks are available through public databases such as The Cancer Genome Atlas (\texttt{http://cancergenome.nih.gov/}). These factors make it an excellent choice as an example network for testing new hypergraph algorithms.\par
+The Hedgehog signaling pathway makes a useful example for modeling \new{computational methods}{Anna}, since the network is small enough to look at manually, but also complex enough that its analysis is nontrivial. Furthermore, because it has been implicated with BCC, along with many other forms of cancer, data for weighting signaling networks are available through public databases such as The Cancer Genome Atlas (\texttt{http://cancergenome.nih.gov/}). These factors make it an excellent choice as an example network for testing new hypergraph algorithms.\par
 
 \section{Signaling Networks in \emph{Arabidopsis thaliana}}
 
-In addition to humans, there is a wealth of data available for other species that can also be studied using PPI database mining. One such species is \textit{Arabidopsis thaliana} (mouse-ear cress), a plant in the mustard family that is commonly used as a model for plant genetics. Researchers often use \textit{A. thaliana} to examine the effects of genetic manipulation on plants. Because of this, there is a huge quantity of data available that make implementing the same kind of algorithms that are possible in human signaling pathways in \textit{A. thaliana}.
+\new{One of the greatest strengths of computational methods is that they are generally agnostic to where their inputs come from, making them good tools for studying more than just human systems.}{Anna} In addition to humans, there is a wealth of data available for other species that can also be studied using PPI database mining. One such species is \textit{Arabidopsis thaliana} (mouse-ear cress), a plant in the mustard family that is commonly used as a model for plant genetics. Researchers often use \textit{A. thaliana} to examine the effects of genetic manipulation on plants. Because of this, there is a huge quantity of data available that make implementing the same kind of algorithms that are possible in human signaling pathways in \textit{A. thaliana}.
 
 \begin{figure}[h]
   \begin{center}
@@ -243,9 +248,15 @@ Unfortunately, for many small-scale pathways (such as the Hedgehog pathway), the
 
 Our ability to look at the entire interactome of species such as \arabidopsis allows us to investigate some of the global effects of genetic manipulation on signal transduction. This is especially useful in model organisms like \arabidopsis, since we can actually perform genetic manipulations on them quickly, safely, and ethically, unlike with human beings. Additionally, our ability to breed model organisms in the lab means that we can use specific datasets with large sample sizes. This is very useful compared to human datasets, which are generally based on small sample sizes, since human gene expression data is generally collected from (more or less) random, sparse cases when a person has a degenerate tissue type, such as a tumor, rather than under direct experimental manipulation.\par
 
-\emph{This needs a good transition, so that it isn't so jarring to the reader.}
+\section{\new{Transition}{Not sure if this should be its own section or if it will be incorporated into the previous.}}
+
+\new{Put in transition.}{Transitions are good.}
 
 \chapter{Hypergraphs \& Hyperpaths}
+
+\new{Intro paragraph.}{Anna}
+
+\section{\new{Graphs and their Limitations}{Anna}}
 
 While standard\footnote{The term ``standard" is used to describe traditional graphs, since the terms ``regular" and ``normal," which would be natural choices, both refer to specific types of graphs.} graphs are useful for many applications, they are severely limited in their ability to represent cell-signaling interactions.  Since they can only show pairwise interactions between nodes, whenever there is an interaction that requires more than two connections, the visualization of the graph becomes confusing, and biologically meaningless.  Furthermore, interactions involving multiple molecules require an enormous amount of different edges to represent all of the sub-interactions that take place.  Determining whether two edges are part of the same biological event is a non-trivial problem, and requires manual curation to solve, at this time.\par
 
@@ -257,22 +268,28 @@ While standard\footnote{The term ``standard" is used to describe traditional gra
   \end{center}
 \end{figure}
 
-One area of cell-signaling that becomes particularly problematic in standard graphs is the formation, interaction, and destruction of protein complexes.  The only way that complexes can be represented in standard graphs is by creating a complete subgraph of all of the elements of the protein complex.  On their own, these complete subgraphs can yield useful information about the make-up of a protein complex, but once they begin interacting with other elements of the graph, the graph becomes much more complex, as all of the proteins in the complex must be represented independently.  In the case of interactions between multiple large complexes, it becomes the case that the standard graph representation of this interaction is a large complete subgraph that contains nodes for all of the proteins involved in either complex.  It is then computationally impossible to distinguish whether the entity being described by the subgraph is the interaction between multiple protein complexes, or simply one large complex that contains all of the components of both complexes.  Furthermore, since the complete subgraphs which represent complexes are undirected, it is extremely difficult to tell what the inputs or outputs of a biochemical reaction may be.\par
+One area of cell-signaling that becomes particularly problematic in standard graphs is the formation, interaction, and destruction of protein complexes.  The easiest way that complexes can be represented in standard graphs is by creating a complete subgraph of all of the elements of the protein complex.  On their own, these complete subgraphs can yield useful information about the make-up of a protein complex, but once they begin interacting with other elements of the graph, the graph becomes much more complex, as all of the proteins in the complex must be represented independently.  In the case of interactions between multiple large complexes, it becomes the case that the standard graph representation of this interaction is a large complete subgraph that contains nodes for all of the proteins involved in either complex.  It is then computationally impossible to distinguish whether the entity being described by the subgraph is the interaction between multiple protein complexes, or simply one large complex that contains all of the components of both complexes.  Furthermore, since the complete subgraphs which represent complexes are undirected, it is extremely difficult to tell what the inputs or outputs of a biochemical reaction may be.\par
 
-Another shortcoming of standard graphs in representing complex biological interactions is that there is no way in which to represent positive or negative regulation of interactions.  Since there is a standardized way in which edges interact with nodes, there is no way to differentiate types of interactions between nodes.  This poses a challenge when there are regulators or catalysts present that are necessary for a reaction, but are not part of the inputs or outputs of the reaction.  If regulators are to be included in a standard graph representation of a cell-signaling network, they become indistinguishable from any other types of interactions that are taking place.  This lack of specificity is problematic, as it treats all interactions as equal, and hides potentially useful information from the graph.\par
+Another shortcoming of standard graphs in representing complex biological interactions is that there is no way in which to represent positive or negative regulation of interactions.  Since there is a standardized way in which edges interact with nodes, there is no way to differentiate types of interactions between nodes.  This poses a challenge when there are regulators or catalysts present that are necessary for a reaction, but are not part of the inputs or outputs of the reaction.  If regulators are to be included in a standard graph representation of a cell-signaling network, they become indistinguishable from any other types of interactions that are taking place.  This lack of specificity is problematic, as it treats all interactions as equal, and hides potentially useful information from the graph\footnote{\new{The Reacome database is available for download as a standard graph, but it is not available as a directed graph. This means that we could not use their graphs as a standard graph comparison to ours.}{Anna}}.\par
 
 To resolve the issues presented by standard graphs, we instead use a generalization called a \textit{hypergraph} that allows for the addition of more detail  and specificity within the data structure than standard graphs allow for.  In particular, hypergraphs allow for both the representation of protein complexes in the form of \textit{hypernodes}, which we think of simply as a set of one or more nodes, and for the representation of complex, directed interactions that can have multiple inputs and outputs.  We represent these interactions with the use of \textit{hyperedges}, which define a set of one or more hypernodes.  Since a hyperedge may include more than two hypernodes, we gain the ability to represent both multi-protein interactions, as well as to define the notions of regulation on reactions.\par
 
-\section{Prize-Collecting Steiner Hypertrees}
+\section{Hypergraphs}
+
+\begin{figure}[thbp]
+  \begin{center}
+    \includegraphics[width=\textwidth/2]{undirected_hypergraph}
+  \caption[An example undirected hypergraph]{\new{An example of an undirected hypergraph (\cite{sharpen}), where each edge is shown by a colored region, as well as the conversion of the hypergraph to a standard graph.}{I could also draw this on my own, I suppose.}}
+  \label{fig:undirected_hypergraph}
+  \end{center}
+\end{figure}
 
 Where a directed graph represents directed, pairwise interactions between only two vertices, we can use \textit{directed hypergraph} to represent directed interactions between sets of vertices (nodes). We formally define a directed hypergraph, $\mathcal{H}$, as a pair $(V,E)$, where $V$ is a finite set of vertices and $E \subseteq 2^V \times 2^V$ is a finite set of \textit{directed hyperedges} connecting members of $V$ such that, for every $e=(T(e),H(e)) \in E$, $T(e) \cap H(e) = \emptyset$, and $T(e)$, $H(e) \neq \emptyset$.  We refer to $T(e)$ as the \textit{tail} of the hyperedge, and to $H(e)$ as the \textit{head} of the hyperedge.\par
-
-Furthermore, we can define sets of two or more nodes as a hypernode, which are members of the power set of $V$.  These can be incorporated into a directed hypergraph to form a \textit{complexed directed hypergraph}.  We define a \textit{complexed directed hypergraph}, $\mathcal{H}$, as the triple $(V,U,E)$ in which $V$ is a finite set of vertices, $U \subseteq 2^V$ is a finite set of hypernodes, and $E \subseteq 2^U \times 2^U$ is a finite set of hyperedges such that, for every $e=(T(e),H(e)) \in E$, $T(e) \cap H(e) = \emptyset$ and $T(e)$, $H(e) \neq \emptyset$.\par
 
 \begin{figure}[thbp]
   \begin{center}
     \includegraphics{example-hypergraph}
-  \caption[An example hypergraph]{An example of the hypergraph that corresponds to the standard graph shown in Figure \ref{fig:example-standard-graph}. Note that each edge now contains more specific information about the flow of information \textit{information?} through the network.}
+  \caption[An example directed hypergraph]{An example of the hypergraph, $\mathcal{H}=(V,E)$ that corresponds to the standard graph shown in Figure \ref{fig:example-standard-graph}. Note that each edge now contains more specific information about the propogation of a signal through the network. For this example, $V={A,B,...,M}$ and each hyperedge is shown by a compund arrow, for example the edge whose tail is hypernodenode $A$ and whose tail is hypernodes $B$ and $D$.}
   \label{fig:example-hypergraph}
   \end{center}
 \end{figure}
@@ -310,7 +327,7 @@ In addition to these properties, it is also necessary for us to define two class
 
 \textit{PUT IN AN IMAGE SHOWING DANGLERS AND CHADS}
 
-\chapter{Formulation of ILP}
+\chapter{Formulation \new{as an Integer Linear Porgram}{Anna}}
 
 In order for us define and develop a Prize-Collecting Steiner Hyptertree, we begin by formulating the notion of a \textit{Steiner Hypertree}. This allows us to develop an implementation that where some nodes, referred to as our \textit{target set}, are included in the solution, by definition. We begin like this to make the development and debugging of the ILP slightly easier, since it allows us to work from the target set to other nearby nodes, instead of forcing the ILP to discover every node that it needs to include.\par
 To make our Steiner Hypertree, $\mathcal{S}$, we begin with a ``parent" hypergraph, $\mathcal{H} = (V,E)$, and a set of target nodes, $T$, such that $T \subseteq V$.  We refer to each hypernode as some $x$ such that $x \in V$\footnote{We use ``$x$" as an element of $V$, rather than lowercase ``$v$" to avoid the visual confusion between lowercase $v$ and uppercase $V$ (REMOVE THIS IF CHANGING TO V'S LOOKS OKAY)}, and each edge is some $e$ such that $e \in E$.  When building $\mathcal{H}$, we initially seed the hypergraph.  Each hyperedge is assigned a weight, that is, a cost associated with including that edge in the solution hypergraph, $\mathcal{S}$.  We then assign each hypernode in $\mathcal{H}$ two values, a prize for being included in $\mathcal{S}$, as well as a penalty associated with being a \textit{dangling} hypernode.\par
@@ -362,12 +379,12 @@ Subject to the set of linear constraints (\emph{Would it be a good idea to chang
 \end{align}%
 
 
-Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\alpha_v$), edges ($\alpha_e$), and dangling nodes ($\delta_v$) that maximize the sums of node prizes ($g_v$), minimize the sums of edge costs ($c_e$), and minimize the sums of dangling penalties ($h_v$). Constraint \eqref{eq:ilpT} encodes that every target node in $T$ is in the solution, $\mathcal{S}$.  Constraints \eqref{eq:ilpinchead} and \eqref{eq:ilpinctail} ensure that if an edge is in $\mathcal{S}$, any nodes incident on that edge (i.e. in the head or tail of that edge) will also be in $\mathcal{S}$.  Finally, constraints \eqref{eq:ilpdang1}, \eqref{eq:ilpdang2}, and \eqref{eq:ilpdang3} encode the ability for nodes to dangle if they do not have an incoming edge.\par
+Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\alpha_v$), edges ($\alpha_e$), and dangling nodes ($\delta_v$) that maximize the sums of node prizes ($g_v$), minimize the sums of edge costs ($c_e$), and minimize the sums of dangling penalties ($h_v$). Constraint \eqref{eq:ilpT} encodes that every target node in $T$ is in the solution, $\mathcal{S}$.  Constraints \eqref{eq:ilpinchead} and \eqref{eq:ilpinctail} ensure that if an edge is in $\mathcal{S}$, any nodes incident on that edge (i.e. in the head or tail of that edge) will also be in $\mathcal{S}$.  Finally, constraints \eqref{eq:ilpdang1}, \eqref{eq:ilpdang2}, and \eqref{eq:ilpdang3} encode the ability for nodes to dangle if they do not have an incoming edge. To illustrate what each of these constraints does in more detail, we will construct a simple example, and examine each constraint within that example.\par
 
-\begin{figure}[!htbp]
-  \begin{minipage}[b]{0.60\linewidth}
+\begin{figure}[th]
+  \begin{minipage}[b]{0.30\linewidth}
     \centering
-    \includegraphics{dummy-before}
+    \includegraphics[width=\linewidth]{dummy-before}
     \par\vspace{0pt}
   \end{minipage}%
   \begin{minipage}[b]{0.30\linewidth}
@@ -377,10 +394,10 @@ Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\al
       \multicolumn{3}{|c|}{Nodes} \\%
       \hline \hline
       Node & $g_v$ &  $h_v$ \\ \hline%
-      A & 10 &  1\\ \hline%
-      B & 10 &  1\\ \hline%
-      C & 1 &  10\\ \hline%
-      D & 10 &  10\\ \hline%
+      $A$ & 10 &  1\\ \hline%
+      $B$ & 10 &  1\\ \hline%
+      $C$ & 1 &  10\\ \hline%
+      $D$ & 10 &  10\\ \hline%
     \end{tabular}%
     \par\vspace{0pt}
   \end{minipage}
@@ -396,17 +413,31 @@ Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\al
     \end{tabular}%
     \par\vspace{0pt}
   \end{minipage}
-\caption[A small hypergraph, with node and edge data]{A simple hypergraph, and its associated node and edge weights. \emph{This obviously needs to be re-formatted to not look terrible.}}
+\caption[A small hypergraph, with node and edge data]{A simple hypergraph, and its associated node and edge weights.}
 \label{fig:dummy-before}
 \end{figure}
 
-\emph{Should I start a new subsection here?}\par
+\paragraph{Example.}Consider the hypergraph shown in Figure \ref{fig:dummy-before}. For this hypergraph, the PCSHT that comes from this graph should consist of hypernodes $A$, $B$, and $D$, as well as hyperedge $E_1$. This is obvious, since nodes $A$ and $B$, which will be dangling in the solution, both have low dangling penalties and high prizes, while node $C$ has a very large dangling penalty relative to its prize. Similarly, $E_1$ has a relatively low cost, whereas $E_2$ has a very high cost. Finally, $D$ is considered a target, in this case, and is therefore automatically included in the solution. Knowing what the solution should be, we can use this hypergraph to demonstrate the effect of each linear constraint in our ILP.\par
 
-Consider the hypergraph shown in Figure \ref{fig:dummy-before}. For this hypergraph, the PCSHT that comes from this graph should consist of hypernodes $A$, $B$, and $D$, as well as hyperedge $E_1$. This is obvious, since nodes $A$ and $B$, which will be dangling in the solution, both have low dangling penalties and high prizes, while node $C$ has a very large dangling penalty relative to its prize. Similarly, $E_1$ has a relatively low cost, whereas $E_2$ has a very high cost. Finally, $D$ is considered a target, in this case, and is therefore automatically included in the solution. Knowing what the solution should be, we can use this hypergraph to demonstrate the effect of each linear constrain in our ILP.\par
+\begin{center}
+  %\captionof{table}{\new{All of the possible solutions that satisfy all necessary linear constraints, and their corresponding objective values. We see that the induced subgraph (DEFINE) from $E_1$ yields the optimal solution.}{Added to show all ``legal" solutions, and what obj. value they yield.}}
 
-We now know that, for the optimal PCSHT, $\alpha_A$, $\alpha_D$, $\alpha_D$, and $\alpha_{E_1}$ are all equal to 1 (that is, they are included in the solution), and $\alpha_C$ and $\alpha_{E_2}$ are equal 0. Additionally, we know that in this solution $A$ and $B$ are dangling nodes, therefore $\delta_A$ and $\delta_B$ are both 1, and $\delta_C$ and $\delta_D$ are both 0. Finally, we are given that $D$ is a target node, hence $T=\{D\}$.\par
+\begin{tabular}{ |l|l|l| }%
+  \hline%
+  \multicolumn{3}{|c|}{Subgraphs} \\%
+  \hline \hline
+  $V$ & $E$ & Objective Value \\ \hline%
+  $A,B,D$ & $E_1$ & 27 \\ \hline%
+  $C,D$ & $E_2$ & -9 \\ \hline%
+  $A,B,C,D$ & $E_1,E_2$ & -2 \\ \hline%
+\end{tabular}%
+\end{center}
 
-First let us look at the objective function, Equation (\emph{not actually an equation. Does this matter?}) \eqref{eq:ilpsum}. We can call each of the three sums included the equation which calculate the total node prizes, edge costs, and dangling penalties $\Xi$, $\Phi$, and $\Psi$, respectively. Given the values of $\alpha_v$, $\alpha_e$, and $\delta_v$ that we know should yield the PCSHT, we get find:
+
+
+We now know that, for the optimal PCSHT, $\alpha_A$, $\alpha_B$, $\alpha_D$, and $\alpha_{E_1}$ are all equal to 1 (that is, they are included in the solution), and $\alpha_C$ and $\alpha_{E_2}$ are equal 0. Additionally, we know that in this solution $A$ and $B$ are dangling nodes, therefore $\delta_A$ and $\delta_B$ are both 1, and $\delta_C$ and $\delta_D$ are both 0. Finally, we are given that $D$ is a target node, hence $T=\{D\}$.\par
+
+First let us look at the objective function, Formula \eqref{eq:ilpsum}. We can call each of the three sums included the equation which calculate the total node prizes, edge costs, and dangling penalties $\Xi$, $\Phi$, and $\Psi$, respectively. Given the values of $\alpha_v$, $\alpha_e$, and $\delta_v$ that we know should yield the PCSHT, we get find:
 \begin{gather*}
  \Xi = 30\\
  \Phi = 1\\
@@ -418,28 +449,22 @@ If $C$ or $E_2$ were to be added, or any node or edge were removed from the PCSH
 Now, we can begin to look at how each linear constraint governs the behavior of the ILP. Let's begin with constraint \eqref{eq:ilpT}. For our hypergraph, $T$ only has one element, $D$, constraint \eqref{eq:ilpT} only needs to be checked for one node. We know that $\alpha_D = 1$, therefore constraint \eqref{eq:ilpT} simplifies to:
 \begin{align*}
   \alpha_D &\geq 1\\
-  1 &\geq 1\\
 \end{align*}
 We see that constraint \eqref{eq:ilpT} holds for all $v$ in $T$, therefore we know that all members of the target set are included in the PCSHT.\par
 
-Next, we can look at constraints \eqref{eq:ilpinchead} and \eqref{eq:ilpinctail}. Since these constraints are the same, except for whether they are concerned with the head or tail of a hyperedge, we can evaluate the effect of just constraint \eqref{eq:ilpinchead}, and assume that constraint \eqref{eq:ilpinctail} works in the same way (\emph{Is this an okay assumption? Should I change it to look at the tails since there is a little more going on with those?}). To assess this constraint, we must see how if the inequality holds for all edges in the hypergraph. We begin by looking at $E_1$. We know that $H({E_1})=D$, and that $\lvert H(e) \rvert = 1$, therefore we can check:
+Next, we can look at constraints \eqref{eq:ilpinchead} and \eqref{eq:ilpinctail}. Since these constraints are the same, except for whether they are concerned with the head or tail of a hyperedge, we can evaluate the effect of just constraint \eqref{eq:ilpinchead}, and assume that constraint \eqref{eq:ilpinctail} works in the same way. To assess this constraint, we must see how if the inequality holds for all edges in the hypergraph. We begin by looking at $E_1$. We know that $H({E_1})=D$, and that $\lvert H(e) \rvert = 1$, therefore we can check:
 \begin{align*}
-  \alpha_D &\geq 1 \times \alpha_{E_1}\\
-  1 &\geq 1 \times 1\\
-  1 &\geq 1\\
+  \alpha_D &\geq 1 \bullet \alpha_{E_1}\\
 \end{align*}%
 So, we see that constraint \eqref{eq:ilpinchead} holds for $E_1$. Now, we can check for $E_2$ (whose head is also only $D$):
 \begin{align*}
-  \alpha_D &\geq 1 \times \alpha{E_2}\\
-  1 &\geq 1 \times 0\\
-  1 &\geq 0\\
+  \alpha_D &\geq 1 \bullet \alpha{E_2}\\
 \end{align*}%
 We see that this inequality also holds. This means that, since the inequality holds for all hyperedges, that for every edge in the hypergraph, its head is also included in the hypergraph. We can easily extend this to see that \eqref{eq:ilpinctail} enforces the same for the tails of every hyperedge.\par
 
 Finally, we can look at the three constraints that allow hypernodes to be dangling: constraints \eqref{eq:ilpdang1}, \eqref{eq:ilpdang2}, and \eqref{eq:ilpdang3}. First, we look at constraint \eqref{eq:ilpdang1} \emph{I need to figure out the proper way to align these.}:
 \begin{alignat*}{4}
   \delta_A &\leq \alpha_A \qquad \delta_B &&\leq \alpha_B \qquad \delta_C &&\leq \alpha_C \qquad \delta_D &&\leq \alpha_D\\
-  1 &\leq 1 \qquad 1 &&\leq 1 \qquad 0 &&\leq 0 \qquad 0 &&\leq 1\\
 \end{alignat*}
 Now, we see that constraint \eqref{eq:ilpdang1} holds for all nodes in the PCSHT. \emph{I will get the other two constraints up soon.}\par
 
@@ -456,38 +481,41 @@ To fix this problem, we must incorporate the notion of hyperpaths and connectedn
   \end{center}
 \end{figure}
 
-\chapter{Implementation of PCSHT in PPI Data}
+\chapter{\new{Results}{Anna}}
 
-  \section{Network Construction \textit{HOW DO I REFERENCE HALP}}
-  In order to construct directed signaling hypergraphs of biological pathways, we use pathway data from preexisting, curated protein-protein interaction networks, available publically. For this, pathway signaling information was downloaded from the curated Reactome pathway database (\cite{Croft2014}, \cite{Milacic2012}), and parsed into two flat files containing node and edge information necessary to construct the hypergraph (See Appendix B).\par
+  \section{Network Construction and Weighting}
+  In order to construct directed signaling hypergraphs of biological pathways, we use pathway data from preexisting, curated protein-protein interaction networks, available publically. For this, pathway signaling information was downloaded from the curated Reactome pathway database (\cite{Croft2014}, \cite{Milacic2012}), and parsed \new{using a Java script (\cite{AnnaCorrespondence})}{Source of script.} into two flat files containing node and edge information necessary to construct the hypergraph (See Appendix B).\par
   The networks generated from the Reactome database specify each hypernode as a combination of one or more proteins or small molecules. For simplicity, each hypernode was ``converted" into a regular node for the purpose of algorithm implementation, and the components' information was saved so that they could be reconstructed \textit{post hoc}. Additionally, each hyperedge contained information about whether the reaction that it represented was regulated either positively or negatively by one or more nodes. Positive regulators were added to the tail of their respective hypernodes, since they are assumed to be necessary reactants for the edge, and should therefore be considered part of the signaling network. Negative regulators, on the other hand, were excluded from the flat files, since the way that they act on reactions poses poses an interesting problem in modeling, since the current definition of PCSHT assumes that all node prizes and edge weights are positive (see Future Directions).\par
+  \new{From the edge files, hypergraphs were constructed using the Hypergraph Algorithms Package (HALP, \cite{halp}). Edge files gave enough information to create induced hypergraphs, which were then weighted based on information stored in node files. For the implementation PCSHT to create meaninful subnetworks, it is important that the parent hypergraph have a meaningful, biologically informed weighting scheme applied. However, it is often the case that data are difficult to acquire and add to the hypergraph, so simple default settings were first applied to each parameter. By default, each node was given a prize of 1, and a dangling penalty of 5 (\emph{I did this arbitrarily, should I have more informed default parameters?}).  Additionally, each edge was given a default weight of 1, so that the algorthm would try to minimize the number of edges.}{Methods section.}
 
-  \section{Network Weighting}
-
-    For the implementation PCSHT to create meaninful subnetworks, it is vital that the parent hypergraph have a meaningful, biologically informed weighting scheme applied.
-
-    \subsection{Efficiency}
-
-
-  \chapter{Efficacy (\& Proof??)}
+  \section{Simulated Data}
 
   To assess the efficacy of this ILP in generating the correct Prize Collecting Steiner Hypertree, it is first necessary to perform a series of benchmarking tests on known datasets and hypergraphs.  This will allow us to determine if the algorithm is performing as expected, and generating results that can be corroborated manually.\par
 
-  \section{Simple Example Hypergraphs}
+  \subsection{Simple Example Hypergraphs}
 
-  \section{Special Cases}
+  \subsection{Potential Special Cases}
 
   \section{PCSHT in Real Data}
 
    \subsection{Human Cancer Data}
 
-   \subsection{\textit{Arabidopsis thaliana} WGD Data}
+  \section{\new{Comparison to Standard Graphs}{Anna}}
+
+  \emph{Make python file to convert to standard graphs!}
+
+  \new{To test how well this algorithm is able to construct sub-hypergraphs that are more meaningful than their standard counterparts, we look at the same implementation on hypergraphs that have been converted to standard graphs. For this conversion, each hyperedge in the original hypergraph was replaced with a set of directed edges that corresponded to \emph{FINISH THIS \P}}{}
 
 \chapter{Future Directions}
  \begin{itemize}
    \item{Heat mapping to weight hypergraphs (Random walks).}
    \item{Computation of individual or multiple subnetworks.}
  \end{itemize}
+
+ \section{\new{Complexed Hypergraphs}{Reordering}}
+
+ \new{
+ We can define sets of two or more nodes as a hypernode, which are members of the power set of $V$.  These can be incorporated into a directed hypergraph to form a \textit{complexed directed hypergraph}.  We define a \textit{complexed directed hypergraph}, $\mathcal{H}$, as the triple $(V,U,E)$ in which $V$ is a finite set of vertices, $U \subseteq 2^V$ is a finite set of hypernodes, and $E \subseteq 2^U \times 2^U$ is a finite set of hyperedges such that, for every $e=(T(e),H(e)) \in E$, $T(e) \cap H(e) = \emptyset$ and $T(e)$, $H(e) \neq \emptyset$.\par}{Reordering}
 
 \chapter*{Conclusion}
          \addcontentsline{toc}{chapter}{Conclusion}

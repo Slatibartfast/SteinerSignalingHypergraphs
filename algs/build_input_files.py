@@ -41,8 +41,8 @@ def createNodeFile(in_prefix, out_prefix, delim=';', sep='\t'):
         #
 
         # Default prizes and penalties
-        defPrize = 0
-        defPenalty = 100
+        defPrize = 1
+        defPenalty = 5
 
         outNodes.write(node_ID+";"+str(defPrize)+";"+str(defPenalty)+"\n")
 
