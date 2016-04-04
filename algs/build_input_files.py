@@ -4,8 +4,8 @@ from directed_hypergraph import *
 
 def main(argv):
     # Specify the name of the file containing the nodes and edges
-    inPrefix = input("What is the prefix of input files (without -hypernodes or -hyperedges)?")
-    outPrefix = input("What should the prefix of the output files be?")
+    inPrefix = input("What is the prefix of input files (without -hypernodes or -hyperedges)? ")
+    outPrefix = input("What should the prefix of the output files be? ")
 
     createNodeFile(inPrefix, outPrefix)
     createEdgeFile(inPrefix, outPrefix)
@@ -57,7 +57,7 @@ def createEdgeFile(in_prefix, out_prefix, delim=';', sep='\t'):
     inEdges = open(inFileName, 'r')
     outFileName = "../hypergraphs/"+out_prefix+"-edges.txt"
     outEdges = open(outFileName, 'w')
-    outEdges.write("name;tail;head;cost\n")
+    outEdges.write("tail;head;cost\n")
 
     # Skip the header line
     inEdges.readline()
@@ -78,13 +78,14 @@ def createEdgeFile(in_prefix, out_prefix, delim=';', sep='\t'):
         tail = words[0].split(delim)
         head = words[1].split(delim)
         posReg = words[2].split(delim)
-        tail.extend(posReg)
+        if posReg[0] != "None":
+            tail.extend(posReg)
 
         # Default cost
         defCost = 1
 
         # Begin printing to edge file
-        outEdges.write(name+";")
+        #outEdges.write(name+";")
 
         isFirst = True
         for node in tail:

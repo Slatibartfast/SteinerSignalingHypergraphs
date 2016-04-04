@@ -6,8 +6,8 @@ def main(argv):
     # Specify the name of the file containing the nodes and edges
     title = input("What is the title of the input/output files? ");
     print("...\n...\n...")
-    nodeFile = "../examples/"+title+"-nodes.txt"
-    edgeFile = "../examples/"+title+"-edges.txt"
+    nodeFile = "../hypergraphs/"+title+"-nodes.txt"
+    edgeFile = "../hypergraphs/"+title+"-edges.txt"
     out = title+".lp"
 
     H = DirectedHypergraph()
@@ -45,8 +45,11 @@ def build_lp(Hypergraph,outputFile):
 
     # Create three lists of the variables present in the linear program.
     xVariables = []
+    # xVarVals = []
     dVariables = []
+    # dVarVals = []
     eVariables = []
+    # eVarVals = []
 
     # First, write sum_{v \in V}{g_{v}'a_{v}}
 

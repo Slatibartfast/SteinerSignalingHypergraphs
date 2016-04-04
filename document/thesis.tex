@@ -171,17 +171,80 @@
 \onehalfspacing
 % \doublespacing
 
-Since the discovery of cells by Robert Hooke in 1665, biologists have worked tirelessly to unlock the mysteries of cell function. Over the last half-century, our knowledge of how cells function has grown tremendously. An important and growing part of this field has been the
+Since the discovery of cells by Robert Hooke in 1665, biologists have worked tirelessly to unlock the mysteries of cell function. Over the last half-century, our knowledge of how cells function has grown tremendously. An important and growing part of this field has been the growing use of computational methods in helping researchers to both test hypotheses, and generate novel hypotheses. \new{Computer-based methods have a wide range of applications, from DNA and RNA sequence analysis (\cite{humanGenome}) to high-throughput (??) modeling of population growth (\cite{SomethingRelevant}), to the growing fields concerned with artificial neural networks (\cite{SomethingElse}). Importantly, in recent years (\emph{decades, centuries? I should get a citation for this.}), biologists\footnote{And other scientists, for that matter.} have begun to employ some of the computational tools that computer scientists have been developing for decades. This recent synthesis of fields (see Figure \ref{fig:bioinf_venn}) has created a new area of research, where existing algorithms and computational methodologies are beign adapted and tweaked to help elucidate new meaning from biological data.\par
+
+ \begin{figure}[h]
+   \begin{center}
+     \includegraphics[width=\textwidth/2]{bioinformatics_venn}
+   \caption[Bioinformatic fields.]{A venn diagram of the intersection between the fields of biology, computer science, and statistics {\cite{putIntoBib}}. This thesis is primarily concerned with the field of computational biology.}
+   \label{fig:bioinf_venn}
+   \end{center}
+ \end{figure}
 
  \section{Signaling Pathways}
 
+ One of the most interesting areas where computational methods are now being applied is in the study of signaling pathways within cells. Generally, signaling pathways are representations of what we currently know about how proteins and small molecules interact within cells in order to propagate signals throughout the cell, and ultimately change the cell's behavior (\emph{behavior?}). We find cell signaling pathways interesting because understanding how signaling information spreads throughout a cell helps us to better understand what disregulations can result in changes in cell dynamics, which often manifest themselves as diseasus such as cancer (\cite{cancer}). Signaling pathways have been studied for years, and they have often been represented visually as flow diagrams (add a picture), but recently, researchers have begun to ``convert" the traditionally drawn digrams of signaling pathways into mathematically intersting structures, for which known algorithms can be employed to learn more about the signaling pathways.
+
+
  \section{Network Representations}
 
- \section{Other Modeling Approaches}
+  To build a mathematical model of cell signaling pathways, we often use a graph as a data structure that is representative of the structure of the pathways. Graphs are a data structure first described by Euler in 1736 (\cite{Shields2012}) to help explain the complex relationships between objects\footnote{In Euler's case, the seven bridges of K\"{o}nigsberg.} in a concise, well defined way. For the purpose of this thesis, the word ``graph\footnote{A term coined by James Joseph Sylvester in 1878 (\cite{Biggs1986}).}" will refer to the data structure. A graph, $G=(V,E)$ is a structure that represents a set of objects, $V$ referred to as \textit{nodes} or \textit{vertices} and pairwise connections between them, $E$ referred to as \textit{edges}. Edges in a graph can either be \textit{undirected} or \textit{directed} (shown in Figure \ref{fig:simple_graph_du}), meaning that they go from one node (the \textit{tail}) to another node (the \textit{head}). We define a \textit{subgraph}, $G^\prime$, of $G$ as $G^\prime=((V^\prime,E^\prime | V^\prime \subseteq V \text{ and } E^\prime \subseteq E))$. Furthermore, we define an \textit{induced subgraph} as the subgraph that arises from a subset of edges, $E^{\prime\prime}$, and their respective heads and tails.\par
+
+  One of the greatest advantages of using graphs as modeling tools is the wealth of graph algorithms that have been invented since Euler first proposed problems on graphs in 1736. These algorithms make it simple for graphs that are representative of real biological data to be queried for informative (i.e. shortest path between two nodes, modularity of a graph, or subgraphs that satisfy certain parameters) which can themselves be analyzed to determine whether they represent a biologically meaningful phenomena.\par
+
+  \begin{figure}[!h]
+    \begin{center}
+      \includegraphics[width=\textwidth/2]{simple_graph_du}
+    \caption[Undirected \& Directed Graphs]{A simple undirected graph (left) and it's directed counterpart (right). The green hyperege has node $D$ as its tail and $C$ as its head.}
+    \label{fig:simple_graph_du}
+    \end{center}
+  \end{figure}
+
+   \subsection{Walks, Paths, Connectivity, and Trees}
+
+   In graphs, it is useful to define a way to traverse the graph, through the nodes and edges. We define a \textit{walk} in a graph as an alternating series of nodes and edges, such that each edge included in the walk is adjacent to the two nodes incident upon it. An example of one such walk, $\mathcal{W}$ in the undirected graph from Figure \ref{fig:simple_graph_du} is:
+
+   \begin{equation*}
+     \mathcal{W} = (A,E_2,D,E_2,A,E_1,B)
+   \end{equation*}
+
+   Furthermore, we can define a \textit{directed walk} in a directed graph as a walk that respects the direction of the edges in the graph. Additionally, we define a \textit{path} (or a \textit{directed path}, in directed graphs) as a walk for which there are no repeated vertices or edges. If we want to talk about a path $\mathcal{P}$ that goes from one node, $s$ to another $t$, we use the notation $\mathcal{P}(s,t)$ to describe the start and endpoints of the path. For example, in the directed graph shown in Figure \ref{fig:simple_graph_du}, one possible path from $A$ to $C$, is:
+
+   \begin{equation*}
+     \mathcal{P}(s,t) = (A,E_2,D,E_4,C)
+   \end{equation*}
+
+   \subsection{Spanning Trees and Steiner Trees}
+
+ \section{Optimization}
+
+  \subsection{Prize Collecting Steiner Trees}
 
  \section{Integer Linear Programming}
 
+  For this thesis, we use a type of programming known as \textit{integer linear programming}. Integer linear programs (ILPs) solve for the optimal solution(s) to an objective expression, subject to a set of linear constraints (\cite{Papadimitriou1998}). In our case, the set of variables, $\mathbf{x}$, are all binary variables, which will represent whether a given part of the graph is included in the solution. If variable $\mathbf{x}_i$ is equal to 0 in the solution, the part of the graph with which it is associated will not be present in the optimal solution. Similarly, if $\mathbf{x}_i$ is equal to 1, its associated graph component is present in the optimal solution.\par
+
+  The canonical form of an ILP is:
+
+
+  \begin{align}
+    \text{Maximize: }\quad&\mathbf{c^Tx}\label{eq:obj_canonical}\\
+    \text{Subject to: }\quad&\mathbf{Ax}\leq\mathbf{b}\text{,}\label{eq:constA}\\
+    &\mathbf{x} \geq 0 \text{,}\label{eq:constB}\\
+    \text{and } \quad & \mathbf{x} \in \mathbb{Z}^n \label{eq:constC}
+  \end{align}
+
+  In this form $\mathbf{x}$ is the vector of binary variables for which the program is solving, $\mathbf{c}$ and $\mathbf{b}$ are vectors and $\mathbf{A}$ is a matrix, all of which have integers as values.
+
  \section{Goals of this Thesis}
+
+ The goal of this thesis is go generate an algorithm that will create subnetworks in a generalization of a graph called a \textit{hypergraph}\footnote{This will be defined both informally and formally later.}. The sub-hypergraph generated by this algorithm should use weights on the edges and nodes of the hypergraph to find a subnetwork that will minimize the total cost of edges while maximizing the value of nodes. Furthermore, the output should not contain disconnected subgraphs, and it should have some sort of ``flow" going from an undetermined (i.e. not pre-specified) set of hypernodes, $S$ to another set of hypernodes, $T$. In addition to formally defining and solving for this target subnetwork, this thesis will find a way to build a network from publically available signaling pathway data, and weight that network in a meaningful way using publically available data.\par
+
+ Ultimately, this should create a software package that anyone could use to build hypergraphs from data that is available to them, and to query that hypergraph for potential hypotheses about signaling pathway disregulations, based on a weighting scheme that they can apply easily.\par
+
+ \emph{THIS NEEDS WORK.}
+
+ }{Added an intro.}
 
 \chapter{Cell Signaling Networks}
 
@@ -254,7 +317,15 @@ Our ability to look at the entire interactome of species such as \arabidopsis al
 
 \chapter{Hypergraphs \& Hyperpaths}
 
-\new{Intro paragraph.}{Anna}
+\new{In order to model cell signaling pathways computationally, it is first necessary to choose the correct computational object to represent our data. For this, we can use graphs, but there are some ways in which graphs are not the ideal structure, and leave some things to be desired (see Figure \ref{fig:anna_fig}). Instead of using graphs, we will define a generalization of a directed graph, called a directed hypergraph, and use it to model cell signaling pathways and PPI networks.}{Anna}
+
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=\textwidth]{anna_fig}
+  \caption[The issue with standard graphs.]{CAPTION AND CITATION}
+  \label{fig:anna_fig}
+  \end{center}
+\end{figure}
 
 \section{\new{Graphs and their Limitations}{Anna}}
 
@@ -419,12 +490,13 @@ Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\al
 
 \paragraph{Example.}Consider the hypergraph shown in Figure \ref{fig:dummy-before}. For this hypergraph, the PCSHT that comes from this graph should consist of hypernodes $A$, $B$, and $D$, as well as hyperedge $E_1$. This is obvious, since nodes $A$ and $B$, which will be dangling in the solution, both have low dangling penalties and high prizes, while node $C$ has a very large dangling penalty relative to its prize. Similarly, $E_1$ has a relatively low cost, whereas $E_2$ has a very high cost. Finally, $D$ is considered a target, in this case, and is therefore automatically included in the solution. Knowing what the solution should be, we can use this hypergraph to demonstrate the effect of each linear constraint in our ILP.\par
 
+\begin{table}[!h]
 \begin{center}
-  %\captionof{table}{\new{All of the possible solutions that satisfy all necessary linear constraints, and their corresponding objective values. We see that the induced subgraph (DEFINE) from $E_1$ yields the optimal solution.}{Added to show all ``legal" solutions, and what obj. value they yield.}}
-
+  \label{tab:obj_values_dummy}
+  \caption[Objective values of dummy hypergraph.]{\new{All of the possible solutions that satisfy all necessary linear constraints, and their corresponding objective values. We see that the induced subgraph (DEFINE) from $E_1$ yields the optimal solution.}{Added to show all ``legal" solutions, and what obj. value they yield.}}
 \begin{tabular}{ |l|l|l| }%
   \hline%
-  \multicolumn{3}{|c|}{Subgraphs} \\%
+  \multicolumn{3}{|c|}{Subgraphs (caption doesn't work plz someone help)} \\%
   \hline \hline
   $V$ & $E$ & Objective Value \\ \hline%
   $A,B,D$ & $E_1$ & 27 \\ \hline%
@@ -432,6 +504,7 @@ Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\al
   $A,B,C,D$ & $E_1,E_2$ & -2 \\ \hline%
 \end{tabular}%
 \end{center}
+\end{table}
 
 
 
@@ -552,6 +625,10 @@ And here's some other random info: the first paragraph after a chapter title or 
         \rule{\textwidth}{1pt}
 
       \chapter{Biological Data}
+
+      \chapter{Version Information}
+
+      This appendix will be concerned with which versions of various softwares I used.
 
 
 %This is where endnotes are supposed to go, if you have them.
