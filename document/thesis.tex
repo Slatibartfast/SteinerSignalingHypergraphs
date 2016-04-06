@@ -208,19 +208,23 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
 
    \subsection{Walks, Paths, Connectivity, and Trees}
 
-   In graphs, it is useful to define a way to traverse the graph, through the nodes and edges. We define a \textit{walk} in a graph as an alternating series of nodes and edges, such that each edge included in the walk is adjacent to the two nodes incident upon it. An example of one such walk, $\mathcal{W}$ in the undirected graph from Figure \ref{fig:simple_graph_du} is:
+   In graphs, it is useful to define a way to traverse the graph, through the nodes and edges. We define a \textit{walk} in a graph as an alternating series of nodes and edges, such that each edge included in the walk is adjacent to the two nodes incident upon it. An example of one such walk, $\mathcal{W}$ in the undirected graph from Figure \ref{fig:simple_graph_du} is:\par
 
    \begin{equation*}
      \mathcal{W} = (A,E_2,D,E_2,A,E_1,B)
    \end{equation*}
 
-   Furthermore, we can define a \textit{directed walk} in a directed graph as a walk that respects the direction of the edges in the graph. Additionally, we define a \textit{path} (or a \textit{directed path}, in directed graphs) as a walk for which there are no repeated vertices or edges. If we want to talk about a path $\mathcal{P}$ that goes from one node, $s$ to another $t$, we use the notation $\mathcal{P}(s,t)$ to describe the start and endpoints of the path. For example, in the directed graph shown in Figure \ref{fig:simple_graph_du}, one possible path from $A$ to $C$, is:
+   Furthermore, we can define a \textit{directed walk} in a directed graph as a walk that respects the direction of the edges in the graph. Additionally, we define a \textit{path} (or a \textit{directed path}, in directed graphs) as a walk for which there are no repeated vertices or edges. If we want to talk about a path $\mathcal{P}$ that goes from one node, $s$ to another $t$, we use the notation $\mathcal{P}(s,t)$ to describe the start and endpoints of the path. Furthermore, we say that a graph is \textit{connected} if, for any pair of nodes in the graph, there exists a path between those two nodes. It is important to note that the endpoints of both paths and walks are always nodes, not edges. For example, in the directed graph shown in Figure \ref{fig:simple_graph_du}, one possible path from $A$ to $C$, is:\par
 
    \begin{equation*}
-     \mathcal{P}(s,t) = (A,E_2,D,E_4,C)
+     \mathcal{P}(A,C) = (A,E_2,D,E_4,C)
    \end{equation*}
 
+   Using our definition of a path, we can also define a \textit{cycle} as a path for which the start and end nodes are the same. Using this definition, we can also say that any path or graph that does not contain any cycles as an \textit{acyclic} path or graph. Finally, we can define a \textit{tree} as any graph that is connected and acyclic. This means that for any pair of nodes in a tree there exists exactly one path between them.\par
+
    \subsection{Spanning Trees and Steiner Trees}
+
+   It is often useful to construct subgraphs from a given graph that fulfill specific 
 
  \section{Optimization}
 
@@ -230,7 +234,7 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
 
   For this thesis, we use a type of programming known as \textit{integer linear programming}. Integer linear programs (ILPs) solve for the optimal solution(s) to an objective expression, subject to a set of linear constraints (\cite{Papadimitriou1998}). In our case, the set of variables, $\mathbf{x}$, are all binary variables, which will represent whether a given part of the graph is included in the solution. If variable $\mathbf{x}_i$ is equal to 0 in the solution, the part of the graph with which it is associated will not be present in the optimal solution. Similarly, if $\mathbf{x}_i$ is equal to 1, its associated graph component is present in the optimal solution.\par
 
-  The canonical form of an ILP is:
+  The canonical form of an ILP is:\par
 
 
   \begin{align}
@@ -240,7 +244,7 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
     \text{and } \quad & \mathbf{x} \in \mathbb{Z}^n \label{eq:constC}
   \end{align}
 
-  In this form $\mathbf{x}$ is the vector of binary variables for which the program is solving, $\mathbf{c}$ and $\mathbf{b}$ are vectors and $\mathbf{A}$ is a matrix, all of which have integers as values. For this thesis IBM ILOG CPLEX Optimization Studio (CPLEX) was used to solve input ILPs which were input in the form of LP files (\texttt{.lp}, see Appendix)
+  In this form $\mathbf{x}$ is the vector of binary variables for which the program is solving, $\mathbf{c}$ and $\mathbf{b}$ are vectors and $\mathbf{A}$ is a matrix, all of which have integers as values. For this thesis IBM ILOG CPLEX Optimization Studio (CPLEX) was used to optimize input ILPs which were input in the form of LP files (\texttt{.lp}, see Appendix B).
 
  \section{Goals of this Thesis}
 
