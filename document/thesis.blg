@@ -10,6 +10,7 @@ Warning--I didn't find a database entry for "SomethingRelevant"
 Warning--I didn't find a database entry for "SomethingElse"
 Warning--I didn't find a database entry for "putIntoBib"
 Warning--I didn't find a database entry for "cancer"
+Warning--I didn't find a database entry for "thing"
 Warning--I didn't find a database entry for "papers"
 Warning--I didn't find a database entry for "paper"
 Warning--I didn't find a database entry for "Beachy2004"
@@ -18,7 +19,7 @@ Warning--empty journal in Conant2008
 Warning--there's a number but no volume in Meysman2015
 You've used 63 entries,
             2804 wiz_defined-function locations,
-            1039 strings with 21836 characters,
+            1040 strings with 21841 characters,
 and the built_in function-call counts, 50776 in all, are:
 = -- 3630
 > -- 3421
@@ -57,4 +58,4 @@ warning$ -- 3
 while$ -- 303
 width$ -- 0
 write$ -- 840
-(There were 12 warnings)
+(There were 13 warnings)

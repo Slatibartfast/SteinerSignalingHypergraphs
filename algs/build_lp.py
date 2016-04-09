@@ -23,7 +23,7 @@ def main(argv):
     H.read(edgeFile, node_delimeter, column_delimeter)
     H.weight_nodes(nodeFile, node_delimeter, column_delimeter)
 
-
+    #build_lp(H,out)
     build_lp_dc(H,outDC)
 
 
@@ -206,15 +206,9 @@ def goesTo(Hypergraph,node,L,D,firstNode):
             if h not in L:
 
                 L.append(h)
-
                 name = str(firstNode)+'To'+str(h)
-
                 D[name] = True
-
                 goesTo(Hypergraph,h,L,D,firstNode)
-
-
-
 
 def connectivityFinder(Hypergraph):
 
@@ -228,18 +222,14 @@ def connectivityFinder(Hypergraph):
             name = str(node)+'To'+str(otherNode)
 
             if node == otherNode:
-
                 D[name] = True
-
             else:
-
                 D[name] = False
 
 
     for n in Hypergraph.node_iterator():
 
         connected = []
-
         goesTo(Hypergraph,n,connected,D,n)
 
     return D
