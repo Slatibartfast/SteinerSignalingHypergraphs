@@ -414,17 +414,17 @@ In order to find the shortest route between two vertices, in a directed hypergra
 
 There are many ways in which we can define hyperpaths, but for the purposes of finding Steiner Trees in directed hypergraphs, we must define a simple \textit{directed hyperpath} between nodes $s$ and $t$. We can think of a directed hyperpath $\mathcal{P}(s,t)=\{s,e_2,v_3,...,e_{n-1},t\}$ as an ordered list of nodes and edges, beginning with $s$ and ending with $t$ such that for any edge, $e_i$, in the path, $v_{i-1}$ is in the tail of $e_i$, and $v_{i+1}$ is in the head of $e_i$.\par
 
-There are two types of hyperpaths that we find particularly interesting, as a result of the branching nature of hyperedges. The first of these is a path the branches out from a single back-end node (Figure \ref{makeThis}). We call this type of hyperpath that is defined in terms of it's back end a B-hyperpath (\cite{Gallo1993}). B-hyperpaths are a particularly interesting to biologists modeling signaling pathways, since a B-hyperpath represents all the products that can be reached from a given reactant (\cite{Ritz2014}).
+There are two types of hyperpaths that we find particularly interesting, as a result of the branching nature of hyperedges. The first of these is a path the branches out from a single back-end node (Figure \ref{fig:B-hyperedge}). We call this type of hyperpath that is defined in terms of it's back end a B-hyperpath (\cite{Gallo1993}). B-hyperpaths are a particularly interesting to biologists modeling signaling pathways, since a B-hyperpath represents all the products that can be reached from a given reactant (\cite{Ritz2014}).
 
-\new{
-Put in image of a B-hyperpath
-}{Image.}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=\textwidth/2]{BF-hyperpaths}
+  \caption[Simple B-Hypergrah and F-Hypergraph.]{\textit{left }A very simple example of a B-hyperpath. \textit{right }A simple example of an F-hyperpath.}
+  \label{fig:BF-hyperedge}
+  \end{center}
+\end{figure}
 
 The second type of hyperpath that we are interested in, F-hyperpaths, are very similar to B-hyperpaths, except that they are defined by a node on their front end (Figure \ref{makeThis}), and are made of hyperedges that lead into that edge. Biologically, this represents all of the reactions that can lead to a given product. Both of these types of hyperpaths will be formalized later, and they will be generalized as part of our definition of a hypershrub.
-
-\new{
-Put in image of a F-hyperpath
-}{Image.}
 
 \chapter{Hypershrubs}
 
@@ -450,9 +450,9 @@ We can now say that $s$ is \textit{B-connected} to some node $t$ if $t \in \math
 Draw a figure here of a B-hypergraph.
 }{Image.}
 
-\paragraph{F-connectedness.}Similarly to B-connectedness, we can consider the set of nodes that ``funnel" into a given target node, $t$ without any loose heads. We therefore can use the same logic to define the \textit{ins} to $t$ as a series of $\ell$
+\paragraph{F-connectedness.}Similarly to B-connectedness, we can consider the set of nodes that ``funnel" into a given target node, $t$ without any loose heads. We therefore can use the same logic to define the \textit{ins} to $t$ as a series of $\ell$ inward hops $\mathcal{I}_\ell(t)$. Similarly, we can say that a node $s$ is F-connected to $t$ if $s \in \mathcal{I}_h(t)$ for some $h \geq 0$.
 
-\paragraph{B-hypershrubs and F-hypershrubs.}In
+\paragraph{B-Hypershrubs, F-Hypershrubs, \& BF-Hypershrubs.}In our formulation of B and F-connectedness, we were focusing on the vertices that reach from or to a target. Instead, we might consider the edges that participate in $\mathcal{O}(s)$ or $\mathcal{I}(t)$. Consider the following, where $A \subseteq E$:
 
 \begin{equation}
   H(A) = \bigcup_{e \in A} H(e)
@@ -461,8 +461,8 @@ and
 \begin{equation}
   T(A) = \bigcup_{e \in A} T(e)
 \end{equation}
-From this, we can also define the induced subset of nodes $V(A) = H(A) \cup T(A)$. From this, we also define the set of everything that is in the tail of some edge, but not in the heads of any hyperedges in $A$ as $D(A) = V(A) \setminus H(A)$. The set $D(A)$ represents the set of the induced roots from $A$. Similarly, we find the induced leaves from $A$ by defining $C(A) = V(A) \setminus T(A)$. From these definitions, we can construct three definitions of Steiner Hypershrubs, \textit{B-Steiner Hypershrubs}, \textit{F-Steiner Hypershrubs}, and \textit{BF-Steiner Hypershrubs}. Intuitively, we think of a B-Steiner Hypershrub which strictly respects the backward set of nodes, an F-Steiner Hypershrub as one that strictly respects the forward set of nodes, and a BF-Steiner Hypershrub as one that strictly respects both sets of nodes. The names for these three types of hypershrubs is adapted from the naming convention for different types of hyperpaths (\cite{Gallo1993}). For all three of the Steiner Hypertrees, we begin with a hypergraph, $\mathcal{S}$, and two sets of nodes: a source set, $S$, and a sink set, $T$, where $S,T \subseteq V$. We now formulate three decision problems:\par
-\paragraph{B-Steiner Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we say that there is a B-Steiner Hypershrub, $\mathcal{S}^{\prime}$ if there exists some subset of hyperedges $A$ such that:
+From this, we can also define the induced subset of nodes $V(A) = H(A) \cup T(A)$. From this, we also define the set of everything that is in the tail of some edge, but not in the heads of any hyperedges in $A$ as $D(A) = V(A) \setminus H(A)$. The set $D(A)$ represents the set of the induced roots from $A$. Similarly, we find the induced leaves from $A$ by defining $C(A) = V(A) \setminus T(A)$. From these definitions, we can construct three definitions of Hypershrubs, \textit{B-Hypershrubs}, \textit{F-Hypershrubs}, and \textit{BF-Hypershrubs}. Intuitively, we think of a B-Hypershrub which strictly respects the backward set of nodes, an F-Hypershrub as one that strictly respects the forward set of nodes, and a BF-Hypershrub as one that strictly respects both sets of nodes. The names for these three types of hypershrubs is adapted from the naming convention for different types of hyperpaths (\cite{Gallo1993}). For all three of the hypershrubs, we begin with a hypergraph, $\mathcal{S}$, and two sets of nodes: a source set, $S$, and a sink set, $T$, where $S,T \subseteq V$. We now formulate three decision problems:\par
+\paragraph{B-Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we say that there is a B-Hypershrub, $\mathcal{B}$ if there exists some subset of hyperedges $A$ such that:
 \begin{equation*}
   C(A) \subseteq T
 \end{equation*}
@@ -470,8 +470,8 @@ and
 \begin{equation*}
   D(A) = S
 \end{equation*}
-We call the induced hypergraph of $A$ the B-Steiner Hypershrub, $\mathcal{S}^{\prime}$.\par
-\paragraph{F-Steiner Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we say that there is a F-Steiner Hypershrub, $\mathcal{S}^{\prime\prime}$ if there exists some subset of hyperedges $A$ such that:
+We call the induced hypergraph of $A$ the B-Hypershrub, $\mathcal{B}$.\par
+\paragraph{F-Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we say that there is a F-Hypershrub, $\mathcal{F}$ if there exists some subset of hyperedges $A$ such that:
 \begin{equation*}
   C(A) = T
 \end{equation*}
@@ -479,8 +479,8 @@ and
 \begin{equation*}
   D(A) \subseteq S
 \end{equation*}
-We call the induced hypergraph of $A$ the F-Steiner Hypershrub, $\mathcal{S}^{\prime\prime}$.\par
-\paragraph{BF-Steiner Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we say that there is a BF-Steiner Hypershrub, $\mathcal{S}^{\prime\prime\prime}$ if there exists some subset of hyperedges $A$ such that:
+We call the induced hypergraph of $A$ the F-Hypershrub, $\mathcal{F}$.\par
+\paragraph{BF-Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we say that there is a BF-Hypershrub, $\mathcal{BF}$ if there exists some subset of hyperedges $A$ such that:
 \begin{equation*}
   C(A) = T
 \end{equation*}
@@ -488,18 +488,18 @@ and
 \begin{equation*}
   D(A) = S
 \end{equation*}
-We call the induced hypergraph of $A$ the BF-Steiner Hypershrub, $\mathcal{S}^{\prime\prime\prime}$.\par
+We call the induced hypergraph of $A$ the BF-Hypershrub, $\mathcal{BF}$.\par
 
-\paragraph{Optimization.}While all three formulations of the decision problem for a Steiner Hypershrub may have useful applications, we will focus on the optimization and prize-collecting versions of the BF-Steiner Hypershrub. From the decision question, ``Does a BF-Steiner Hypershrub $\mathcal{S}$ exist in $\mathcal{H}$ given some $S$ and $T$?" we can extend to looking for a minimal BF-Steiner Hypershrub. We say that a BF-Steiner Hypershrub $\hat{\mathcal{S}}$ is minimal in a hypergraph $\mathcal{H}$ given $S$ and $T$ if two conditions are met:\par
+\paragraph{Optimization.}While all three formulations of the decision problem for a Steiner Hypershrub may have useful applications, we will focus on the optimization and prize-collecting versions of the BF-Hypershrub. From the decision question, ``Does a BF-Hypershrub $\mathcal{S}$ exist in $\mathcal{H}$ given some $S$ and $T$?" we can extend to looking for a minimal BF-Hypershrub. We say that a BF-Hypershrub $\hat{\mathcal{S}}$ is minimal in a hypergraph $\mathcal{H}$ given $S$ and $T$ if two conditions are met:\par
 \begin{enumerate}
-  \item{There are no other possible BF-Steiner Hypershrubs in $H$, for $S$ and $T$ that have fewer hyperedges than $\hat{\mathcal{S}}$.}
+  \item{There are no other possible BF-Hypershrubs in $H$, for $S$ and $T$ that have fewer hyperedges than $\hat{\mathcal{S}}$.}
   \item{No hyperedge can be removed without making at least one node that is not in $S$ or $T$ into a root or leaf.}
 \end{enumerate}
 
 
 \section{Definition of PCSHS}
 
-When we are looking for a minimal BF-Steiner Hypershrub using empirical data, we often do not know what $S$ and $T$ are \textit{a priori}. To get around this, we instead try to determine a prize-collecting variant of the decision and optimization problem described above, so that we can determine a plausible set of roots and leaves that will define some BF-Steiner Hypershrub in a weighted hypergraph. We now can define the Prize-Collecting Steiner Hypershrub, $\mathcal{S} = (V^\prime,E^\prime)$, to be the set of hypernodes and hyperedges for which total vertex prizes are maximized, and total edge weights are minimized. We also try to minimize the cost that we give to each node for being present without any incoming hyperedge\footnote{In signaling pathways, this cost quantifies how likely or unlikely we consider it to be that a given reactant is present in the cell, agnostic to the reactions that caused it to be there.}.
+When we are looking for a minimal BF-Hypershrub using empirical data, we often do not know what $S$ and $T$ are \textit{a priori}. To get around this, we instead try to determine a prize-collecting variant of the decision and optimization problem described above, so that we can determine a plausible set of roots and leaves that will define some BF-Hypershrub in a weighted hypergraph. We now can define the Prize-Collecting Steiner Hypershrub, $\mathcal{S} = (V^\prime,E^\prime)$, to be the set of hypernodes and hyperedges for which total vertex prizes are maximized, and total edge weights are minimized. We also try to minimize the cost that we give to each node for being present without any incoming hyperedge\footnote{In signaling pathways, this cost quantifies how likely or unlikely we consider it to be that a given reactant is present in the cell, agnostic to the reactions that caused it to be there.}.
 
 To make our Prize-Collecting Steiner Hypershrub, $\mathcal{S}$, we begin with a parent hypergraph, $\mathcal{H} = (V,E)$, and a set of target nodes, $T$, such that $T \subseteq V$.  We refer to each node as some $v$ such that $v \in V$, and each edge is some $e$ such that $e \in E$.  When building $\mathcal{H}$, each hyperedge is assigned a weight, that is, a cost associated with including that edge in the solution hypergraph, $\mathcal{S}$.  We then assign each hypernode in $\mathcal{H}$ two values, a prize for being included in $\mathcal{S}$, as well as a penalty associated with being a \textit{root} hypernode.\par
 
