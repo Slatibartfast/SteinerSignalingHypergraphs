@@ -53,7 +53,7 @@ breaklines=true
 %% Added for comments
 \usepackage{color}
 \newcommand{\anna}[1]{{\color{blue}[AR: #1]}}
-\newcommand{\new}[2]{{\color{purple}#1 [#2]}}
+\newcommand{\new}[2]{{\color{red}#1 [#2]}}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
@@ -176,19 +176,29 @@ breaklines=true
 \onehalfspacing
 % \doublespacing
 
-Since the discovery of cells by Robert Hooke in 1665, biologists have worked tirelessly to unlock the mysteries of cell function. Over the last half-century, our knowledge of how cells function has grown tremendously. An important and growing part of this field has been the growing use of computational methods in helping researchers to both test pre-existing hypotheses, and generate novel hypotheses. Computer-based methods have a wide range of applications, from DNA and RNA sequence analysis (\cite{humanGenome}) to high-throughput modeling of population growth (\cite{SomethingRelevant}), to the growing fields concerned with artificial neural networks (\cite{SomethingElse}). Importantly, in recent years, biologists\footnote{And other scientists, for that matter.} have begun to employ some of the computational tools that computer scientists have been developing for decades. This recent synthesis of fields (see Figure \ref{fig:bioinf_venn}) has created a new area of research, where existing algorithms and computational methodologies are being adapted and tweaked to help elucidate new meaning from biological data.\par
+Since the discovery of cells by Robert Hooke in 1665, biologists have worked tirelessly to unlock the mysteries of cell function. Over the last half-century, our knowledge of how cells function has grown tremendously. An important and growing part of this field has been the growing use of computational methods in helping researchers to both test pre-existing hypotheses, and generate novel hypotheses. Computer-based methods have a wide range of applications, from DNA and RNA sequence analysis (\cite{humanGenome}) to high-throughput modeling of population growth (\cite{Anderson2005}), to the growing fields concerned with artificial neural networks (\cite{Chon1996}). Importantly, in recent years, biologists\footnote{And other scientists, for that matter.} have begun to employ some of the computational tools that computer scientists have been developing for decades. This recent synthesis of fields (see Figure \ref{fig:bioinf_venn}) has created a new area of research, where existing algorithms and computational methodologies are being adapted and tweaked to help elucidate new meaning from biological data.\par
 
- \begin{figure}[h]
+ \begin{figure}[!h]
    \begin{center}
      \includegraphics[width=\textwidth/2]{bioinformatics_venn}
-   \caption[Bioinformatic fields.]{A venn diagram of the intersection between the fields of biology, computer science, and statistics {\cite{putIntoBib}}. This thesis is primarily concerned with the field of computational biology.}
+   \caption[Bioinformatic fields.]{A venn diagram of the intersection between the fields of biology, computer science, and statistics. This thesis is primarily concerned with the field of computational biology. Image from \url{https://genomejigsaw.wordpress.com/2015/09/27/faq/}, Marek Cmero.}
    \label{fig:bioinf_venn}
    \end{center}
  \end{figure}
 
  \section{Signaling Pathways}
 
- One of the most interesting areas where computational methods are now being applied is in the study of signaling pathways within cells. Generally, signaling pathways are representations of what we currently know about how proteins and small molecules interact within cells in order to propagate signals throughout the cell, and ultimately change the cell's behavior. We find cell signaling pathways interesting because understanding how signaling information spreads throughout a cell helps us to better understand what disregulations can result in changes in cell dynamics, which often manifest themselves in heterogenous diseases such as cancer\footnote{As well as many other diseases in which signaling pathway disregulations have been implicated.} (\cite{cancer}). Signaling pathways have been studied for years, and they have often been represented visually as flow diagrams (add a picture), but recently, researchers have begun to ``convert" the traditionally drawn digrams of signaling pathways into mathematically intersting structures, for which known algorithms can be employed to learn more about the signaling pathways.
+ One of the most interesting areas where computational methods are now being applied is in the study of signaling pathways within cells. Generally, signaling pathways are representations of what we currently know about how proteins and small molecules interact within cells in order to propagate signals throughout the cell, and ultimately change the cell's behavior. We find cell signaling pathways interesting because understanding how signaling information spreads throughout a cell helps us to better understand what disregulations can result in changes in cell dynamics, which often manifest themselves in heterogenous diseases such as cancer\footnote{As well as many other diseases in which signaling pathway disregulations have been implicated.} (\cite{Taylor2009}). Signaling pathways have been studied for years, and they have often been represented visually as flow diagrams (Figure \ref{fig:shh}), but recently, researchers have begun to ``convert" the traditionally drawn digrams of signaling pathways into mathematically intersting structures, for which known algorithms can be employed to learn more about the signaling pathways.\par
+
+ \begin{figure}[!h]
+   \begin{center}
+     \includegraphics[width=4in]{Sonic_hedgehog_pathway}
+   \caption[Sonic hedgehog signal transduction.]{A traditional representation of the Sonic hedgehog signaling pathway. By Fred the Oysteri. The source code of this SVG is valid. This vector graphics image was created with Adobe Illustrator., GFDL, \url{https://commons.wikimedia.org/w/index.php?curid=36313869}}
+   \label{fig:shh}
+   \end{center}
+ \end{figure}
+
+ \paragraph{Uses of Signaling Pathways.}At this point, we should discuss why signaling pathways are interesting, important tools for biologists.
 
  \section{Network Representations}
 
@@ -204,18 +214,20 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
     \end{center}
   \end{figure}
 
+  One way that we often reason with graphs is through weighting. When we weight a graph, we generally assign values to the edges (though sometimes the nodes as well) to indicate differences between the edges, other than which nodes they connect. Weights can represent many different conditions, and often help apply real-world meaning to a graph that is being used as a modeling tool. For instance, if one had a graph where the nodes were representative of locations, then the weights of the edges could be used to show the distance between the nodes. One could also use a graph to represent a group of lab-mates who play streetball together during the summer, with weighted edges representing the likelihood that any two people will play on the same team. In the case of this thesis, we will use a combination of edge and node weighting to build subgraphs that may be biologically interesting using gene expression data.\par
+
    \subsection{Walks, Paths, Connectivity, and Trees}
 
-   In graphs, it is useful to define a way to traverse the graph, through the nodes and edges. We define a \textit{walk} in a graph as an alternating series of nodes and edges, such that each edge included in the walk is adjacent to the two nodes incident upon it. An example of one such walk, $\mathcal{W}$ in the undirected graph from Figure \ref{fig:simple_graph_du} is:\par
+   In graphs, it is useful to define a way to traverse the graph, through the nodes and edges. We define a \textit{walk} in a graph as an alternating series of nodes and edges, such that each edge included in the walk is adjacent to the two nodes incident upon it. An example of one such walk, $W$ in the undirected graph from Figure \ref{fig:simple_graph_du} is:\par
 
    \begin{equation*}
-     \mathcal{W} = (A,E_2,D,E_2,A,E_1,B)
+     W = (A,E_2,D,E_2,A,E_1,B)
    \end{equation*}
 
-   Furthermore, we can define a \textit{directed walk} in a directed graph as a walk that respects the direction of the edges in the graph. Additionally, we define a \textit{path} (or a \textit{directed path}, in directed graphs) as a walk for which there are no repeated vertices or edges. If we want to talk about a path $\mathcal{P}$ that goes from one node, $s$ to another $t$, we use the notation $\mathcal{P}(s,t)$ to describe the start and endpoints of the path. Furthermore, we say that a graph is \textit{connected} if, for any pair of nodes in the graph, there exists a path between those two nodes. It is important to note that the endpoints of both paths and walks are always nodes, not edges. For example, in the directed graph shown in Figure \ref{fig:simple_graph_du}, one possible path from $A$ to $C$, is:\par
+   Furthermore, we can define a \textit{directed walk} in a directed graph as a walk that respects the direction of the edges in the graph. Additionally, we define a \textit{path} (or a \textit{directed path}, in directed graphs) as a walk for which there are no repeated vertices or edges. If we want to talk about a path $P$ that goes from one node, $s$ to another $t$, we use the notation $P(s,t)$ to describe the start and endpoints of the path. Furthermore, we say that a graph is \textit{connected} if, for any pair of nodes in the graph, there exists a path between those two nodes. It is important to note that the endpoints of both paths and walks are always nodes, not edges. For example, in the directed graph shown in Figure \ref{fig:simple_graph_du}, one possible path from $A$ to $C$, is:\par
 
    \begin{equation*}
-     \mathcal{P}(A,C) = (A,E_2,D,E_4,C)
+     P(A,C) = (A,E_2,D,E_4,C)
    \end{equation*}
 
    Using our definition of a path, we can also define a \textit{cycle} as a path for which the start and end nodes are the same. Using this definition, we can also say that any path or graph that does not contain any cycles as an \textit{acyclic} path or graph. Finally, we can define a \textit{tree} as any graph that is connected and acyclic. This means that for any pair of nodes in a tree there exists exactly one path between them.\par
@@ -234,9 +246,19 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
 
    \paragraph{Spanning Trees.}One useful structure that we can look for in a graph is a \textit{spanning tree}. Given a graph $G=(V,E)$, we say that there exists a spannning tree if there exits some tree $\mathcal{T}=(V^\prime,E^\prime)$ for which $V^\prime = V$.  More plainly, given a graph, a spanning tree is one that ``hits" every node in the graph while still conforming to all the constraints that define a tree.
 
-   \paragraph{Steiner Trees.}While spanning trees are useful substructures, sometimes we want to find a subtree that only spans a subset of the nodes in a graph.
+   \paragraph{Steiner Trees.}While spanning trees are useful substructures, sometimes we want to find a subtree that only spans a subset of the nodes in a graph. If this is the case, we can construct a slightly altered version of a spanning tree called a \textit{Steiner Tree}\footnote{Named after Swiss mathematician Jakob Steiner.} We say that a Steiner Tree $S$ exists in a graph $G$, if there is a subtree within the graph that connects all of a set of nodes $T$, which we call target nodes. Furthermore, we call any node that is included in the Steiner Tree, but that is not a member of $T$ a Steiner Node. Figure \ref{fig:graph1} gives an example of both spanning and Steiner Trees.
+
+   \begin{figure}[!h]
+     \begin{center}
+       \includegraphics[width=\textwidth]{graph1}
+     \caption[Spanning and Steiner Trees.]{A graph \textit{(left)} along with a spanning tree \textit{(center)} and a Steiner Tree \textit{(right)} within. In the Steiner Tree, the red nodes are target nodes and the black nodes are the Steiner Nodes.}
+     \label{fig:graph1}
+     \end{center}
+   \end{figure}
 
  \section{Optimization}
+
+ It is often the case that, instead of just knowing \emph{if} a certain Steiner Tree exists in a graph, we want to know what that Steiner Tree is. Furthermore, if there are multiple possible Steiner Trees, we may want to find one (or more) that fulfills some notion of optimality. Most often, we want to find the Steiner Tree from a set of candidate Steiner Trees that will be minimal. In the case where the parent graph is unweighted, this will mean that the minimal Steiner Tree is the one that contains the fewest number of edges. Similarly, in a weighted graph, we say that the minimal Steiner Tree is the for which the sum of it's edge weights is smaller than the sum of the edge weights of all other candidate Steiner Trees.
 
   \subsection{Prize Collecting Steiner Trees}
 
@@ -263,12 +285,12 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
 
 \chapter{Cell Signaling Networks}
 
-Cell function is governed by countless interactions between proteins, nucleic acids, lipids, carbohydrates, and many other small molecules.  The interactions between all of these components form what we call \textit{protein-protein interaction} (PPI) networks, which are responsible for almost every process within a cell (\cite{thing}). Furthermore, we often think about specific sub-networks that explain important biological phenomena (hormone secretion, transcriptional regulation of a gene, or response to a particular stimuli are all examples). We refer to these subsets of the larger PPI network as \textit{cell signaling pathways}. We use cell signaling pathways to describe how many of the most basic reactions within cells cause propagations of information, and the results of thse signals.  Some of the most important types of interactions that we see in cell signaling networks include the assembly and destruction of protein complexes, how small molecules such as ATP interact with proteins, the cascade of events that can occur after a membrane-bound protein is bound by a ligand, or where negative feedback loops exist that can have an effect on cell function.  Historically, PPI networks have been a useful tool for compiling knowledge about individual interactions that have been studied \textit{in situ}, so that larger scale patterns of interaction can be examined, and both communicated easily and analyzed algorithmically. In recent years, there has been a push to find ways to accurately model these networks so that they can be used to predict potential areas of future research (\cite{papers}), in particular, by using graph-based methods (\cite{Aittokallio2006}).\par
+Cell function is governed by countless interactions between proteins, nucleic acids, lipids, carbohydrates, and many other small molecules.  The interactions between all of these components form what we call \textit{protein-protein interaction} (PPI) networks, which are responsible for almost every process within a cell (\cite{Taylor2009}). Furthermore, we often think about specific sub-networks that explain important biological phenomena (hormone secretion, transcriptional regulation of a gene, or response to a particular stimuli are all examples). We refer to these subsets of the larger PPI network as \textit{cell signaling pathways}. We use cell signaling pathways to describe how many of the most basic reactions within cells cause propagations of information, and the results of thse signals.  Some of the most important types of interactions that we see in cell signaling networks include the assembly and destruction of protein complexes, how small molecules such as ATP interact with proteins, the cascade of events that can occur after a membrane-bound protein is bound by a ligand, or where negative feedback loops exist that can have an effect on cell function.  Historically, PPI networks have been a useful tool for compiling knowledge about individual interactions that have been studied \textit{in situ}, so that larger scale patterns of interaction can be examined, and both communicated easily and analyzed algorithmically. In recent years, there has been a push to find ways to accurately model these networks so that they can be used to predict potential areas of future research (\cite{Haverty2004}), in particular, by using graph-based methods (\cite{Aittokallio2006}).\par
 
 There are a multitude of different forms of cell signaling pathways\footnote{As well as extracellular signaling networks and metabolic cell functions that are not triggered externally.}, responsible for many types of cell functions, but we will use the example of a cell changing its gene expression in response to an external stimuli as a general model for signaling pathways. In these cases, there are a few key steps that result in signal transduction throughout the cell. First, a trans-membrane protein will undergo a conformational change in response to a particular ligand\footnote{A small molecule that typically will bind to a trans-membrant, initiating a cascade of events (i.e. the signal that starts the process).}. Typically, this signal will be some sort of messenger molecule to which the cell needs to respond. The change in conformation results in a cascade of interactions between proteins and other small molecules within the cell. Some of the changes that can result from this cascade of signaling are protein complex assembly, complex degradation, conformational changes to other proteins, phosphorylation, or dephosphorylation (among many other reactions). The ultimate result of this signaling cascade is a change in one or more transcription factors, proteins that bind to DNA, and regulate the rate of transcription of DNA to mRNA. The ultimate result of this pathway will be a change in the expression of one or more genes within the cell, and possibly the start of new signaling pathways.\par
 
 \paragraph{Computational Methods.}
-Signaling pathways are of particular importance because they are often disregulated in heterogenous diseases such as cancer (\cite{papers}). Because of this, researchers' ability to obtain accurate information about signaling pathways, and their ability to interpret that information may help them to deduce interactions whose disregulation may be implicated in a particular disease. As these networks grow and become more accurate, we will become increasingly able to develop computational methods to mine these networks for novel areas to research, that may help explain or treat heterogenous diseases. Additionally, as the databases become more complete, cross-pathway interactions may begin to be documented that would not otherwise be apparent upon studying individual pathways. The development of new computational techniques to elucidate regulatory changes in areas where different pathways, once modeled as discrete, crosstalk. If areas like these, could be identified, they could lead to new hypotheses that researchers could investigate \textit{in situ}. Furthermore, while past research has found many individual proteins and pathways that are implicated in particular diseases, our ability to observe or quantify certain elements that could be playing an important role in pathway disregulation is limited by our current sampling methods (RNA-Seq, microarray, etc). The development of more nuanced algorithms could increase our ability to implicate proteins that we cannot currently observe being disregulated because of thow protein expression in cels is currenly quantified.\par
+Signaling pathways are of particular importance because they are often disregulated in heterogenous diseases such as cancer (\cite{Taylor2009}). Because of this, researchers' ability to obtain accurate information about signaling pathways, and their ability to interpret that information may help them to deduce interactions whose disregulation may be implicated in a particular disease. As these networks grow and become more accurate, we will become increasingly able to develop computational methods to mine these networks for novel areas to research, that may help explain or treat heterogenous diseases. Additionally, as the databases become more complete, cross-pathway interactions may begin to be documented that would not otherwise be apparent upon studying individual pathways. The development of new computational techniques to elucidate regulatory changes in areas where different pathways, once modeled as discrete, crosstalk. If areas like these, could be identified, they could lead to new hypotheses that researchers could investigate \textit{in situ}. Furthermore, while past research has found many individual proteins and pathways that are implicated in particular diseases, our ability to observe or quantify certain elements that could be playing an important role in pathway disregulation is limited by our current sampling methods (RNA-Seq, microarray, etc). The development of more nuanced algorithms could increase our ability to implicate proteins that we cannot currently observe being disregulated because of thow protein expression in cels is currenly quantified.\par
 
 Beyond individual signal transduction pathways, it is useful to think of the set of all known interactions, together. We refer to this object as an \textit{interactome}, and our ability to analyze it computationally could lead to discovery (or at least postulation) of completely novel signaling networks. By examining the interactome for a species, and weighting it appropriately, it may be the case that we are able to elucidate sets of interactions that had been observed separately, but actually to be correlated with each other. A simple case of this would be if we find that one signaling pathway was to lead directly into another, that is, the outputs of the first pathway were the inputs to the other. Though interactions between multiple networks as simple as that are likely to have already been observed, it could be the case that an algorithm could find that there is some ``chain" of connections between one network and another, or that there was some form of crosstalk between some of the components of two networks. If we could find this type of interaction, it would help researchers understand the extent to which a change in one network may affect another.\par
 
@@ -323,18 +345,16 @@ Unfortunately, for many small-scale pathways (such as the Hedgehog pathway), the
 
 Our ability to look at the entire interactome of species such as \textit{A. thaliana} allows us to investigate some of the global effects of genetic manipulation on signal transduction. This is especially useful in model organisms like \textit{A. thaliana}, since we can actually perform genetic manipulations on them quickly, safely, and ethically, unlike with human beings. Additionally, our ability to breed model organisms in the lab means that we can use specific datasets with large sample sizes. This is very useful compared to human datasets, which are generally based on small sample sizes, since human gene expression data is generally collected from pseudo-random, sparse cases when a person has a degenerate tissue type, such as a tumor, rather than under direct experimental manipulation.\par
 
-\section{\new{Transition}{Not sure if this should be its own section or if it will be incorporated into the previous.}}
-
-\new{Put in transition.}{Transitions are good.}
+Now that we have an understanding of what signaling pathways and protein interaction networks are, we need to develop an appropriate tool with which we can model them. To do so, we will now describe a generalization of a graph, known as a hypergraph. We will then describe a new way to query hypergraphs that will find important subnetworks, which we call hypershrubs, that may reveal biologically interesting phenomena that current computational methods fail to capture.\par
 
 \chapter{Hypergraphs \& Hyperpaths}
 
-\new{In order to model cell signaling pathways computationally, it is first necessary to choose the correct computational object to represent our data. For this, we can use graphs, but there are some ways in which graphs are not the ideal structure, and leave some things to be desired (see Figure \ref{fig:anna_fig}). Instead of using graphs, we will define a generalization of a directed graph, called a directed hypergraph, and use it to model cell signaling pathways and PPI networks.}{Intro}
+In order to model cell signaling pathways computationally, it is first necessary to choose the correct computational object to represent our data. For this, we can use graphs, but there are some ways in which graphs are not the ideal structure, and leave some things to be desired (see Figure \ref{fig:anna_fig}). Instead of using graphs, we will define a generalization of a directed graph, called a directed hypergraph, and use it to model cell signaling pathways and PPI networks.
 
 \begin{figure}[h]
   \begin{center}
     \includegraphics[width=\textwidth]{anna_fig}
-  \caption[The issue with standard graphs.]{CAPTION AND CITATION}
+  \caption[The issue with standard graphs.]{Standard graphs are not always the best tool for modeling biological events. Instead, we use hypergraphs, a generalization of standard graphs that allow for more nuanced modeling.}
   \label{fig:anna_fig}
   \end{center}
 \end{figure}
@@ -367,7 +387,7 @@ To resolve the issues presented by standard graphs, we instead use a generalizat
   \end{center}
 \end{figure}
 
-Where a directed graph represents directed, pairwise interactions between only two vertices, we can use \textit{directed hypergraph} to represent directed interactions between sets of vertices (nodes). We formally define a directed hypergraph, $\mathcal{H}$, as a pair $(V,E)$, where $V$ is a finite set of vertices and $E \subseteq 2^V \times 2^V$ is a finite set of \textit{directed hyperedges} connecting members of $V$ such that, for every $e=(T(e),H(e)) \in E$, $T(e) \cap H(e) = \emptyset$, and $T(e)$, $H(e) \neq \emptyset$.  We refer to $T(e)$ as the \textit{tail} of the hyperedge, and to $H(e)$ as the \textit{head} of the hyperedge.\par
+Where a directed graph represents directed, pairwise interactions between only two vertices, we can use \textit{directed hypergraph} to represent directed interactions between sets of vertices (nodes). We formally define a directed hypergraph, $\mathcal{H}$, as a pair $(V,E)$, where $V$ is a finite set of vertices and $E \subseteq 2^V \times 2^V$ is a finite set of \textit{directed hyperedges} connecting members of $V$ such that, for every $e=(T(e),H(e)) \in E$, $T(e) \cap H(e) = \emptyset$, and $T(e)$, $H(e) \neq \emptyset$ (definition adapted from \cite{Gallo1993}).  We refer to $T(e)$ as the \textit{tail} of the hyperedge, and to $H(e)$ as the \textit{head} of the hyperedge.\par
 
 \begin{figure}[thbp]
   \begin{center}
@@ -387,21 +407,53 @@ It is important to note that a standard directed graph is a special case of a di
   \end{center}
 \end{figure}
 
-\section{Hyperpaths \& Connectivity\new{consider revising this using earlier defs}[yup]}
-In order to find the shortest route between two vertices, in a directed hypergraph, we define the notion of a \textit{hyperpath}, $P$, on the directed hypergraph $\mathcal{H}$.  We think of $P(s,t)$ as the list of vertices and hyperedges that one must pass through in order to traverse through the directed hypergraph from vertex $s$ to $t$. The existence of a hyperpath between two nodes encodes the notion of ``connectivity" between those nodes.  If a hyperpath exists between nodes $s$ and $t$, we say that they are \textit{connected}. Furthermore, given some root hypernode, $u$, we refer to the set of all nodes, $V$ in a hypergraph for which there exists some $P(u,v)$ (where $v \in V$) as a \textit{hypertree}. This is a useful definition, because it allows us the notion of a \textit{connected hypergraph}, a hypergraph in which every node is connected by some hyperpath to every other node in the hypergraph.\par
+\section{Hyperpaths \& Connectivity}
+In order to find the shortest route between two vertices, in a directed hypergraph, we define the notion of a \textit{hyperpath}, $\mathcal{P}$, on the directed hypergraph $\mathcal{H}$.  We think of a path, $\mathcal{P}$ from vertex $s$ to vertex $t$ as the list of vertices and hyperedges that one must pass through in order to traverse through the directed hypergraph from vertex $s$ to $t$. The existence of a hyperpath between two nodes encodes the notion of ``connectivity" between those nodes.  If a hyperpath exists between nodes $s$ and $t$, we say that they are \textit{connected}. This is a useful definition, because it allows us the notion of a \textit{connected hypergraph}, a hypergraph in which every node is connected by some hyperpath to every other node in the hypergraph.\par
 
 \subsection{Directed Hyperpaths}
 
-There are many ways in which we can define hyperpaths, but for the purposes of finding Steiner Trees in directed hypergraphs, we must define a simple \textit{directed hyperpath} between nodes $s$ and $t$. We can think of a directed hyperpath $P(s,t)=\{s,e_2,v_3,...,e_{n-1},t\}$ as an ordered list of nodes and edges, beginning with $s$ and ending with $t$ such that for any edge, $e_i$, in the path, $v_{i-1}$ is in the tail of $e_i$, and $v_{i+1}$ is in the head of $e_i$.\par
+There are many ways in which we can define hyperpaths, but for the purposes of finding Steiner Trees in directed hypergraphs, we must define a simple \textit{directed hyperpath} between nodes $s$ and $t$. We can think of a directed hyperpath $\mathcal{P}(s,t)=\{s,e_2,v_3,...,e_{n-1},t\}$ as an ordered list of nodes and edges, beginning with $s$ and ending with $t$ such that for any edge, $e_i$, in the path, $v_{i-1}$ is in the tail of $e_i$, and $v_{i+1}$ is in the head of $e_i$.\par
 
-\chapter{Prize Collecting Steiner Hypershrubs}
-
-In order for us define and develop a Prize-Collecting Steiner Hyptershrub, we begin by formulating the notion of a \textit{Steiner Hypershrub}. This allows us to develop an implementation that where some nodes, referred to as our \textit{target set}, are included in the solution, by definition. We begin like this to make the development and debugging of the ILP slightly easier, since it allows us to work from the target set to other nearby nodes, instead of forcing the ILP to discover every node that it needs to include.\par
+There are two types of hyperpaths that we find particularly interesting, as a result of the branching nature of hyperedges. The first of these is a path the branches out from a single back-end node (Figure \ref{makeThis}). We call this type of hyperpath that is defined in terms of it's back end a B-hyperpath (\cite{Gallo1993}). B-hyperpaths are a particularly interesting to biologists modeling signaling pathways, since a B-hyperpath represents all the products that can be reached from a given reactant (\cite{Ritz2014}).
 
 \new{
-We now can define the Prize-Collecting Steiner Hypershrub (PCSHS), $\mathcal{S} = (V^\prime,E^\prime)$, to be the set of hypernodes and hyperedges for which total vertex prizes are maximized, and total edge weights (and dangling penalties) are minimized. Due to the structure of hypergraphs, rather than formulating a generalization of a single-source tree, as is used in standard graphs, we will instead construct a \textit{hypershrub}, as a structure that can contain multiple sources, and multiple targets. At this point, it is necessary for us to define two classes of nodes that may be present in a PCSHS: root nodes and leaf nodes.  We say a node is a \textit{root} if it is present in a PCSHS and does not have any incoming hyperedge in the PCSHS (that is, it is not in the tail of any edge in the hypergraph). We can define a root node, $d$ as any node such $d \in V^\prime$ and $d \notin T(e)$ for all $e \in \mathcal{S}$. Similarly, we say a node is a \textit{leaf} if it is present in a PCSHS, and not in the head of any edge in the hypergraph. A leaf, $c$, is defined as any node $l \in V^\prime$ and $l \notin T(e)$ for all $e \in \mathcal{S}$.\par
-We now formulate the decision problem as follows:\par
-\paragraph{Steiner Hypershrub.}Given a hypergraph $\mathcal{H}$, with vertices $V$ and hyperedges $E$ and some set of hyperedges $A \subseteq E$. From this, we define:\par
+Put in image of a B-hyperpath
+}{Image.}
+
+The second type of hyperpath that we are interested in, F-hyperpaths, are very similar to B-hyperpaths, except that they are defined by a node on their front end (Figure \ref{makeThis}), and are made of hyperedges that lead into that edge. Biologically, this represents all of the reactions that can lead to a given product. Both of these types of hyperpaths will be formalized later, and they will be generalized as part of our definition of a hypershrub.
+
+\new{
+Put in image of a F-hyperpath
+}{Image.}
+
+\chapter{Hypershrubs}
+
+Recall that we are interested in finding interesting signaling pathways in protein-protein interaction networks using hypergraph representations of the PPI networks. Remember as well that we want to use biological data to find subnetworks that capture as much of the data in as small as a subnetwork as possible (\emph{this should probably be reworded.}), much like in the Prize-Collecting Steiner problem. Finally, recall that with problems such as this, we see two formulations, as an unweighted decision problem, and as a weighted optimization formulation.\par
+
+Now, we will review the formulations of B and F hyperpaths, which are both concerned with single source-target pairs. From there, we will generalize these hyperpaths to include multiple targets. Our ultimate goal is to present two new formulations, one a decision problem for hypergraphs seeking a set of targets from multiple sources, and the second an optimization problem for hypergraphs that relaxes the decision formulation. This will allow us to seek worthy targets and sources. Finally, we will show an ILP formulation that will produce this optimal subnetwork, which we will call a \textit{hypershrub}.\par
+
+\paragraph{Hyperwalks.}In order build our formalization of B and F hyperpaths, we begin by defining \textit{hyperwalks}, an analog to a walk in a standard graph. We define a hyperwalk from $s$ to $t$ as a sequence of edges $\mathcal{W} \subseteq E$
+
+\begin{align*}
+  (e_1,e_2,...,e_\ell)
+\end{align*}
+
+of length $\ell$, where $T(e_i) \cap H(e_{i+1}) \neq \emptyset$\footnote{This ensures that there is at least one shared vertex between $e_i$ and $e_{i+1}$} and $s \in H(e_1)$ and $t \in T(e_\ell)$. In other words, a hyperwalk is a series of ``hops" that one can make along directed hyperedges that take you from $s$ to $t$.\par
+
+\paragraph{B-connectivity.}For B-connectivity relative to a source, $s$, we consider a tree\footnote{Note that this is not to be confused with the mathematical structure.} of hyperedges emanating forwards from $s$, with the condition that there be no ``loose tails," such as in Figure \ref{makeThis}. More precisely, we define the set of \textit{outs} from $s$ in terms of a series of $\ell$ outward hops $\mathcal{O}_\ell(s)$ where:
+\begin{align*}
+  \mathcal{O}_0(s)&=\{s\}\\
+  \mathcal{O}_{i+1}(s)&=\{u\,|\,\forall\,e,v \text{ where } u \in T(e) \text{ and } v \in \mathcal{O}_i(s)\,\forall\,v \in H(e)\}
+\end{align*}
+We can now say that $s$ is \textit{B-connected} to some node $t$ if $t \in \mathcal{O}_h(s)$ for some $h \geq 0$. In other words, this means that $t$ is $h$ hops forward from $s$, and there is some walk from $s$ to $t$ for which there are no loose tails.\par
+\new{
+Draw a figure here of a B-hypergraph.
+}{Image.}
+
+\paragraph{F-connectedness.}Similarly to B-connectedness, we can consider the set of nodes that ``funnel" into a given target node, $t$ without any loose heads. We therefore can use the same logic to define the \textit{ins} to $t$ as a series of $\ell$
+
+\paragraph{B-hypershrubs and F-hypershrubs.}In
+
 \begin{equation}
   H(A) = \bigcup_{e \in A} H(e)
 \end{equation}
@@ -409,8 +461,8 @@ and
 \begin{equation}
   T(A) = \bigcup_{e \in A} T(e)
 \end{equation}
-From this, we can also define the induced subset of nodes $V(A) = H(A) \cup T(A)$. From this, we also define the set of everything that is in the tail of some edge, but not in the heads of any hyperedges in $A$ as $D(A) = V(A) \setminus H(A)$. The set $D(A)$ represents the set of the induced roots from $A$. Similarly, we find the induced leaves from $A$ by defining $C(A) = V(A) \setminus T(A)$. From these definitions, we can construct three definitions of Steiner Hypershrubs, \textit{B-Steiner Hypershrubs}, \textit{F-Steiner Hypershrubs}, and \textit{BF-Steiner Hypershrubs}. For all three of the Steiner Hypertrees, we begin with a hypergraph, $\mathcal{S}$, and two sets of nodes: a source set, $S$, and a sink set, $T$, where $S,T \subseteq V$. We now define:\par
-\paragraph{B-Steiner Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we that there is a B-Steiner Hypershrub, $\mathcal{S}^{\prime}$ if there exists some subset of hyperedges $A$ such that:
+From this, we can also define the induced subset of nodes $V(A) = H(A) \cup T(A)$. From this, we also define the set of everything that is in the tail of some edge, but not in the heads of any hyperedges in $A$ as $D(A) = V(A) \setminus H(A)$. The set $D(A)$ represents the set of the induced roots from $A$. Similarly, we find the induced leaves from $A$ by defining $C(A) = V(A) \setminus T(A)$. From these definitions, we can construct three definitions of Steiner Hypershrubs, \textit{B-Steiner Hypershrubs}, \textit{F-Steiner Hypershrubs}, and \textit{BF-Steiner Hypershrubs}. Intuitively, we think of a B-Steiner Hypershrub which strictly respects the backward set of nodes, an F-Steiner Hypershrub as one that strictly respects the forward set of nodes, and a BF-Steiner Hypershrub as one that strictly respects both sets of nodes. The names for these three types of hypershrubs is adapted from the naming convention for different types of hyperpaths (\cite{Gallo1993}). For all three of the Steiner Hypertrees, we begin with a hypergraph, $\mathcal{S}$, and two sets of nodes: a source set, $S$, and a sink set, $T$, where $S,T \subseteq V$. We now formulate three decision problems:\par
+\paragraph{B-Steiner Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we say that there is a B-Steiner Hypershrub, $\mathcal{S}^{\prime}$ if there exists some subset of hyperedges $A$ such that:
 \begin{equation*}
   C(A) \subseteq T
 \end{equation*}
@@ -419,7 +471,7 @@ and
   D(A) = S
 \end{equation*}
 We call the induced hypergraph of $A$ the B-Steiner Hypershrub, $\mathcal{S}^{\prime}$.\par
-\paragraph{F-Steiner Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we that there is a F-Steiner Hypershrub, $\mathcal{S}^{\prime\prime}$ if there exists some subset of hyperedges $A$ such that:
+\paragraph{F-Steiner Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we say that there is a F-Steiner Hypershrub, $\mathcal{S}^{\prime\prime}$ if there exists some subset of hyperedges $A$ such that:
 \begin{equation*}
   C(A) = T
 \end{equation*}
@@ -428,7 +480,7 @@ and
   D(A) \subseteq S
 \end{equation*}
 We call the induced hypergraph of $A$ the F-Steiner Hypershrub, $\mathcal{S}^{\prime\prime}$.\par
-\paragraph{BF-Steiner Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we that there is a BF-Steiner Hypershrub, $\mathcal{S}^{\prime\prime\prime}$ if there exists some subset of hyperedges $A$ such that:
+\paragraph{BF-Steiner Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we say that there is a BF-Steiner Hypershrub, $\mathcal{S}^{\prime\prime\prime}$ if there exists some subset of hyperedges $A$ such that:
 \begin{equation*}
   C(A) = T
 \end{equation*}
@@ -438,16 +490,24 @@ and
 \end{equation*}
 We call the induced hypergraph of $A$ the BF-Steiner Hypershrub, $\mathcal{S}^{\prime\prime\prime}$.\par
 
-}{Jim, please double check this if you can.}
+\paragraph{Optimization.}While all three formulations of the decision problem for a Steiner Hypershrub may have useful applications, we will focus on the optimization and prize-collecting versions of the BF-Steiner Hypershrub. From the decision question, ``Does a BF-Steiner Hypershrub $\mathcal{S}$ exist in $\mathcal{H}$ given some $S$ and $T$?" we can extend to looking for a minimal BF-Steiner Hypershrub. We say that a BF-Steiner Hypershrub $\hat{\mathcal{S}}$ is minimal in a hypergraph $\mathcal{H}$ given $S$ and $T$ if two conditions are met:\par
+\begin{enumerate}
+  \item{There are no other possible BF-Steiner Hypershrubs in $H$, for $S$ and $T$ that have fewer hyperedges than $\hat{\mathcal{S}}$.}
+  \item{No hyperedge can be removed without making at least one node that is not in $S$ or $T$ into a root or leaf.}
+\end{enumerate}
+
 
 \section{Definition of PCSHS}
 
-To make our Prize-Collecting Steiner Hypershrub, $\mathcal{S}$, we begin with a ``parent" hypergraph, $\mathcal{H} = (V,E)$, and a set of target nodes, $T$, such that $T \subseteq V$.  We refer to each hypernode as some $x$ such that $x \in V$\footnote{We use ``$x$" as an element of $V$, rather than lowercase ``$v$" to avoid the visual confusion between lowercase $v$ and uppercase $V$}, and each edge is some $e$ such that $e \in E$.  When building $\mathcal{H}$, we initially seed the hypergraph.  Each hyperedge is assigned a weight, that is, a cost associated with including that edge in the solution hypergraph, $\mathcal{S}$.  We then assign each hypernode in $\mathcal{H}$ two values, a prize for being included in $\mathcal{S}$, as well as a penalty associated with being a \textit{root} hypernode.\par
+When we are looking for a minimal BF-Steiner Hypershrub using empirical data, we often do not know what $S$ and $T$ are \textit{a priori}. To get around this, we instead try to determine a prize-collecting variant of the decision and optimization problem described above, so that we can determine a plausible set of roots and leaves that will define some BF-Steiner Hypershrub in a weighted hypergraph. We now can define the Prize-Collecting Steiner Hypershrub, $\mathcal{S} = (V^\prime,E^\prime)$, to be the set of hypernodes and hyperedges for which total vertex prizes are maximized, and total edge weights are minimized. We also try to minimize the cost that we give to each node for being present without any incoming hyperedge\footnote{In signaling pathways, this cost quantifies how likely or unlikely we consider it to be that a given reactant is present in the cell, agnostic to the reactions that caused it to be there.}.
+
+To make our Prize-Collecting Steiner Hypershrub, $\mathcal{S}$, we begin with a parent hypergraph, $\mathcal{H} = (V,E)$, and a set of target nodes, $T$, such that $T \subseteq V$.  We refer to each node as some $v$ such that $v \in V$, and each edge is some $e$ such that $e \in E$.  When building $\mathcal{H}$, each hyperedge is assigned a weight, that is, a cost associated with including that edge in the solution hypergraph, $\mathcal{S}$.  We then assign each hypernode in $\mathcal{H}$ two values, a prize for being included in $\mathcal{S}$, as well as a penalty associated with being a \textit{root} hypernode.\par
+
 \section{Prize-Collecting Steiner Hypershrub ILP}
 
-To solve for solutions to the Prize-Collecting Steiner Hypershrub
+To start our implementation, we begin by looking backwards through a hypergraph from a set of target nodes, $T$. We begin in this way because, in PPI data, downstream nodes are often more easily inferred using empirical data such as gene expression, since changes in the expression of some genes is the ultimate output of cell signaling pathways.
 
-Given an input hypergraph $\mathcal{H}=(V,E)$, and a set of target nodes, $T$, we construct a Steiner Hypershrub, (DEFINE) $\mathcal{S}= (V^\prime,E^\prime)$, where $V^\prime \subseteq V$ and $E^\prime \subseteq E$.  We build $\mathcal{S}$ using an ILP which encodes the definition of a Steiner Hypershrub.  In order to accomplish this, we define three indicator variables, $\alpha_v$, $\alpha_e$, and $\delta_v$, where $v$ and $e$ are hypernodes or hyperedges in $\mathcal{H}$.  If hypernode $x$ is in the solution of the ILP, $\alpha_v$ will have a value of 1, otherwise it will be equal to 0.  Similarly, if edge $e$ is present in the solution, $\alpha_e$ will take a value of 1. The value of $\delta_v$ will be determined by whether a hypernode is dangling.\par
+Given an input hypergraph $\mathcal{H}=(V,E)$, and a set of target nodes, $T$, we construct a Steiner Hypershrub, $\mathcal{S}= (V^\prime,E^\prime)$, where $V^\prime \subseteq V$ and $E^\prime \subseteq E$.  We build $\mathcal{S}$ using an ILP which encodes the definition of a Steiner Hypershrub.  In order to accomplish this, we define three indicator variables, $\alpha_v$, $\alpha_e$, and $\delta_v$, where $v$ and $e$ are hypernodes or hyperedges in $\mathcal{H}$.  If hypernode $x$ is in the solution of the ILP, $\alpha_v$ will have a value of 1, otherwise it will be equal to 0.  Similarly, if edge $e$ is present in the solution, $\alpha_e$ will take a value of 1. The value of $\delta_v$ will be determined by whether a hypernode is dangling.\par
 
 We find the Steiner Hypershrub $\mathcal{S}$ by optimizing the function:
 
@@ -462,12 +522,11 @@ Subject to the set of linear constraints:
  \sum_{v \in H(e)} \alpha_v \geq \lvert H(e)\rvert \alpha_e \qquad\qquad &\forall\; e \in E\label{eq:ilpinchead}\\
  \sum_{v \in T(e)} \alpha_v \geq \lvert T(e)\rvert \alpha_e\qquad\qquad &\forall\; e \in E\label{eq:ilpinctail}\\
  \delta_v \leq \alpha_v \qquad\qquad &\forall\; v \in V\label{eq:ilpdang1}\\
- \delta_v \geq \alpha_{v} - \sum_{e:v \in H(e)} \alpha_e \qquad\qquad &\forall\; v \in V\label{eq:ilpdang2}\\
-0 \leq \delta_v \leq 1 \qquad\qquad &\forall\; v \in V\label{eq:ilpdang3}%
+ \delta_v \geq \alpha_{v} - \sum_{e:v \in H(e)} \alpha_e \qquad\qquad &\forall\; v \in V\label{eq:ilpdang2}%
 \end{align}%
 
 
-Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\alpha_v$), edges ($\alpha_e$), and dangling nodes ($\delta_v$) that maximize the sums of node prizes ($g_v$), minimize the sums of edge costs ($c_e$), and minimize the sums of dangling penalties ($h_v$). Constraint \eqref{eq:ilpT} encodes that every target node in $T$ is in the solution, $\mathcal{S}$.  Constraints \eqref{eq:ilpinchead} and \eqref{eq:ilpinctail} ensure that if an edge is in $\mathcal{S}$, any nodes incident on that edge (i.e. in the head or tail of that edge) will also be in $\mathcal{S}$.  Finally, constraints \eqref{eq:ilpdang1}, \eqref{eq:ilpdang2}, and \eqref{eq:ilpdang3} encode the ability for nodes to dangle if they do not have an incoming edge. To illustrate what each of these constraints does in more detail, we will construct a simple example, and examine each constraint within that example.\par
+Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\alpha_v$), edges ($\alpha_e$), and dangling nodes ($\delta_v$) that maximize the sums of node prizes ($g_v$), minimize the sums of edge costs ($c_e$), and minimize the sums of dangling penalties ($h_v$). Constraint \eqref{eq:ilpT} encodes that every target node in $T$ is in the solution, $\mathcal{S}$.  Constraints \eqref{eq:ilpinchead} and \eqref{eq:ilpinctail} ensure that if an edge is in $\mathcal{S}$, any nodes incident on that edge (i.e. in the head or tail of that edge) will also be in $\mathcal{S}$.  Finally, constraints \eqref{eq:ilpdang1} and \eqref{eq:ilpdang2} encode the ability for nodes to dangle if they do not have an incoming edge. To illustrate what each of these constraints does in more detail, we will construct a simple example, and examine each constraint within that example.\par
 
 \begin{figure}[th]
   \begin{minipage}[b]{0.30\linewidth}
@@ -550,17 +609,21 @@ So, we see that constraint \eqref{eq:ilpinchead} holds for $E_1$. Now, we can ch
 \end{align*}%
 We see that this inequality also holds. This means that, since the inequality holds for all hyperedges, that for every edge in the hypergraph, its head is also included in the hypergraph. We can easily extend this to see that \eqref{eq:ilpinctail} enforces the same for the tails of every hyperedge.\par
 
-Finally, we can look at the three constraints that allow hypernodes to be dangling: constraints \eqref{eq:ilpdang1}, \eqref{eq:ilpdang2}, and \eqref{eq:ilpdang3}. First, we look at constraint \eqref{eq:ilpdang1} \emph{I need to figure out the proper way to align these.}:
+Finally, we can look at the three constraints that allow hypernodes to be dangling: constraints \eqref{eq:ilpdang1} and \eqref{eq:ilpdang2}. First, we look at constraint \eqref{eq:ilpdang1}:
 \begin{alignat*}{4}
   \delta_A &\leq \alpha_A \qquad \delta_B &&\leq \alpha_B \qquad \delta_C &&\leq \alpha_C \qquad \delta_D &&\leq \alpha_D\\
-\end{alignat*}
-Now, we see that constraint \eqref{eq:ilpdang1} holds for all nodes in the PCSHS. \emph{I will get the other two constraints up soon.}\par
+\end{alignat*}%
+Now that we see that constraint \eqref{eq:ilpdang1} holds for all nodes in the PCSHS, we can look at \ref{eq:ilpdang2}. This constraint is trivial for every node in the hypergraph other than $D$, since it is the only node in the head of any hyperedges:
+\begin{align*}
+ \delta_D \geq \alpha_{D} - \alpha_{E_1} - \alpha_{E_2}\\
+\end{align*}%
+
 
 \section{Roots and Leaves Problem}
 
 When we implement the ILP in a more complex hypergraph, such as the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}, we find that it creates a hypergraph that consists of multiple smaller hypergraphs (Figure \ref{fig:example-hypergraph-weighted-after-ILP}), rather than a continuous subnetwork. Our original implementation ends up returning a group of disconnected hypergraphs that represent regions with high prize to edge/dangling cost ratios, separated by gaps where the parent hypergraph had regions of low prize to edge/dangling cost ratios. While this result is intersting in itself, it will not necessarily create a soltion that is biologically interesting, once we begin looking for PCSHSs in pathway signaling data.\par
 
-\begin{figure}[th]
+\begin{figure}[hp]
   \begin{center}
     \includegraphics{example-hypergraph-weighted-after-ILP}
   \caption[Output from ILP with disconnected sub-hypergraphs]{The output of our ILP, when it is run on the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}. The dashed arrows indicate a dangling hypernode.}
@@ -568,7 +631,53 @@ When we implement the ILP in a more complex hypergraph, such as the hypergraph s
   \end{center}
 \end{figure}
 
-To fix this problem, we must incorporate the notion of hyperpaths and connectedness to our implementation of the PCSHS, as well as define the class of leaf variables in our formulation. Additionally, we must construct a matrix\footnote{Actually implemented as a Python dictionary, if that matters.} of whether or not there exists a hyperpath between every pair of nodes in $\mathcal{H}$. As such, we adopt the notation $\iota_x$, as a binary variable that indicates whether node $x$ is a leaf in the solution.
+\new{
+Our new goal is to find a way to connect regions that would be disconnected in the original formulation of the PCSHS. In doing so, we have two cases that may exist: the region between sub-hypernetworks is prize-rich or it is prize-poor. If the region is prize-rich, we would want to connect the two regions throuh that region to construct a larger PCSHS that explains the lowest cost connecting region. If the region is prize-poor, on the other hand, we would rather have the less valuable sub-hypernetwork to be left out of the final PCSHS, since the cost of reaching it would not justify the prize that the sub-hypernetwork contained. Additionally, we need to consider the case where there is no way to get from one sub-hypernetwork to another sub-hypernetwork, we will allow both to be present in the final solution.\par
+
+To accomplish these goals, we use the set of nodes that either have no incoming or outgoing hyperedges in the solution: the roots and leaves. We are only concerned with these dangly nodes, and not with the inner nodes because we want to keep the same topology that is generated by the original formulation, and not be concerned with any hypereges that may connect the middle parts of sub-hypernetworks, but whose prices are too high to justify being included in the solution. When we think of this biologically, it means that we do not want to force including a reaction in the solution just because it's reactants and products are present elsewhere in the solution, if there are already lower cost explanations for why they are present.\par
+
+To fix this new problem, we must incorporate the notion of hyperpaths and connectedness to our implementation of the PCSHS, as well as define the class of leaf variables in our formulation. Additionally, we must construct a matrix of whether or not there exists a hyperpath between every pair of nodes in $\mathcal{H}$. As such, we adopt the notation $\iota_v$, as a binary variable that indicates whether hypernode $v$ is a leaf in the solution. Furthermore, we introduce the binary variable $\mathcal{P}(u,v)$ to indicate whether or not a hyperpath exists from $u$ to $v$. From this, we simply say that if there exists a hyperpath from node $s$ to $t$, then either $s$ cannot be a leaf or $t$ cannot be a root (i.e. $\mathcal{P}(u,v)\implies\neg(\delta_u\wedge\iota_v)$).\par
+
+\paragraph{Implementation in the ILP.}To add this change to the ILP for the PCSHS it is necessary to implement three new linear constraints, as well as the two new sets of variables described already, $iota$ and $\mathcal{P}$. It is important to note that, in a hypergraph with $n$ vertices, this will add $n$ new $iota$ variables, and $n^2$ new $\mathcal{P}$ variables, since every pairwise combination of vertices $(s,t)$ must be checked to see if there is a hyperpath from $s$ to $t$.
+
+We introduce linear constraints:
+
+}{new}
+
+\begin{align}
+ \iota_v \leq \alpha_v \qquad\qquad &\forall\; v \in V\label{eq:dc1}\\
+ \iota_v \geq \alpha_{v} - \sum_{e:v \in T(e)} \alpha_e \qquad\qquad &\forall\; v \in V\label{eq:dc2}\\
+ 2 - \delta_u - \iota_v \leq \mathcal{P}(u,v) \qquad\qquad &\forall\; u,v \in V\label{eq:dc3}%
+\end{align}%
+
+Similarly to in the original constraint \eqref{eq:ilpdang1}, constraint \eqref{eq:dc1} ensures that all nodes which are considered leaves must be present in the solution. Additionally, constraint \eqref{eq:dc2} follows the same form as constraint \eqref{eq:ilpdang2}, only it now applies to edges for which the node of interest is in the tail, rather than the head. These two constraints enforce the labeling of nodes that do not have an outgoing hyperedge as leaves. Constraint \eqref{eq:dc3} is where we encode that that if a path exits from $u$ to $v$, then either $u$ cannot be a leaf, or $v$ cannot be a root, in the PCSHS. When we implement these three linear constraints, along with the existing set in the hypergraph from Figure \ref{fig:example-hypergraph-weighted}, we find a new solution, as shown in Figure \ref{fig:example-hypergraph-weighted_DC}.
+
+\begin{figure}[hp]
+  \begin{center}
+    \includegraphics{example-hypergraph-weighted_DC}
+  \caption[Output from ILP after Roots and Leaves.]{The output of our ILP, when it is run on the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}, also taking the Roots and Leaves problem into account.}
+  \label{fig:example-hypergraph-weighted_DC}
+  \end{center}
+\end{figure}
+
+\paragraph{Running Time.}It is important to note at this point that, because the number of variables and constraints in the ILP now quadratic with respect to the number of nodes in the original hypergraph, the amount of time that the ILP will take to solve will increase rapidly with the number of nodes. To this end, even the time to build the \texttt{.lp} files that are the input of the ILP solver is non-trivial on large datasets. This is illustrated in the table below.
+
+\begin{table}[!h]
+\begin{center}
+  \label{tab:build_lp_runtimes}
+  \caption[Runtimes of ``build lp" programs.]{Four datasets of increasing size, and how long they take to be converted into \textit{.lp} files using both the original formulation (\textit{blp}) and the formulation that takes into account the roots and leaves problem (\textit{blprl}). Input files are the dummy hypergraph used in \ref{fig:dummy-before}, the example hypergraph from \ref{fig:example-hypergraph-weighted}, the Hedgehog signaling pathway, and the entire Reactome database. All times are in seconds.}
+\begin{tabular}{ |l||l|l|l|l|l|l| }%
+  \hline%
+  Hypergraph & Nodes & Edges & Time(\textit{blp}) & Time(\textit{blprl}) & Lines(\textit{blp}) & Lines(\textit{blprl}) \\%
+  \hline \hline
+  dummy & 4 & 2 & 0.00066 & 0.00095 & 30 & 86 \\ \hline%
+  ex & 13 & 12 & 0.00115 & 0.00274 & 100 & 633 \\ \hline%
+  Hh & 413 & 82 & 0.0183 & 1.464 & 1,904 & 514,437  \\ \hline%
+  Reactome & 35,913 & 8,614 & do & do & do & do \\ \hline%
+\end{tabular}%
+\end{center}
+\end{table}
+
 
 \chapter{Methods and Results}
 
@@ -612,13 +721,6 @@ To fix this problem, we must incorporate the notion of hyperpaths and connectedn
 	\markboth{Conclusion}{Conclusion}
 	\setcounter{chapter}{4}
 	\setcounter{section}{0}
-
-Here's a conclusion, demonstrating the use of all that manual incrementing and table of contents adding that has to happen if you use the starred form of the chapter command. The deal is, the chapter command in \LaTeX\ does a lot of things: it increments the chapter counter, it resets the section counter to zero, it puts the name of the chapter into the table of contents and the running headers, and probably some other stuff.
-
-So, if you remove all that stuff because you don't like it to say ``Chapter 4: Conclusion'', then you have to manually add all the things \LaTeX\ would normally do for you. Maybe someday we'll write a new chapter macro that doesn't add ``Chapter X'' to the beginning of every chapter title.
-
-\section{More info}
-And here's some other random info: the first paragraph after a chapter title or section head \emph{shouldn't be} indented, because indents are to tell the reader that you're starting a new paragraph. Since that's obvious after a chapter or section title, proper typesetting doesn't add an indent there.
 
 
 %If you feel it necessary to include an appendix, it goes here.

@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import sys
+import timeit
 from directed_hypergraph import *
 
 def main(argv):
@@ -9,9 +10,9 @@ def main(argv):
 #    print("...\n...\n...")
 #    print("...\n...\n...")
 #    dc = input("Use the D&C formulation? (y/n) ");
-    nodeFile = "../examples/"+title+"-nodes.txt"
-    edgeFile = "../examples/"+title+"-edges.txt"
-#    out = title+".lp"
+    nodeFile = "../hypergraphs/"+title+"-nodes.txt"
+    edgeFile = "../hypergraphs/"+title+"-edges.txt"
+    out = title+".lp"
     outDC = title+"_DC.lp"
 
     H = DirectedHypergraph()
@@ -23,7 +24,20 @@ def main(argv):
     H.read(edgeFile, node_delimeter, column_delimeter)
     H.weight_nodes(nodeFile, node_delimeter, column_delimeter)
 
-    #build_lp(H,out)
+    # A = timeit.Timer(lambda: build_lp(H,out))
+    # B = timeit.Timer(lambda: build_lp_dc(H,outDC))
+    #
+    # listA = A.repeat(repeat=100,number=1)
+    #
+    # listB = B.repeat(repeat=100,number=1)
+    #
+    # print("Average run time of build_lp:")
+    # print(sum(listA)/len(listA))
+    #
+    # print("Average run time of build_lp_dc:")
+    # print(sum(listB)/len(listB))
+
+    build_lp(H,out)
     build_lp_dc(H,outDC)
 
 
@@ -61,12 +75,16 @@ def build_lp(Hypergraph,outputFile):
     isFirst = True
     for n in Hypergraph.node_iterator():
         if isFirst == True:
+#            print(n,"!")
+#            print(Hypergraph.get_node_attribute(n,"prize"))
             lp_file.write(str(Hypergraph.get_node_attribute(n,"prize")))
             lp_file.write(" ")
             lp_file.write(str(n)+"x")
             isFirst = False
         else:
             lp_file.write(" + ")
+#            print(n,"!")
+#            print(Hypergraph.get_node_attribute(n,"prize"))
             lp_file.write(str(Hypergraph.get_node_attribute(n,"prize")))
             lp_file.write(" ")
             lp_file.write(str(n)+"x")
@@ -205,7 +223,8 @@ def goesTo(Hypergraph,node,L,D,firstNode):
         for h in Hypergraph.get_hyperedge_head(e):
             if h not in L:
 
-                L.append(h)
+                #L.append(h)
+                L[h]=True
                 name = str(firstNode)+'To'+str(h)
                 D[name] = True
                 goesTo(Hypergraph,h,L,D,firstNode)
@@ -215,9 +234,15 @@ def connectivityFinder(Hypergraph):
     # Make a dictionary that contains whether or not any 2 nodes are connected
 
     D = {}
+    connected = set()
+
+    count = 0
 
     for node in Hypergraph.node_iterator():
         for otherNode in Hypergraph.node_iterator():
+
+            if count % 100000 == 0:
+                print("count:",count)
 
             name = str(node)+'To'+str(otherNode)
 
@@ -226,10 +251,12 @@ def connectivityFinder(Hypergraph):
             else:
                 D[name] = False
 
+            count += 1
 
     for n in Hypergraph.node_iterator():
 
-        connected = []
+        #connected = []
+        connected = {}
         goesTo(Hypergraph,n,connected,D,n)
 
     return D

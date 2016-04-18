@@ -41,8 +41,8 @@ def createNodeFile(in_prefix, out_prefix, delim=';', sep='\t'):
         #
 
         # Default prizes and penalties
-        defPrize = 1
-        defPenalty = 5
+        defPrize = 5
+        defPenalty = 100
 
         outNodes.write(node_ID+";"+str(defPrize)+";"+str(defPenalty)+"\n")
 
@@ -76,10 +76,16 @@ def createEdgeFile(in_prefix, out_prefix, delim=';', sep='\t'):
 
         name = words[4]
         tail = words[0].split(delim)
+        if tail[0] == "None":
+            tail = []
         head = words[1].split(delim)
         posReg = words[2].split(delim)
         if posReg[0] != "None":
             tail.extend(posReg)
+        if len(tail) == 0 or len(head) == 0:
+            print("Skipping")
+            continue
+
 
         # Default cost
         defCost = 1

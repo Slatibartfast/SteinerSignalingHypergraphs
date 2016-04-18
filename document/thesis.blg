@@ -4,58 +4,52 @@ The top-level auxiliary file: thesis.aux
 The style file: APA/apa-good.bst
 Database file #1: thesis.bib
 Warning--entry type for "sharpen" isn't style-file defined
---line 817 of file thesis.bib
-Warning--I didn't find a database entry for "humanGenome"
-Warning--I didn't find a database entry for "SomethingRelevant"
-Warning--I didn't find a database entry for "SomethingElse"
-Warning--I didn't find a database entry for "putIntoBib"
-Warning--I didn't find a database entry for "cancer"
-Warning--I didn't find a database entry for "thing"
-Warning--I didn't find a database entry for "papers"
+--line 884 of file thesis.bib
 Warning--I didn't find a database entry for "paper"
 Warning--I didn't find a database entry for "Beachy2004"
+Warning--I didn't find a database entry for "thing"
 Warning--there's a number but no volume in Ausiello1992
 Warning--empty journal in Conant2008
 Warning--there's a number but no volume in Meysman2015
-You've used 63 entries,
+You've used 68 entries,
             2804 wiz_defined-function locations,
-            1040 strings with 21841 characters,
-and the built_in function-call counts, 50776 in all, are:
-= -- 3630
-> -- 3421
+            1070 strings with 23176 characters,
+and the built_in function-call counts, 54861 in all, are:
+= -- 3923
+> -- 3691
 < -- 30
-+ -- 1279
-- -- 1215
-* -- 4527
-:= -- 7973
-add.period$ -- 186
-call.type$ -- 63
-change.case$ -- 718
-chr.to.int$ -- 62
-cite$ -- 66
-duplicate$ -- 3268
-empty$ -- 3028
-format.name$ -- 1412
-if$ -- 9518
++ -- 1380
+- -- 1311
+* -- 4904
+:= -- 8612
+add.period$ -- 201
+call.type$ -- 68
+change.case$ -- 774
+chr.to.int$ -- 67
+cite$ -- 71
+duplicate$ -- 3532
+empty$ -- 3279
+format.name$ -- 1523
+if$ -- 10278
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 813
-newline$ -- 347
-num.names$ -- 252
-pop$ -- 1542
+missing$ -- 880
+newline$ -- 375
+num.names$ -- 272
+pop$ -- 1658
 preamble$ -- 1
-purify$ -- 657
+purify$ -- 708
 quote$ -- 0
-skip$ -- 976
+skip$ -- 1044
 stack$ -- 0
-substring$ -- 1990
-swap$ -- 2082
+substring$ -- 2167
+swap$ -- 2254
 text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 561
+type$ -- 606
 warning$ -- 3
-while$ -- 303
+while$ -- 328
 width$ -- 0
-write$ -- 840
-(There were 13 warnings)
+write$ -- 908
+(There were 7 warnings)
