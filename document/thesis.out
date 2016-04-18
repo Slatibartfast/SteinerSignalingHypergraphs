@@ -17,22 +17,21 @@
 \BOOKMARK [1][-]{section.2.3}{Hyperpaths \046 Connectivity}{chapter.2}% 17
 \BOOKMARK [2][-]{subsection.2.3.1}{Directed Hyperpaths}{section.2.3}% 18
 \BOOKMARK [0][-]{chapter.3}{Chapter 3: Hypershrubs}{}% 19
-\BOOKMARK [1][-]{section.3.1}{Definition of PCSHS}{chapter.3}% 20
-\BOOKMARK [1][-]{section.3.2}{Prize-Collecting Steiner Hypershrub ILP}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.1}{Definition of PRHS}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.2}{Implementation as an Integer Linear Program}{chapter.3}% 21
 \BOOKMARK [1][-]{section.3.3}{Roots and Leaves Problem}{chapter.3}% 22
 \BOOKMARK [0][-]{chapter.4}{Chapter 4: Methods and Results}{}% 23
 \BOOKMARK [1][-]{section.4.1}{Network Construction and Weighting}{chapter.4}% 24
 \BOOKMARK [1][-]{section.4.2}{Simulated Data}{chapter.4}% 25
-\BOOKMARK [2][-]{subsection.4.2.1}{Simple Example Hypergraphs}{section.4.2}% 26
-\BOOKMARK [2][-]{subsection.4.2.2}{Potential Special Cases}{section.4.2}% 27
-\BOOKMARK [1][-]{section.4.3}{PCSHS in Real Data}{chapter.4}% 28
-\BOOKMARK [2][-]{subsection.4.3.1}{Human Cancer Data}{section.4.3}% 29
-\BOOKMARK [1][-]{section.4.4}{Comparison to Standard Graphs}{chapter.4}% 30
-\BOOKMARK [0][-]{chapter.5}{Chapter 5: Future Directions}{}% 31
-\BOOKMARK [1][-]{section.5.1}{redComplexed Hypergraphs [Reordering]}{chapter.5}% 32
-\BOOKMARK [0][-]{chapter*.44}{Conclusion}{}% 33
-\BOOKMARK [0][-]{appendix.A}{Appendix A: Benchmarking Graphs \046 Supplemental Data}{}% 34
-\BOOKMARK [0][-]{appendix.B}{Appendix B: Algorithms \046 Programs}{}% 35
-\BOOKMARK [0][-]{appendix.C}{Appendix C: Biological Data}{}% 36
-\BOOKMARK [0][-]{appendix.D}{Appendix D: Version Information}{}% 37
-\BOOKMARK [0][-]{appendix*.46}{References}{}% 38
+\BOOKMARK [2][-]{subsection.4.2.1}{Simple Example Hypergraphs and Potential Special Cases}{section.4.2}% 26
+\BOOKMARK [1][-]{section.4.3}{PRHS in Real Data}{chapter.4}% 27
+\BOOKMARK [2][-]{subsection.4.3.1}{Human Cancer Data}{section.4.3}% 28
+\BOOKMARK [1][-]{section.4.4}{Comparison to Standard Graphs}{chapter.4}% 29
+\BOOKMARK [0][-]{chapter*.46}{Conclusion}{}% 30
+\BOOKMARK [1][-]{section.5.1}{Future Directions}{chapter*.46}% 31
+\BOOKMARK [1][-]{section.5.2}{Complexed Hypergraphs}{chapter*.46}% 32
+\BOOKMARK [0][-]{appendix.A}{Appendix A: Benchmarking Graphs \046 Supplemental Data}{}% 33
+\BOOKMARK [0][-]{appendix.B}{Appendix B: Algorithms \046 Programs}{}% 34
+\BOOKMARK [0][-]{appendix.C}{Appendix C: Biological Data}{}% 35
+\BOOKMARK [0][-]{appendix.D}{Appendix D: Version Information}{}% 36
+\BOOKMARK [0][-]{appendix*.48}{References}{}% 37
