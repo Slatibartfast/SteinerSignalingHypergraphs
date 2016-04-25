@@ -4,13 +4,13 @@ from directed_hypergraph import *
 
 def main(argv):
     # Specify the name of the file containing the nodes and edges
-    inPrefix = input("What is the prefix of input files (without -hypernodes or -hyperedges)? ")
-    outPrefix = input("What should the prefix of the output files be? ")
+    inPrefix = argv[0]
+    outPrefix = argv[1]
 
-    createNodeFile(inPrefix, outPrefix)
+    createNodeFile(inPrefix, outPrefix,argv[2],argv[3],delim=';',sep='\t')
     createEdgeFile(inPrefix, outPrefix)
 
-def createNodeFile(in_prefix, out_prefix, delim=';', sep='\t'):
+def createNodeFile(in_prefix, out_prefix,pz=0.75,pen=10, delim=';', sep='\t'):
 
     inFileName = "/Users/bpotter/Desktop/Thesis/reactomeData/reactomeHypergraphs/"+in_prefix+"-hypernodes.txt"
     inNodes = open(inFileName, 'r')
@@ -41,8 +41,9 @@ def createNodeFile(in_prefix, out_prefix, delim=';', sep='\t'):
         #
 
         # Default prizes and penalties
-        defPrize = 5
-        defPenalty = 100
+        defPrize = pz
+        defPenalty = pen
+
 
         outNodes.write(node_ID+";"+str(defPrize)+";"+str(defPenalty)+"\n")
 
@@ -119,4 +120,4 @@ def createEdgeFile(in_prefix, out_prefix, delim=';', sep='\t'):
     outEdges.close()
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main(sys.argv[1:])

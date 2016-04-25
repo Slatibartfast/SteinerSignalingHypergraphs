@@ -5,7 +5,7 @@ from directed_hypergraph import *
 
 def main(argv):
     # Specify the name of the file containing the nodes and edges
-    title = input("What is the title of the input/output files? ");
+    title = argv[0]
     print("...\n...\n...")
 #    print("...\n...\n...")
 #    print("...\n...\n...")
@@ -23,6 +23,7 @@ def main(argv):
     # Read the edge and node files to create a weighted hypergraph.
     H.read(edgeFile, node_delimeter, column_delimeter)
     H.weight_nodes(nodeFile, node_delimeter, column_delimeter)
+    weightNodes(H,title)
 
     # A = timeit.Timer(lambda: build_lp(H,out))
     # B = timeit.Timer(lambda: build_lp_dc(H,outDC))
@@ -40,6 +41,203 @@ def main(argv):
     build_lp(H,out)
     build_lp_dc(H,outDC)
 
+def weightNodes(H,prefix):
+
+    name2prize = nameToPrize(prefix)
+    uniprot2name = uniprotToName(prefix)
+    reactome2uniprot = reactomeIdToUniprot(prefix)
+
+    count = 0
+
+    for node in H.node_iterator():
+
+        name = str(node)
+
+        if not name in reactome2uniprot:
+            continue
+
+        UP = reactome2uniprot[name]
+
+        if not UP in uniprot2name:
+            continue
+
+        up2n = uniprot2name[UP]
+
+        if not up2n in name2prize:
+            continue
+
+        prize = float(name2prize[up2n])
+        prize = prize * 10
+        prize = str(prize)
+
+        atts = H.get_node_attributes(node)
+        pen = atts["penalty"]
+
+        if name[0] == "P":
+
+            attributes = {"prize" : prize, "penalty" : pen}
+            H.add_node(name, attributes)
+            count += 1
+
+        elif name[0] == "C":
+
+            #stuff
+            proteins = proteinsInComplex(filename,name)
+            prizes = []
+
+            for prot in proteins:
+                up = reactome2uniprot[prot]
+                pz = float(name2prize[up])
+                pz = pz * 10
+                pz = str(pz)
+                prizes.append(pz)
+
+            minPrize = min(prizes)
+
+            attributes = {"prize" : minPrize, "penalty" : pen}
+            H.add_node(name, attributes)
+            count += 1
+
+    print("Nodes weighted:",count)
+
+def nameToPrize(prefix):
+
+    D = {}
+
+    sep = ","
+
+    filename = "outputFiles/"+prefix+"-name2prize.csv"
+
+    in_file = open(filename, 'r')
+
+    # Skip the header line
+    in_file.readline()
+
+    line_number = 2
+    for line in in_file.readlines():
+        line = line.strip()
+        # Skip empty lines
+        if not line:
+            continue
+
+        words = line.split(sep)
+        if not (len(words) == 3):
+            raise \
+                IOError("Line {} ".format(line_number) +
+                        "contains {} ".format(len(words)) +
+                        "columns -- must contain only 3.")
+
+        D[words[0]] = words[2]
+
+        line_number += 1
+
+    in_file.close()
+
+    return D
+
+def proteinsInComplex(prefix, nodeName):
+
+    proteins = []
+
+    sep = "\t"
+    delim = ";"
+
+    filename = "../../reactomeData/testOutput/"+prefix+"-complexes.txt"
+
+    in_file = open(filename, 'r')
+
+    # Skip the header line
+    in_file.readline()
+
+    line_number = 2
+    for line in in_file.readlines():
+        line = line.strip()
+        # Skip empty lines
+        if not line:
+            continue
+
+        words = line.split(sep)
+        prots = words[3].split(delim)
+
+        if words[0] == nodeName:
+
+            proteins = prots
+
+
+        line_number += 1
+
+    in_file.close()
+
+    return proteins
+
+def reactomeIdToUniprot(prefix):
+
+    D = {}
+
+    filename = "../../reactomeData/testOutput/"+prefix+"-elements.txt"
+
+    sep = "\t"
+    delim = ";"
+    delim2 = ":"
+
+    in_file = open(filename, 'r')
+
+    # Skip the header line
+    in_file.readline()
+
+    line_number = 2
+    for line in in_file.readlines():
+        line = line.strip()
+        # Skip empty lines
+        if not line:
+            continue
+
+        words = line.split(sep)
+        if words[0][0] == "P":
+            aliases = words[3].split(delim)
+            print(aliases)
+            if len(aliases) > 1:
+                UP = aliases[1].split(delim2)
+            print(UP)
+
+            D[words[0]] = UP[1]
+
+        line_number += 1
+
+    in_file.close()
+
+    return D
+
+def uniprotToName(prefix):
+
+    D = {}
+
+    sep = "\t"
+
+    filename = "../hypergraphs/"+prefix+"-conversion.txt"
+
+    in_file = open(filename, 'r')
+
+    # Skip the header line
+    in_file.readline()
+
+    line_number = 2
+    for line in in_file.readlines():
+        line = line.strip('\n')
+        # Skip empty lines
+        if not line:
+            continue
+
+        words = line.split(sep)
+        D[words[1]] = words[0]
+
+        line_number += 1
+
+    in_file.close()
+
+    print("up2n: ",D)
+
+    return D
 
 def build_lp(Hypergraph,outputFile):
 
@@ -75,7 +273,7 @@ def build_lp(Hypergraph,outputFile):
     isFirst = True
     for n in Hypergraph.node_iterator():
         if isFirst == True:
-#            print(n,"!")
+
 #            print(Hypergraph.get_node_attribute(n,"prize"))
             lp_file.write(str(Hypergraph.get_node_attribute(n,"prize")))
             lp_file.write(" ")
@@ -83,7 +281,7 @@ def build_lp(Hypergraph,outputFile):
             isFirst = False
         else:
             lp_file.write(" + ")
-#            print(n,"!")
+
 #            print(Hypergraph.get_node_attribute(n,"prize"))
             lp_file.write(str(Hypergraph.get_node_attribute(n,"prize")))
             lp_file.write(" ")
@@ -501,4 +699,4 @@ def build_lp_dc(Hypergraph,outputFile):
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main(sys.argv[1:])

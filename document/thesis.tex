@@ -57,6 +57,16 @@ breaklines=true
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 
+\setlength\epigraphwidth{8cm}
+\setlength\epigraphrule{0pt}
+\setlength{\epigraphwidth}{.8\textwidth}
+
+\usepackage{etoolbox}
+
+\makeatletter
+\patchcmd{\epigraph}{\@epitext{#1}}{\itshape\@epitext{#1}}{}{}
+\makeatother
+
 %% Preface quote stuff
 \newlength\longest
 
@@ -113,6 +123,7 @@ breaklines=true
     \item{Mom and Dad}
     \item{Mari}
     \item{Far Far}
+    \item{Hailey Boren and Colten Burke}
     \item{Sam, Will, Rich, and ext. family}
     \item{Helen and Melvin}
     \item{Michael and Caleb}
@@ -129,23 +140,23 @@ breaklines=true
 % To remove it, comment it out or delete it.
     \chapter*{Preface}
 	%\epigraph{We can only see a short distance ahead, but we can see plenty there that needs to be done.}{\textit{Alan Turing}}
-  \null\vfill
-
-\settowidth\longest{\huge\itshape but we can see plenty there }
-\begin{center}
-\parbox{\longest}{%
-  \raggedright{\huge\itshape%
-   We can only see \\
-  a short distance ahead, \\
-  but we can see plenty there \\
-  that needs to be done.\par\bigskip
-  }
-  \raggedleft\Large\MakeUppercase{Alan Turing}\par%
-}
+  \begin{center}
+\epigraph{
+   It is an unkempt Researcher, \\
+  And he stoppeth one of three. \\
+  `By thy patched red beard and bloodshot eye, \\
+  Now wherefore stopp'st thou me?'
+  \bigbreak
+  He holds him with his withered hand, \\
+  `There was a shrub,' quoth he. \\
+  `Hold off! unhand me, red-beard loon!' \\
+  Eftsoons his hand dropt he...
+  \bigbreak
+  He holds him with his bloodshot eye--\\
+  The Renn Fayre-Guest stood still, \\
+  And listens like a three years' child: \\
+  The Researcher hath his will.}{--- \textup{Samuel Jostein Isaksen Potter}}%
 \end{center}
-
-\vfill\vfill
-
 
     \tableofcontents
 % if you want a list of tables, optional
@@ -156,10 +167,13 @@ breaklines=true
 % The abstract is not required if you're writing a creative thesis (but aren't they all?)
 % If your abstract is longer than a page, there may be a formatting issue.
     \chapter*{Abstract}
-	Cell signaling pathways are an important tool used by biologists to model how signals are transduced through cells. Though they can be (and often are) modeled using graphs, we instead use a generaliation known as a hypergraphs. Using these, we draw from the literature on hypergraphs and their traversal to develop the notion of a hypershrub, a multi-source, multi-target generalization of a hyperpath. We then draw on the literature on Prize-Collecting Steiner Trees and their applications to biological systems to create a formulation that finds specific, prize-dense hypershrubs that may be representative of biological phenomena that went previously unnoticed in standard graph representations of the same signaling pathways. Finally, we apply this formulation to the human Hedgehog signaling pathway, and the \textit{Arabidopsis thaliana} interactome, to analyze the effectiveness of our algorithm in real data.
+	Cell signaling pathways are an important tool used by biologists to model how signals are transduced through cells. Though they can be (and often are) modeled using graphs, we instead use a generalization known as a hypergraphs. Using these, we draw from the literature on hypergraphs and their traversal to develop the notion of a hypershrub, a multi-source, multi-target generalization of a hyperpath. We then draw on the literature on Prize-Collecting Steiner Trees and their applications to biological systems to create a formulation that finds specific, prize-dense hypershrubs that may be representative of biological phenomena that went previously unnoticed in standard graph representations of the same signaling pathways. Finally, we apply this formulation to the human Hedgehog signaling pathway, and disregulations therein related to Basal Cell carcinoma to analyze the effectiveness of our algorithm in real data.
 
 	\chapter*{Dedication}
-	You can have a dedication here if you wish.
+	\begin{itemize}
+    \item{Grandma- Carol Jane Isaksen}
+    %\item{Born November 15, 1931. dad worked in mines in Wisconsin- Polish immigrant family, mom Norwegian-American. Parents: Leo and Merle Herman. Ended up in pengilly (NE Minnesota by Swan Lake) log house on the lake. Leeches in water. 2 Sisters & a brother, all shared a mattress. Alice, Grandma, Bonnie, Clarence (uncle Punky). Moved to Seattle when she was 6 (gearing up for WWII) to work (grandpa) in the shipyards. Ended up in Bothell. Very close with her dad. Kind of a tom-boy. Didn't really like women. Felt like an outsider in her family. Very funny. Would pick berries in the B-ham summer and lived in the slave quarters. Lived on Norway Hill in Bothell. Met Far Far at a dance in Kenmore. Married Far Far right after that (like 6 weeks). Stay at home mom until mom was in k-garden. Started doing custodial and laundry for the school district. Retired in 1994. She painted. She always wanted to play the drums as a kid in school, but her mom wouldn't let her. She liked Pink Floyd and the Alan Parsons Project. She was a great mother, even though mom was an unappreciative shithead. Would decorate elaborately for Halloween. She really liked animals. Wouldn't wear makeup except lipstick, wouldn't go anywhere without putting on her lips. Sen sens. Bowling league.}
+  \end{itemize}
 
   \mainmatter % here the regular arabic numbering starts
   \pagestyle{fancyplain} % turns page numbering back on
@@ -203,9 +217,9 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
 
  \section{Network Representations}
 
-  To build a mathematical model of cell signaling pathways, we often use a graph as a data structure that is representative of the structure of the pathways. Graphs are a data structure first described by Euler in 1736 (\cite{Shields2012}) to help explain the complex relationships between objects\footnote{In Euler's case, the seven bridges of K\"{o}nigsberg.} in a concise, well defined way. For the purpose of this thesis, the word ``graph\footnote{A term coined by James Joseph Sylvester in 1878 (\cite{Biggs1986}).}" will refer to the data structure. A graph, $G=(V,E)$ is a structure that represents a set of objects, $V$ referred to as \textit{nodes} or \textit{vertices} and pairwise connections between them, $E$ referred to as \textit{edges}. Edges in a graph can either be \textit{undirected} or \textit{directed} (shown in Figure \ref{fig:simple_graph_du}), meaning that they go from one node (the \textit{tail}) to another node (the \textit{head}). We define a \textit{subgraph}, $G^\prime$, of $G$ as $G^\prime=((V^\prime,E^\prime | V^\prime \subseteq V \text{ and } E^\prime \subseteq E))$. Furthermore, we define an \textit{induced subgraph} as the subgraph that arises from a subset of edges, $E^{\prime\prime}$, and their respective heads and tails.\par
+  To build a mathematical model of cell signaling pathways, we often use a graph as a data structure that is representative of the structure of the pathways. Graphs were first described by Euler in 1736 (\cite{Shields2012}) to help explain the complex relationships between objects\footnote{In Euler's case, the seven bridges of K\"{o}nigsberg.} in a concise, well defined way. For the purpose of this thesis, the word ``graph\footnote{A term coined by James Joseph Sylvester in 1878 (\cite{Biggs1986}).}" will refer to the data structure. A graph, $G=(V,E)$ is a structure that represents a set of objects, $V$ referred to as \textit{nodes} or \textit{vertices} and pairwise connections between them, $E$ referred to as \textit{edges}. Edges in a graph can either be \textit{undirected} or \textit{directed} (shown in Figure \ref{fig:simple_graph_du}), meaning that they go from one node (the \textit{tail}) to another node (the \textit{head}). We define a \textit{subgraph}, $G^\prime$, of $G$ as $G^\prime=((V^\prime,E^\prime | V^\prime \subseteq V \text{ and } E^\prime \subseteq E))$. Furthermore, we define an \textit{induced subgraph} as the subgraph that arises from a subset of edges, $E^{\prime\prime}$, and their respective heads and tails.\par
 
-  One of the greatest advantages of using graphs as modeling tools is the wealth of graph algorithms that have been invented since Euler first proposed problems on graphs in 1736. These algorithms make it simple for graphs that are representative of real biological data to be queried for informative (i.e. shortest path between two nodes, modularity of a graph, or subgraphs that satisfy certain parameters) which can themselves be analyzed to determine whether they represent a biologically meaningful phenomena.\par
+  One of the greatest advantages of using graphs as modeling tools is the wealth of graph algorithms that have been invented since Euler first proposed problems on graphs in 1736. These algorithms make it simple for graphs that are representative of real biological data to be queried for interesting substructures (i.e. shortest path between two nodes, modularity of a graph, or subgraphs that satisfy certain parameters) which can themselves be analyzed to determine whether they represent a biologically meaningful phenomena.\par
 
   \begin{figure}[!h]
     \begin{center}
@@ -235,7 +249,7 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
 
    \subsection{Spanning Trees and Steiner Trees}
 
-   It is often useful to construct subgraphs from a given graph that fulfill specific parameters. These subgraphs are often formulated as a decision question: ``Given a graph $G$ and a set of parameters, does subgraph $G^\prime$ of $G$ exists that meets all of the specified parameters." An example of one such graph is a complete graph, shown in Figure \ref{fig:complete_graphs}. A complete graph of $n$ nodes (\textit{k}-$n$) is defined as an undirected graph for which each node is connected to each other node by exactly one edge.
+   It is often useful to construct subgraphs from a given graph that fulfill specific parameters. These subgraphs are often formulated as a decision question: ``Given a graph $G$ and a set of parameters, does subgraph $G^\prime$ of $G$ exists that meets all of the specified parameters?" An example of one such graph is a complete graph, shown in Figure \ref{fig:complete_graphs}. A complete graph of $n$ nodes (\textit{k}-$n$) is defined as an undirected graph for which each node is connected to each other node by exactly one edge.
 
    \begin{figure}[!h]
      \begin{center}
@@ -245,9 +259,9 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
      \end{center}
    \end{figure}
 
-   \paragraph{Spanning Trees.}One useful structure that we can look for in a graph is a \textit{spanning tree}. Given a graph $G=(V,E)$, we say that there exists a spannning tree if there exits some tree $\mathcal{T}=(V^\prime,E^\prime)$ for which $V^\prime = V$.  More plainly, given a graph, a spanning tree is one that ``hits" every node in the graph while still conforming to all the constraints that define a tree.
+   \paragraph{Spanning Trees.}One useful structure that we can look for in a graph is a \textit{spanning tree}. Given a graph $G=(V,E)$, we say that there exists a spannning tree if there exits some undirected tree $\mathcal{T}=(V^\prime,E^\prime)$ for which $V^\prime = V$.  More plainly, given a graph, a spanning tree is one that ``hits" every node in the graph while still conforming to all the constraints that define a tree.
 
-   \paragraph{Steiner Trees.}While spanning trees are useful substructures, sometimes we want to find a subtree that only spans a subset of the nodes in a graph. If this is the case, we can construct a slightly altered version of a spanning tree called a \textit{Steiner Tree}\footnote{Named after Swiss mathematician Jakob Steiner.} We say that a Steiner Tree $S$ exists in a graph $G$, if there is a subtree within the graph that connects all of a set of nodes $T$, which we call target nodes. Furthermore, we call any node that is included in the Steiner Tree, but that is not a member of $T$ a Steiner Node. Figure \ref{fig:graph1} gives an example of both spanning and Steiner Trees.
+   \paragraph{Steiner Trees.}While spanning trees are useful substructures, sometimes we want to find a subtree that only spans a subset of the nodes in a graph. If this is the case, we can construct a slightly altered version of a spanning tree called a \textit{Steiner Tree}\footnote{Named after Swiss mathematician Jakob Steiner.} We say that a Steiner Tree $S$ exists in a graph $G$, if there is an undirected subtree within the graph that connects all of a set of nodes $T$, which we call target nodes. Furthermore, we call any node that is included in the Steiner Tree, but that is not a member of $T$ a Steiner Node. Figure \ref{fig:graph1} gives an example of both spanning and Steiner Trees.
 
    \begin{figure}[!h]
      \begin{center}
@@ -267,14 +281,14 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
   \begin{figure}[!h]
     \begin{center}
       \includegraphics[width=4in]{PCST}
-    \caption[Prize-Collecting Steiner Tree]{In PPI networks, we want to find the smallest possible subgraph that captures as much prize as possible. One way to find this is by searching for a Prize-Collecting Steiner Tree. Image (c) Copyright by Ernest Fraenkel 2016, reprinted by permission.}
+    \caption[Prize-Collecting Steiner Tree]{In PPI networks, we want to find the smallest possible subgraph that captures as much prize as possible. One way to find this is by searching for a Prize-Collecting Steiner Tree. Image (c) Copyright by Ernest Fraenkel 2016, reprinted with permission.}
     \label{fig:PCST}
     \end{center}
   \end{figure}
 
  \section{Integer Linear Programming}
 
-  For this thesis, we use a type of programming known as \textit{integer linear programming}. Integer linear programs (ILPs) solve for the optimal solution(s) to an objective expression, subject to a set of linear constraints (\cite{Papadimitriou1998}). In our case, the set of variables, $\mathbf{x}$, are all binary variables, which will represent whether a given part of the graph is included in the solution. If variable $\mathbf{x}_i$ is equal to 0 in the solution, the part of the graph with which it is associated will not be present in the optimal solution. Similarly, if $\mathbf{x}_i$ is equal to 1, its associated graph component is present in the optimal solution.\par
+  There are many kinds of algorithms used to find interesting subnetworks in graphs and hypergraphs.  For this thesis, we use a type of programming known as \textit{integer linear programming}. Integer linear programs (ILPs) solve for the optimal solution(s) to an objective expression, subject to a set of linear constraints (\cite{Papadimitriou1998}). In our case, the set of variables, $\mathbf{x}$, are all binary variables, which will represent whether a given part of the graph is included in the solution. If variable $\mathbf{x}_i$ is equal to 0 in the solution, the part of the graph with which it is associated will not be present in the optimal solution. Similarly, if $\mathbf{x}_i$ is equal to 1, its associated graph component is present in the optimal solution.\par
 
   The canonical form of an ILP is:\par
 
@@ -285,11 +299,13 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
     \text{and } \quad & \mathbf{x} \in \mathbb{Z}^n \label{eq:constC}
   \end{align}
 
-  In this form $\mathbf{x}$ is the vector of binary variables for which the program is solving, $\mathbf{c}$ and $\mathbf{b}$ are vectors and $\mathbf{A}$ is a matrix, all of which have integers as values. For this thesis IBM ILOG CPLEX Optimization Studio (CPLEX) was used to optimize input ILPs which were input in the form of LP files (\texttt{.lp}, see Appendix B).
+  In this form $\mathbf{x}$ is the vector of binary variables for which the program is solving, $\mathbf{c}$ and $\mathbf{b}$ are vectors and $\mathbf{A}$ is a matrix, all of which take integer values. For this thesis IBM ILOG CPLEX Optimization Studio (CPLEX) was used to optimize input ILPs which were input in the form of LP files (\texttt{.lp}, see Appendix B).
 
  \section{Goals of this Thesis}
 
- The goal of this thesis is to generate an algorithm that will create subnetworks in a generalization of a graph called a \textit{hypergraph}\footnote{This will be defined both informally and formally later.}. The sub-hypergraph generated by this algorithm should use weights on the edges and nodes of the hypergraph to find a subnetwork that will minimize the total cost of edges while maximizing the value of nodes. Furthermore, the output should not contain disconnected subgraphs, and it should have some sort of ``flow" going from an undetermined (i.e. not pre-specified) set of hypernodes, $S$ to another set of hypernodes, $T$. In addition to formally defining and solving for this target subnetwork, this thesis will find a way to build a network from publically available signaling pathway data, and weight that network in a meaningful way using publically available data.\par
+ The goal of this thesis is to generate an algorithm that will create subnetworks in a generalization of a graph called a \textit{hypergraph}\footnote{This will be defined both informally and formally later.}. The sub-hypergraph generated by this algorithm should use weights on the edges and nodes of the hypergraph to find a subnetwork that will minimize the total cost of edges while maximizing the value of nodes. Furthermore, the output should not contain disconnected subgraphs, and it should have some sort of ``flow" going from an undetermined (i.e. not pre-specified) set of nodes, $S$ to another set of nodes, $T$. In addition to formally defining and solving for this target subnetwork, this thesis will find a way to build a network from publically available signaling pathway data, and weight that network in a meaningful way using publically available data.\par
+
+ Following this, we will discuss the implementation of the algorithm in a weighted hypernetwork that is representative of the Hedgehog signaling pathway in humans. In particular, we will analyze this network after we weight it according to differential gene expression between healthy patients, and ones with Basal Cell carcinoma.
 
  Ultimately, this should create a software package that anyone could use to build hypergraphs from available data, and to query that hypergraph for potential hypotheses about signaling pathway disregulations, based on a weighting scheme that the user can apply easily.\par
 
@@ -297,7 +313,7 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
 
 Cell function is governed by countless interactions between proteins, nucleic acids, lipids, carbohydrates, and many other small molecules.  The interactions between all of these components form what we call \textit{protein-protein interaction} (PPI) networks, which are responsible for almost every process within a cell (\cite{Taylor2009}). Furthermore, we often think about specific sub-networks that explain important biological phenomena (hormone secretion, transcriptional regulation of a gene, or response to a particular stimuli are all examples). We refer to these subsets of the larger PPI network as \textit{cell signaling pathways}. We use cell signaling pathways to describe how many of the most basic reactions within cells cause propagations of information, and the results of thse signals.  Some of the most important types of interactions that we see in cell signaling networks include the assembly and destruction of protein complexes, how small molecules such as ATP interact with proteins, the cascade of events that can occur after a membrane-bound protein is bound by a ligand, or where negative feedback loops exist that can have an effect on cell function.  Historically, PPI networks have been a useful tool for compiling knowledge about individual interactions that have been studied \textit{in situ}, so that larger scale patterns of interaction can be examined, and both communicated easily and analyzed algorithmically. In recent years, there has been a push to find ways to accurately model these networks so that they can be used to predict potential areas of future research (\cite{Haverty2004}), in particular, by using graph-based methods (\cite{Aittokallio2006}).\par
 
-There are a multitude of different forms of cell signaling pathways\footnote{As well as extracellular signaling networks and metabolic cell functions that are not triggered externally.}, responsible for many types of cell functions, but we will use the example of a cell changing its gene expression in response to an external stimuli as a general model for signaling pathways. In these cases, there are a few key steps that result in signal transduction throughout the cell. First, a trans-membrane protein will undergo a conformational change in response to a particular ligand\footnote{A small molecule that typically will bind to a trans-membrant, initiating a cascade of events (i.e. the signal that starts the process).}. Typically, this signal will be some sort of messenger molecule to which the cell needs to respond. The change in conformation results in a cascade of interactions between proteins and other small molecules within the cell. Some of the changes that can result from this cascade of signaling are protein complex assembly, complex degradation, conformational changes to other proteins, phosphorylation, or dephosphorylation (among many other reactions). The ultimate result of this signaling cascade is a change in one or more transcription factors, proteins that bind to DNA, and regulate the rate of transcription of DNA to mRNA. The ultimate result of this pathway will be a change in the expression of one or more genes within the cell, and possibly the start of new signaling pathways.\par
+There are a multitude of different forms of cell signaling pathways\footnote{As well as intercellular signaling networks and metabolic cell functions that are not triggered externally.}, responsible for many types of cell functions, but we will use the example of a cell changing its gene expression in response to an external stimuli as a general model for signaling pathways. In these cases, there are a few key steps that result in signal transduction throughout the cell. First, a trans-membrane protein will undergo a conformational change in response to a particular ligand\footnote{A small molecule that typically will bind to a trans-membrant, initiating a cascade of events (i.e. the signal that starts the process).}. Typically, this signal will be some sort of messenger molecule to which the cell needs to respond. The change in conformation results in a cascade of interactions between proteins and other small molecules within the cell. Some of the changes that can result from this cascade of signaling are protein complex assembly, complex degradation, conformational changes to other proteins, phosphorylation, or dephosphorylation (among many other reactions). The ultimate result of this signaling cascade is a change in one or more transcription factors, proteins that bind to DNA, and regulate the rate of transcription of DNA to mRNA. The ultimate result of this pathway will be a change in the expression of one or more genes within the cell, and possibly the start of new signaling pathways.\par
 
 \paragraph{Computational Methods.}
 Signaling pathways are of particular importance because they are often disregulated in heterogenous diseases such as cancer (\cite{Taylor2009}). Because of this, researchers' ability to obtain accurate information about signaling pathways, and their ability to interpret that information may help them to deduce interactions whose disregulation may be implicated in a particular disease. As these networks grow and become more accurate, we will become increasingly able to develop computational methods to mine these networks for novel areas to research, that may help explain or treat heterogenous diseases. Additionally, as the databases become more complete, cross-pathway interactions may begin to be documented that would not otherwise be apparent upon studying individual pathways. The development of new computational techniques to elucidate regulatory changes in areas where different pathways, once modeled as discrete, crosstalk. If areas like these, could be identified, they could lead to new hypotheses that researchers could investigate \textit{in situ}. Furthermore, while past research has found many individual proteins and pathways that are implicated in particular diseases, our ability to observe or quantify certain elements that could be playing an important role in pathway disregulation is limited by our current sampling methods (RNA-Seq, microarray, etc). The development of more nuanced algorithms could increase our ability to implicate proteins that we cannot currently observe being disregulated because of thow protein expression in cels is currenly quantified.\par
@@ -307,7 +323,7 @@ Beyond individual signal transduction pathways, it is useful to think of the set
 \begin{figure}[h]
   \begin{center}
     \includegraphics[width=\textwidth]{human_interactome}
-  \caption[Human interactome]{The entire human interactome, as displayed by the Reacome interactive pathway browser.}
+  \caption[Human interactome]{The entire human interactome, as displayed by the Reacome interactive pathway browser. Each dot actually represents a discrete signaling pathway.}
   \label{fig:human_interactome}
   \end{center}
 \end{figure}
@@ -336,30 +352,6 @@ Put in 2-3 \P here about how Hh signaling works in more detail, and why it is an
 
 The Hedgehog signaling pathway makes a useful example for applying computational methods and graph-based modeling, since the network is small enough to look at manually, but also complex enough that its analysis is nontrivial. Furthermore, because it has been implicated with BCC, along with many other forms of cancer, data for weighting signaling networks are available through public databases such as The Cancer Genome Atlas (\texttt{http://cancergenome.nih.gov/}). These factors make it an excellent choice as an example network for testing new hypergraph algorithms.\par
 
-\section{Signaling Networks in \emph{Arabidopsis thaliana}}
-
-One of the greatest strengths of computational methods is that they are generally agnostic to where their inputs come from, making them good tools for studying more than just human systems. In addition to humans, there is a wealth of data available for other species that can also be studied using PPI database mining. One such species is \textit{Arabidopsis thaliana} (mouse-ear cress), a plant in the mustard family that is commonly used as a model for plant genetics. Researchers often use \textit{A. thaliana} to examine the effects of genetic manipulation on plants, since \textit{A. thaliana} has one of the best known genomes of any plant\footnote{It is like the \textit{Drosophila melanogaster} of the plant world.}. Because of this, there is a huge quantity of data available that make implementing the same kind of algorithms that are possible in human signaling pathways in \textit{A. thaliana}.
-
-\begin{figure}[h]
-  \begin{center}
-    \includegraphics[width=\textwidth]{at_hh}
-  \caption[\textit{Arabidopsis thaliana} Hedgehog pathway]{The Reactome Hedgehog signaling pathway in \textit{A. thaliana}. For this pathway, and many others, the Reacome database is very sparse relative to the orthologous pathways in humans, and is therefore not very useful for implementing network algorithms, at this point.}
-  \label{fig:at_hh}
-  \end{center}
-\end{figure}
-
-Unfortunately, for many small-scale pathways (such as the Hedgehog pathway), there is not as much pathway data available in pathway databases, since much more research has been done on humans than on any other organism. Fortunately, however, there is enough pathway data available that the overall interactome can be searched and may yield useful outcomes.\par
-
-\begin{figure}[h]
-  \begin{center}
-    \includegraphics[width=\textwidth]{at_interactome}
-  \caption[\textit{Arabidopsis thaliana} interactome]{The entire \textit{A. thaliana}  interactome, as displayed by the Reacome interactive pathway browser. This interactome is comparably dense to the human interactome seen in \ref{fig:human_interactome}, which makes it a better candidate for running network algorithms.}
-  \label{fig:at_interactome}
-  \end{center}
-\end{figure}
-
-Our ability to look at the entire interactome of species such as \textit{A. thaliana} allows us to investigate some of the global effects of genetic manipulation on signal transduction. This is especially useful in model organisms like \textit{A. thaliana}, since we can actually perform genetic manipulations on them quickly, safely, and ethically, unlike with human beings. Additionally, our ability to breed model organisms in the lab means that we can use specific datasets with large sample sizes. This is very useful compared to human datasets, which are generally based on small sample sizes, since human gene expression data is generally collected from pseudo-random, sparse cases when a person has a degenerate tissue type, such as a tumor, rather than under direct experimental manipulation.\par
-
 Now that we have an understanding of what signaling pathways and protein interaction networks are, we need to develop an appropriate tool with which we can model them. To do so, we will now describe a generalization of a graph, known as a hypergraph. We will then describe a new way to query hypergraphs that will find important subnetworks, which we call hypershrubs, that may reveal biologically interesting phenomena that current computational methods fail to capture.\par
 
 \chapter{Hypergraphs \& Hyperpaths}
@@ -369,7 +361,7 @@ In order to model cell signaling pathways computationally, it is first necessary
 \begin{figure}[h]
   \begin{center}
     \includegraphics[width=\textwidth]{anna_fig}
-  \caption[The issue with standard graphs.]{Standard graphs are not always the best tool for modeling biological events. Instead, we use hypergraphs, a generalization of standard graphs that allow for more nuanced modeling.}
+  \caption[The issue with standard graphs.]{Standard graphs are not always the best tool for modeling biological events. Instead, we use hypergraphs, a generalization of standard graphs that allow for more nuanced modeling. Image (c) Copyright \cite{Ritz2014a}, reprinted with permission.}
   \label{fig:anna_fig}
   \end{center}
 \end{figure}
@@ -380,7 +372,7 @@ While standard\footnote{The term ``standard" is used to describe traditional gra
 
 \begin{figure}[thbp]
   \begin{center}
-    \includegraphics{example-standard-graph}
+    \includegraphics[width=\textwidth/2]{example-standard-graph}
   \caption[A standard graph]{An example of a standard graph. All edges represent directed, pairwise interactions between two nodes. Biologically, it is difficult to extract meaningful signaling pathway information from this graph, since protein complex formation and degradation is ambiguous.}
   \label{fig:example-standard-graph}
   \end{center}
@@ -390,14 +382,14 @@ One area of cell-signaling that becomes particularly problematic in standard gra
 
 Another shortcoming of standard graphs in representing complex biological interactions is that there is no way in which to represent positive or negative regulation of interactions.  Since there is a standardized way in which edges interact with nodes, there is no way to differentiate types of interactions between nodes.  This poses a challenge when there are regulators or catalysts present that are necessary for a reaction, but are not part of the inputs or outputs of the reaction.  If regulators are to be included in a standard graph representation of a cell-signaling network, they become indistinguishable from any other types of interactions that are taking place.  This lack of specificity is problematic, as it treats all interactions as equal, and hides potentially useful information from the graph\footnote{The Reacome database is available for download as a standard graph, but it is not available as a directed graph. This means that we could not use their graphs as a standard graph comparison to ours.}.\par
 
-To resolve the issues presented by standard graphs, we instead use a generalization called a \textit{hypergraph} that allows for the addition of more detail  and specificity within the data structure than standard graphs allow.  In particular, hypergraphs allow for both the representation of protein complexes in the form of \textit{hypernodes}, which we think of simply as a set of one or more nodes, and for the representation of complex, directed interactions that can have multiple inputs and outputs.  We represent these interactions with the use of \textit{hyperedges}, which define a set of one or more hypernodes.  Since a hyperedge may include more than two hypernodes, we gain the ability to represent both multi-protein interactions, as well as to define the notions of regulation on reactions.\par
+To resolve the issues presented by standard graphs, we instead use a generalization called a \textit{hypergraph} that allows for the addition of more detail  and specificity within the data structure than standard graphs allow.  In particular, hypergraphs allow for both the representation of protein complexes in the form of \textit{hypernodes}, which we think of simply as a set of one or more nodes, and for the representation of complex, directed interactions that can have multiple inputs and outputs.  We represent these interactions with the use of \textit{hyperedges}, which define a set of one or more hypernodes\footnote{For simplicity, we treat each hypernode as a single node, in our treatment of signaling pathways, see Future Directions for more details. We will henceforth refer to all vertices in our hypergraphs as ``nodes" to avoide confusion.}.  Since a hyperedge may include more than two nodes, we gain the ability to represent both multi-protein interactions, as well as to define the notions of regulation on reactions.\par
 
 \section{Hypergraphs}
 
 \begin{figure}[thbp]
   \begin{center}
     \includegraphics[width=\textwidth/2]{undirected_hypergraph}
-  \caption[An example undirected hypergraph]{An example of an undirected hypergraph (\cite{sharpen}), where each edge is shown by a colored region, as well as the conversion of the hypergraph to a standard graph.}
+  \caption[An example undirected hypergraph]{An example of an undirected hypergraph (\cite{sharpen}), where each edge is shown by a colored region, as well as the conversion of the hypergraph to a standard graph, where each hyperedge is shown as a node (white squares).}
   \label{fig:undirected_hypergraph}
   \end{center}
 \end{figure}
@@ -406,44 +398,44 @@ Where a directed graph represents directed, pairwise interactions between only t
 
 \begin{figure}[thbp]
   \begin{center}
-    \includegraphics{example-hypergraph}
-  \caption[An example directed hypergraph]{An example of the hypergraph, $\mathcal{H}=(V,E)$ that corresponds to the standard graph shown in Figure \ref{fig:example-standard-graph}. Note that each edge now contains more specific information about the propogation of a signal through the network. For this example, $V={A,B,...,M}$ and each hyperedge is shown by a compund arrow, for example the edge whose tail is hypernodenode $A$ and whose tail is hypernodes $B$ and $D$.}
+    \includegraphics[width=\textwidth/2]{example-hypergraph}
+  \caption[An example directed hypergraph]{An example of the hypergraph, $\mathcal{H}=(V,E)$ that corresponds to the standard graph shown in Figure \ref{fig:example-standard-graph}. Note that each edge now contains more specific information about the propogation of a signal through the network. For this example, $V={A,B,...,M}$ and each hyperedge is shown by a compund arrow, for example the edge whose tail is nodenode $A$ and whose tail is nodes $B$ and $D$.}
   \label{fig:example-hypergraph}
   \end{center}
 \end{figure}
 
-It is important to note that a standard directed graph is a special case of a directed hypergraph.  This is the case if every hypernode in the graph contains only one element, and if each edge has exactly one head element, and one tail element.  This has two important implications for algorithms that run on directed hypergraphs.  First, this means that there is no loss in functionality caused by using a hypergraph representation of a cell network, since anything that could be computed on a standard directed graph can be recreated exactly using the special case of the hypergraph. Secondly, this is important, because it means that anything that can be computed on a standard graph will be at least as computationally difficult to compute when generalized to a hypergraph.  In fact, we find that many tasks that are computationally easy on standard graphs become very difficult when generalized to hypergraphs (\cite{Ritz2014a}).\par
+It is important to note that a standard directed graph is a special case of a directed hypergraph.  This is the case if every node in the graph contains only one element, and if each hyperedgeedge has exactly one head element, and one tail element.  This has two important implications for algorithms that run on directed hypergraphs.  First, this means that there is no loss in functionality caused by using a hypergraph representation of a cell network, since anything that could be computed on a standard directed graph can be recreated exactly using the special case of the hypergraph. Secondly, this is important, because it means that anything that can be computed on a standard graph will be at least as computationally difficult to compute when generalized to a hypergraph.  In fact, we find that many tasks that are computationally easy on standard graphs become very difficult when generalized to hypergraphs (\cite{Ritz2014a}).\par
 
 \begin{figure}[thbp]
   \begin{center}
-    \includegraphics{example-hypergraph-weighted}
-  \caption[A weighted hypergraph]{The same hypergraph as in \ref{fig:example-hypergraph}, now weighted with node prizes (inner color) and dangling penalties (outer color). Edge thickness corresponds with edge weight. Intuitively, to find the PRHS for this hypergraph, we want to find the subnetwork that maximizes the amount of blue, and minimizes the amount of both red nodes and thick lines.}
+    \includegraphics[width=\textwidth/2]{example-hypergraph-weighted}
+  \caption[A weighted hypergraph]{The same hypergraph as in \ref{fig:example-hypergraph}, now weighted with node prizes (inner color) and root penalties (outer color). Edge thickness corresponds with edge weight. Intuitively, to find the PRHS for this hypergraph, we want to find the subnetwork that maximizes the amount of blue, and minimizes the amount of both red nodes and thick lines.}
   \label{fig:example-hypergraph-weighted}
   \end{center}
 \end{figure}
 
 \section{Hyperpaths \& Connectivity}
-In order to find the shortest route between two vertices, in a directed hypergraph, we define the notion of a \textit{hyperpath}, $\mathcal{P}$, on the directed hypergraph $\mathcal{H}$.  We think of a path, $\mathcal{P}$ from vertex $s$ to vertex $t$ as the list of vertices and hyperedges that one must pass through in order to traverse through the directed hypergraph from vertex $s$ to $t$. The existence of a hyperpath between two nodes encodes the notion of ``connectivity" between those nodes.  If a hyperpath exists between nodes $s$ and $t$, we say that they are \textit{connected}. This is a useful definition, because it allows us the notion of a \textit{connected hypergraph}, a hypergraph in which every node is connected by some hyperpath to every other node in the hypergraph.\par
+In order to find the shortest route between two vertices, in a directed hypergraph, we define the notion of a \textit{directed hyperpath}, $\mathcal{P}$, on the directed hypergraph $\mathcal{H}$.  We think of a path, $\mathcal{P}$ from vertex $s$ to vertex $t$ as the list of vertices and hyperedges that one must pass through in order to traverse through the directed hypergraph from vertex $s$ to $t$. The existence of a hyperpath between two nodes encodes the notion of ``connectivity" between those nodes.  If a hyperpath exists between nodes $s$ and $t$, we say that they are \textit{connected}. This is a useful definition, because it allows us the notion of a \textit{connected hypergraph}, a hypergraph in which every node is connected by some hyperpath to every other node in the hypergraph.\par
 
 \subsection{Directed Hyperpaths}
 
-There are many ways in which we can define hyperpaths, but for the purposes of finding Steiner Trees in directed hypergraphs, we must define a simple \textit{directed hyperpath} between nodes $s$ and $t$. We can think of a directed hyperpath $\mathcal{P}(s,t)=\{s,e_2,v_3,...,e_{n-1},t\}$ as an ordered list of nodes and edges, beginning with $s$ and ending with $t$ such that for any edge, $e_i$, in the path, $v_{i-1}$ is in the tail of $e_i$, and $v_{i+1}$ is in the head of $e_i$.\par
+There are many ways in which we can define hyperpaths, but for the purposes of finding hypershrubs in directed hypergraphs, we must define a simple \textit{directed hyperpath} between nodes $s$ and $t$. We can think of a directed hyperpath $\mathcal{P}=\{s,e_2,v_3,...,e_{n-1},t\}$ as an ordered list of nodes and edges, beginning with $s$ and ending with $t$ such that for any edge, $e_i$, in the path, $v_{i-1}$ is in the tail of $e_i$, and $v_{i+1}$ is in the head of $e_i$.\par
 
-There are two types of hyperpaths that we find particularly interesting, as a result of the branching nature of hyperedges. The first of these is a path the branches out from a single back-end node (Figure \ref{fig:B-hyperedge}). We call this type of hyperpath that is defined in terms of it's back end a B-hyperpath (\cite{Gallo1993}). B-hyperpaths are a particularly interesting to biologists modeling signaling pathways, since a B-hyperpath represents all the products that can be reached from a given reactant (\cite{Ritz2014}).
+There are two types of hyperpaths that we find particularly interesting, as a result of the branching nature of hyperedges. The first of these is a path that branches out from a one or more back-end nodes (Figure \ref{fig:BF-hyperpaths}). We call a hyperpath that branches out from a set of nodes a B-hyperpath (\cite{Gallo1993}). B-hyperpaths are a particularly interesting to biologists modeling signaling pathways, since a B-hyperpath represents all the products that can be reached from a given reactant (\cite{Ritz2014}).
 
 \begin{figure}[!h]
   \begin{center}
     \includegraphics[width=\textwidth/2]{BF-hyperpaths}
   \caption[Simple B-Hypergrah and F-Hypergraph.]{\textit{left }A very simple example of a B-hyperpath. \textit{right }A simple example of an F-hyperpath.}
-  \label{fig:BF-hyperedge}
+  \label{fig:BF-hyperpaths}
   \end{center}
 \end{figure}
 
-The second type of hyperpath that we are interested in, F-hyperpaths, are very similar to B-hyperpaths, except that they are defined by a node on their front end (Figure \ref{fig:B-hyperedge}), and are made of hyperedges that lead into that edge. Biologically, this represents all of the reactions that can lead to a given product. Both of these types of hyperpaths will be formalized later, and they will be generalized as part of our definition of a hypershrub.
+The second type of hyperpath that we are interested in, F-hyperpaths, are very similar to B-hyperpaths, except that they are defined by a node on their front end (Figure \ref{fig:BF-hyperpaths}), and are made of hyperedges that lead into that edge. Biologically, this represents all of the reactions that can lead to a given product. Both of these types of hyperpaths will be formalized later, and they will be generalized as part of our definition of a hypershrub.
 
 \chapter{Hypershrubs}
 
-Recall that we are interested in finding interesting signaling pathways in protein-protein interaction networks using hypergraph representations of the PPI networks. Remember as well that we want to use biological data to find subnetworks that capture as much of the data in as small as a subnetwork as possible (\emph{this should probably be reworded.}), much like in the Prize-Collecting Steiner problem. Finally, recall that with problems such as this, we see two formulations, as an unweighted decision problem, and as a weighted optimization formulation.\par
+Recall that we are interested in finding interesting signaling pathways in protein-protein interaction networks using hypergraph representations of the PPI networks. Remember as well that we want to use biological data to find subnetworks that capture the maximal amount of prize in the smallest network possible, much like in the Prize-Collecting Steiner problem. Finally, recall that with problems such as this, we see two formulations, as an unweighted decision problem, and as a weighted optimization formulation.\par
 
 Now, we will review the formulations of B and F hyperpaths, which are both concerned with single source-target pairs. From there, we will generalize these hyperpaths to include multiple targets. Our ultimate goal is to present two new formulations, one a decision problem for hypergraphs seeking a set of targets from multiple sources, and the second an optimization problem for hypergraphs that relaxes the decision formulation. This will allow us to seek worthy targets and sources. Finally, we will show an ILP formulation that will produce this optimal subnetwork, which we will call a \textit{hypershrub}.\par
 
@@ -455,7 +447,7 @@ Now, we will review the formulations of B and F hyperpaths, which are both conce
 
 of length $\ell$, where $T(e_i) \cap H(e_{i+1}) \neq \emptyset$\footnote{This ensures that there is at least one shared vertex between $e_i$ and $e_{i+1}$} and $s \in H(e_1)$ and $t \in T(e_\ell)$. In other words, a hyperwalk is a series of ``hops" that one can make along directed hyperedges that take you from $s$ to $t$.\par
 
-\paragraph{B-connectivity.}For B-connectivity relative to a source, $s$, we consider a tree\footnote{Note that this is not to be confused with the mathematical structure.} of hyperedges emanating forwards from $s$, with the condition that there be no ``loose tails," such as in Figure \ref{fig:B-Hypergraph}. More precisely, we define the set of \textit{outs} from $s$ in terms of a series of $\ell$ outward hops $\mathcal{O}_\ell(s)$ where:
+\paragraph{B-connectivity.}For B-connectivity relative to a source, $s$, we consider a tree\footnote{Note that this is not to be confused with the mathematical structure.} of hyperedges emanating forward from $s$, with the condition that there be no ``loose tails," such as in Figure \ref{fig:B-Hypergraph}. More precisely, we define the set of \textit{outs} from $s$ in terms of a series of $\ell$ outward hops $\mathcal{O}_\ell(s)$ where:
 \begin{align*}
   \mathcal{O}_0(s)&=\{s\}\\
   \mathcal{O}_{i+1}(s)&=\{u\,|\,\forall\,e,v \text{ where } u \in T(e) \text{ and } v \in \mathcal{O}_i(s)\,\forall\,v \in H(e)\}
@@ -481,7 +473,7 @@ and
 \begin{equation}
   T(A) = \bigcup_{e \in A} T(e)
 \end{equation}
-From this, we can also define the induced subset of nodes $V(A) = H(A) \cup T(A)$. From this, we also define the set of everything that is in the tail of some edge, but not in the heads of any hyperedges in $A$ as $D(A) = V(A) \setminus H(A)$. The set $D(A)$ represents the set of the induced roots from $A$. Similarly, we find the induced leaves from $A$ by defining $C(A) = V(A) \setminus T(A)$. From these definitions, we can construct three definitions of Hypershrubs, \textit{B-Hypershrubs}, \textit{F-Hypershrubs}, and \textit{BF-Hypershrubs}. Intuitively, we think of a B-Hypershrub which strictly respects the backward set of nodes, an F-Hypershrub as one that strictly respects the forward set of nodes, and a BF-Hypershrub as one that strictly respects both sets of nodes. The names for these three types of hypershrubs is adapted from the naming convention for different types of hyperpaths (\cite{Gallo1993}). For all three of the hypershrubs, we begin with a hypergraph, $\mathcal{S}$, and two sets of nodes: a source set, $S$, and a sink set, $T$, where $S,T \subseteq V$. We now formulate three decision problems:\par
+From this, we can also define the induced subset of nodes $V(A) = H(A) \cup T(A)$. From this, we also define the set of everything that is in the tail of some edge, but not in the heads of any hyperedges in $A$ as $D(A) = V(A) \setminus H(A)$. The set $D(A)$ represents the set of the induced roots from $A$. Similarly, we find the induced leaves from $A$ by defining $C(A) = V(A) \setminus T(A)$\footnote{Since roots being $D(A)$ and leaves being $C(A)$ are not very intuitive names, remember that roots go \textit{down}, and that leaves \textit{climb}.}. From these definitions, we can construct three definitions of Hypershrubs, \textit{B-Hypershrubs}, \textit{F-Hypershrubs}, and \textit{BF-Hypershrubs}. Intuitively, we think of a B-Hypershrub which strictly respects the backward set of nodes, an F-Hypershrub as one that strictly respects the forward set of nodes, and a BF-Hypershrub as one that strictly respects both sets of nodes. The names for these three types of hypershrubs is adapted from the naming convention for different types of hyperpaths (\cite{Gallo1993}). For all three of the hypershrubs, we begin with a hypergraph, $\mathcal{S}$, and two sets of nodes: a source set, $S$, and a sink set, $T$, where $S,T \subseteq V$. We now formulate three decision problems:\par
 \paragraph{B-Hypershrub.}Given a hypergraph $\mathcal{H}$ and node sets $S$ and $T$ we say that there is a B-Hypershrub, $\mathcal{B}$ if there exists some subset of hyperedges $A$ such that:
 \begin{equation*}
   C(A) \subseteq T
@@ -512,7 +504,7 @@ We call the induced hypergraph of $A$ the BF-Hypershrub, $\mathcal{BF}$.\par
 
 \begin{figure}[!h]
   \begin{center}
-    \includegraphics[width=5in]{BF-hypershrub}
+    \includegraphics[width=4in]{BF-hypershrub}
   \caption[Hypershrub.]{A Hypershrub, with edge set $A$. The roots, $D(A)$ are shown in chestnut and the leaves, $C(A)$ in kelly green. All of the black nodes represent $H(A) \cap T(A)$.}
   \label{fig:BF-hypershrub}
   \end{center}
@@ -524,15 +516,15 @@ One important piece to note is that we can easily reconstruct B, F, or BF-hyperp
 
 \section{Definition of PRHS}
 
-When we are looking for a minimal BF-Hypershrub using empirical data, we often do not know what $S$ and $T$ are \textit{a priori}. To get around this, we instead try to determine a prize-collecting variant of the decision and optimization problem described above, so that we can determine a plausible set of roots and leaves that will define some BF-Hypershrub in a weighted hypergraph. We now can define the Prize-Rich Hypershrub, $\mathcal{S} = (V^\prime,E^\prime)$, to be the set of hypernodes and hyperedges for which total vertex prizes are maximized, and total edge weights are minimized. We also try to minimize the cost that we give to each node for being present without any incoming hyperedge\footnote{In signaling pathways, this cost quantifies how likely or unlikely we consider it to be that a given reactant is present in the cell, agnostic to the reactions that caused it to be there.}.
+When we are looking for a minimal BF-Hypershrub using empirical data, we often do not know what $S$ and $T$ are \textit{a priori}. To get around this, we instead try to determine a prize-collecting variant of the decision and optimization problem described above, so that we can determine a plausible set of roots and leaves that will define some BF-Hypershrub in a weighted hypergraph. We now can define the Prize-Rich Hypershrub, $\mathcal{S} = (V^\prime,E^\prime)$, to be the set of nodes and hyperedges for which total vertex prizes are maximized, and total edge weights are minimized. We also try to minimize the cost that we give to each node for being present without any incoming hyperedge\footnote{In signaling pathways, this cost quantifies how likely or unlikely we consider it to be that a given reactant is present in the cell, agnostic to the reactions that caused it to be there.}.
 
-To make our Prize-Rich Hypershrub, $\mathcal{S}$, we begin with a parent hypergraph, $\mathcal{H} = (V,E)$, and a set of target nodes, $T$, such that $T \subseteq V$.  We refer to each node as some $v$ such that $v \in V$, and each edge is some $e$ such that $e \in E$.  When building $\mathcal{H}$, each hyperedge is assigned a weight, that is, a cost associated with including that edge in the solution hypergraph, $\mathcal{S}$.  We then assign each hypernode in $\mathcal{H}$ two values, a prize for being included in $\mathcal{S}$, as well as a penalty associated with being a \textit{root} hypernode.\par
+To make our Prize-Rich Hypershrub, $\mathcal{S}$, we begin with a parent hypergraph, $\mathcal{H} = (V,E)$, and a set of target nodes, $T$, such that $T \subseteq V$.  We refer to each node as some $v$ such that $v \in V$, and each edge is some $e$ such that $e \in E$.  When building $\mathcal{H}$, each hyperedge is assigned a weight, that is, a cost associated with including that edge in the solution hypergraph, $\mathcal{S}$.  We then assign each node in $\mathcal{H}$ two values, a prize for being included in $\mathcal{S}$, as well as a penalty associated with being a \textit{root} node.\par
 
 \section{Implementation as an Integer Linear Program}
 
 To start our implementation, we begin by looking backwards through a hypergraph from a set of target nodes, $T$. We begin in this way because, in PPI data, downstream nodes are often more easily inferred using empirical data such as gene expression, since changes in the expression of some genes is the ultimate output of cell signaling pathways.
 
-Given an input hypergraph $\mathcal{H}=(V,E)$, and a set of target nodes, $T$, we construct a hypershrub, $\mathcal{S}= (V^\prime,E^\prime)$, where $V^\prime \subseteq V$ and $E^\prime \subseteq E$.  We build $\mathcal{S}$ using an ILP which encodes the definition of a hypershrub.  In order to accomplish this, we define three indicator variables, $\alpha_v$, $\alpha_e$, and $\delta_v$, where $v$ and $e$ are hypernodes or hyperedges in $\mathcal{H}$.  If hypernode $x$ is in the solution of the ILP, $\alpha_v$ will have a value of 1, otherwise it will be equal to 0.  Similarly, if edge $e$ is present in the solution, $\alpha_e$ will take a value of 1. The value of $\delta_v$ will be determined by whether a hypernode is dangling.\par
+Given an input hypergraph $\mathcal{H}=(V,E)$, and a set of target nodes, $T$, we construct a hypershrub, $\mathcal{S}= (V^\prime,E^\prime)$, where $V^\prime \subseteq V$ and $E^\prime \subseteq E$.  We build $\mathcal{S}$ using an ILP which encodes the definition of a hypershrub.  In order to accomplish this, we define three indicator variables, $\alpha_v$, $\alpha_e$, and $\delta_v$, where $v$ and $e$ are nodes or hyperedges in $\mathcal{H}$.  If node $x$ is in the solution of the ILP, $\alpha_v$ will have a value of 1, otherwise it will be equal to 0.  Similarly, if edge $e$ is present in the solution, $\alpha_e$ will take a value of 1. The value of $\delta_v$ will be determined by whether a node is a root.\par
 
 We find the hypershrub $\mathcal{S}$ by optimizing the function:
 
@@ -551,7 +543,7 @@ Subject to the set of linear constraints:
 \end{align}%
 
 
-Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\alpha_v$), edges ($\alpha_e$), and dangling nodes ($\delta_v$) that maximize the sums of node prizes ($g_v$), minimize the sums of edge costs ($c_e$), and minimize the sums of dangling penalties ($h_v$). Constraint \eqref{eq:ilpT} encodes that every target node in $T$ is in the solution, $\mathcal{S}$.  Constraints \eqref{eq:ilpinchead} and \eqref{eq:ilpinctail} ensure that if an edge is in $\mathcal{S}$, any nodes incident on that edge (i.e. in the head or tail of that edge) will also be in $\mathcal{S}$.  Finally, constraints \eqref{eq:ilpdang1} and \eqref{eq:ilpdang2} encode the ability for nodes to dangle if they do not have an incoming edge. To illustrate what each of these constraints does in more detail, we will construct a simple example, and examine each constraint within that example.\par
+Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\alpha_v$), edges ($\alpha_e$), and root nodes ($\delta_v$) that maximize the sums of node prizes ($g_v$), minimize the sums of edge costs ($c_e$), and minimize the sums of root penalties ($h_v$). Constraint \eqref{eq:ilpT} encodes that every target node in $T$ is in the solution, $\mathcal{S}$.  Constraints \eqref{eq:ilpinchead} and \eqref{eq:ilpinctail} ensure that if an edge is in $\mathcal{S}$, any nodes incident on that edge (i.e. in the head or tail of that edge) will also be in $\mathcal{S}$.  Finally, constraints \eqref{eq:ilpdang1} and \eqref{eq:ilpdang2} encode the ability for nodes to dangle if they do not have an incoming edge. To illustrate what each of these constraints does in more detail, we will construct a simple example, and examine each constraint within that example.\par
 
 \begin{figure}[th]
   \begin{minipage}[b]{0.30\linewidth}
@@ -589,7 +581,7 @@ Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\al
 \label{fig:dummy-before}
 \end{figure}
 
-\paragraph{Example.}Consider the hypergraph shown in Figure \ref{fig:dummy-before}. For this hypergraph, the PRHS that comes from this graph should consist of hypernodes $A$, $B$, and $D$, as well as hyperedge $E_1$. This is obvious, since nodes $A$ and $B$, which will be dangling in the solution, both have low dangling penalties and high prizes, while node $C$ has a very large dangling penalty relative to its prize. Similarly, $E_1$ has a relatively low cost, whereas $E_2$ has a very high cost. Finally, $D$ is considered a target, in this case, and is therefore automatically included in the solution. Knowing what the solution should be, we can use this hypergraph to demonstrate the effect of each linear constraint in our ILP.\par
+\paragraph{Example.}Consider the hypergraph shown in Figure \ref{fig:dummy-before}. For this hypergraph, the PRHS that comes from this graph should consist of nodes $A$, $B$, and $D$, as well as hyperedge $E_1$. This is obvious, since nodes $A$ and $B$, which will be a root in the solution, both have low root penalties and high prizes, while node $C$ has a very large root penalty relative to its prize. Similarly, $E_1$ has a relatively low cost, whereas $E_2$ has a very high cost. Finally, $D$ is considered a target, in this case, and is therefore automatically included in the solution. Knowing what the solution should be, we can use this hypergraph to demonstrate the effect of each linear constraint in our ILP.\par
 
 \begin{table}[!h]
 \begin{center}
@@ -607,9 +599,9 @@ Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\al
 \end{center}
 \end{table}
 
-We now know that, for the optimal PRHS, $\alpha_A$, $\alpha_B$, $\alpha_D$, and $\alpha_{E_1}$ are all equal to 1 (that is, they are included in the solution), and $\alpha_C$ and $\alpha_{E_2}$ are equal 0. Additionally, we know that in this solution $A$ and $B$ are dangling nodes, therefore $\delta_A$ and $\delta_B$ are both 1, and $\delta_C$ and $\delta_D$ are both 0. Finally, we are given that $D$ is a target node, hence $T=\{D\}$.\par
+We now know that, for the optimal PRHS, $\alpha_A$, $\alpha_B$, $\alpha_D$, and $\alpha_{E_1}$ are all equal to 1 (that is, they are included in the solution), and $\alpha_C$ and $\alpha_{E_2}$ are equal 0. Additionally, we know that in this solution $A$ and $B$ are root nodes, therefore $\delta_A$ and $\delta_B$ are both 1, and $\delta_C$ and $\delta_D$ are both 0. Finally, we are given that $D$ is a target node, hence $T=\{D\}$.\par
 
-First let us look at the objective function, Formula \eqref{eq:ilpsum}. We can call each of the three sums included the equation which calculate the total node prizes, edge costs, and dangling penalties $\Xi$, $\Phi$, and $\Psi$, respectively. Given the values of $\alpha_v$, $\alpha_e$, and $\delta_v$ that we know should yield the PRHS, we get find:
+First let us look at the objective function, Formula \eqref{eq:ilpsum}. We can call each of the three sums included the equation which calculate the total node prizes, edge costs, and root penalties $\Xi$, $\Phi$, and $\Psi$, respectively. Given the values of $\alpha_v$, $\alpha_e$, and $\delta_v$ that we know should yield the PRHS, we get find:
 \begin{gather*}
  \Xi = 30\\
  \Phi = 1\\
@@ -634,7 +626,7 @@ So, we see that constraint \eqref{eq:ilpinchead} holds for $E_1$. Now, we can ch
 \end{align*}%
 We see that this inequality also holds. This means that, since the inequality holds for all hyperedges, that for every edge in the hypergraph, its head is also included in the hypergraph. We can easily extend this to see that \eqref{eq:ilpinctail} enforces the same for the tails of every hyperedge.\par
 
-Finally, we can look at the three constraints that allow hypernodes to be dangling: constraints \eqref{eq:ilpdang1} and \eqref{eq:ilpdang2}. First, we look at constraint \eqref{eq:ilpdang1}:
+Finally, we can look at the three constraints that allow nodes to be a root: constraints \eqref{eq:ilpdang1} and \eqref{eq:ilpdang2}. First, we look at constraint \eqref{eq:ilpdang1}:
 \begin{alignat*}{4}
   \delta_A &\leq \alpha_A \qquad \delta_B &&\leq \alpha_B \qquad \delta_C &&\leq \alpha_C \qquad \delta_D &&\leq \alpha_D\\
 \end{alignat*}%
@@ -646,37 +638,37 @@ Now that we see that constraint \eqref{eq:ilpdang1} holds for all nodes in the P
 
 \section{Roots and Leaves Problem}
 
-When we implement the ILP in a more complex hypergraph, such as the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}, we find that it creates a hypergraph that consists of multiple smaller hypergraphs (Figure \ref{fig:example-hypergraph-weighted-after-ILP}), rather than a continuous subnetwork. Our original implementation ends up returning a group of disconnected hypergraphs that represent regions with high prize to edge/dangling cost ratios, separated by gaps where the parent hypergraph had regions of low prize to edge/dangling cost ratios. While this result is intersting in itself, it will not necessarily create a soltion that is biologically interesting, once we begin looking for PRHSs in pathway signaling data.\par
+When we implement the ILP in a more complex hypergraph, such as the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}, we find that it creates a hypergraph that consists of multiple smaller hypergraphs (Figure \ref{fig:example-hypergraph-weighted-after-ILP}), rather than a continuous subnetwork. Our original implementation ends up returning a group of disconnected hypergraphs that represent regions with high prize to edge/root cost ratios, separated by gaps where the parent hypergraph had regions of low prize to edge/root cost ratios. While this result is intersting in itself, it will not necessarily create a solution that is biologically interesting, once we begin looking for PRHSs in pathway signaling data.\par
 
 \begin{figure}[hp]
   \begin{center}
-    \includegraphics{example-hypergraph-weighted-after-ILP}
-  \caption[Output from ILP with disconnected sub-hypergraphs]{The output of our ILP, when it is run on the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}. The dashed arrows indicate a dangling hypernode.}
+    \includegraphics[width=\textwidth/2]{example-hypergraph-weighted-after-ILP}
+  \caption[Output from ILP with disconnected sub-hypergraphs]{The output of our ILP, when it is run on the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}. The dashed arrows indicate a root node.}
   \label{fig:example-hypergraph-weighted-after-ILP}
   \end{center}
 \end{figure}
 
 Our new goal is to find a way to connect regions that would be disconnected in the original formulation of the PRHS. In doing so, we have two cases that may exist: the region between sub-hypernetworks is prize-rich or it is prize-poor. If the region is prize-rich, we would want to connect the two regions throuh that region to construct a larger PRHS that explains the lowest cost connecting region. If the region is prize-poor, on the other hand, we would rather have the less valuable sub-hypernetwork to be left out of the final PRHS, since the cost of reaching it would not justify the prize that the sub-hypernetwork contained. Additionally, we need to consider the case where there is no way to get from one sub-hypernetwork to another sub-hypernetwork, we will allow both to be present in the final solution.\par
 
-To accomplish these goals, we use the set of nodes that either have no incoming or outgoing hyperedges in the solution: the roots and leaves. We are only concerned with these dangly nodes, and not with the inner nodes because we want to keep the same topology that is generated by the original formulation, and not be concerned with any hypereges that may connect the middle parts of sub-hypernetworks, but whose prices are too high to justify being included in the solution. When we think of this biologically, it means that we do not want to force including a reaction in the solution just because it's reactants and products are present elsewhere in the solution, if there are already lower cost explanations for why they are present.\par
+To accomplish these goals, we use the set of nodes that either have no incoming or outgoing hyperedges in the solution: the roots and leaves. We are only concerned with these dangly nodes, and not with the inner nodes because we want to keep the same topology that is generated by the original formulation, and not be concerned with any hypereges that may connect the middle parts of sub-hypernetworks, but whose prices are too high to justify being included in the solution. When we think of this biologically, it means that we do not want to force including a reaction in the solution just because its reactants and products are present elsewhere in the solution, if there are already lower cost explanations for why they are present.\par
 
-To fix this new problem, we must incorporate the notion of hyperpaths and connectedness to our implementation of the PRHS, as well as define the class of leaf variables in our formulation. Additionally, we must construct a matrix of whether or not there exists a hyperpath between every pair of nodes in $\mathcal{H}$. As such, we adopt the notation $\iota_v$, as a binary variable that indicates whether hypernode $v$ is a leaf in the solution. Furthermore, we introduce the binary variable $\mathcal{P}(u,v)$ to indicate whether or not a hyperpath exists from $u$ to $v$. From this, we simply say that if there exists a hyperpath from node $s$ to $t$, then either $s$ cannot be a leaf or $t$ cannot be a root (i.e. $\mathcal{P}(u,v)\implies\neg(\delta_u\wedge\iota_v)$).\par
+To fix this new problem, we must incorporate the notion of hyperpaths and connectedness to our implementation of the PRHS, as well as define the class of leaf variables in our formulation. Additionally, we must construct a matrix of whether or not there exists a hyperpath of any kind between every pair of nodes in $\mathcal{H}$. As such, we adopt the notation $\iota_v$, as a binary variable that indicates whether node $v$ is a leaf in the solution. Furthermore, we introduce the binary variable $\mathcal{P}(u,v)$ to indicate whether or not a hyperpath exists from $u$ to $v$. From this, we simply say that if there exists a hyperpath from node $s$ to $t$, then either $s$ cannot be a leaf or $t$ cannot be a root (i.e. $\mathcal{P}(u,v)\implies\neg(\delta_u\wedge\iota_v)$).\par
 
-\paragraph{Implementation in the ILP.}To add this change to the ILP for the PRHS it is necessary to implement three new linear constraints, as well as the two new sets of variables described already, $iota$ and $\mathcal{P}$. It is important to note that, in a hypergraph with $n$ vertices, this will add $n$ new $iota$ variables, and $n^2$ new $\mathcal{P}$ variables, since every pairwise combination of vertices $(s,t)$ must be checked to see if there is a hyperpath from $s$ to $t$.
+\paragraph{Implementation in the ILP.}To add this change to the ILP for the PRHS it is necessary to implement three new linear constraints, as well as the two new sets of variables described already, $\iota$ and $\mathcal{P}$. It is important to note that, in a hypergraph with $n$ vertices, this will add $n$ new $\iota$ variables, and $n^2$ new $\mathcal{P}$ variables, since every pairwise combination of vertices $(s,t)$ must be checked to see if there is a hyperpath from $s$ to $t$.
 
 We introduce linear constraints:
 
 \begin{align}
  \iota_v \leq \alpha_v \qquad\qquad &\forall\; v \in V\label{eq:dc1}\\
  \iota_v \geq \alpha_{v} - \sum_{e:v \in T(e)} \alpha_e \qquad\qquad &\forall\; v \in V\label{eq:dc2}\\
- 2 - \delta_u - \iota_v \leq \mathcal{P}(u,v) \qquad\qquad &\forall\; u,v \in V\label{eq:dc3}%
+ 2 - \delta_u - \iota_v \leq \mathcal{P}_{u,v} \qquad\qquad &\forall\; u,v \in V\label{eq:dc3}%
 \end{align}%
 
 Similarly to in the original constraint \eqref{eq:ilpdang1}, constraint \eqref{eq:dc1} ensures that all nodes which are considered leaves must be present in the solution. Additionally, constraint \eqref{eq:dc2} follows the same form as constraint \eqref{eq:ilpdang2}, only it now applies to edges for which the node of interest is in the tail, rather than the head. These two constraints enforce the labeling of nodes that do not have an outgoing hyperedge as leaves. Constraint \eqref{eq:dc3} is where we encode that that if a path exits from $u$ to $v$, then either $u$ cannot be a leaf, or $v$ cannot be a root, in the PRHS. When we implement these three linear constraints, along with the existing set in the hypergraph from Figure \ref{fig:example-hypergraph-weighted}, we find a new solution, as shown in Figure \ref{fig:example-hypergraph-weighted_DC}.
 
 \begin{figure}[hp]
   \begin{center}
-    \includegraphics{example-hypergraph-weighted_DC}
+    \includegraphics[width=\textwidth/2]{example-hypergraph-weighted_DC}
   \caption[Output from ILP after Roots and Leaves.]{The output of our ILP, when it is run on the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}, also taking the Roots and Leaves problem into account.}
   \label{fig:example-hypergraph-weighted_DC}
   \end{center}
@@ -695,58 +687,29 @@ Similarly to in the original constraint \eqref{eq:ilpdang1}, constraint \eqref{e
   dummy & 4 & 2 & 0.00066 & 0.00095 & 30 & 86 \\ \hline%
   ex & 13 & 12 & 0.00115 & 0.00274 & 100 & 633 \\ \hline%
   Hh & 413 & 82 & 0.0183 & 1.464 & 1,904 & 514,437  \\ \hline%
-  Reactome & do & do & do & do & do & do \\ \hline%
 \end{tabular}%
 \end{center}
 \end{table}
-
-\new{
-Figure out how to time CPLEX and make an analagous table here.
-}{To do.}
 
 
 \chapter{Methods and Results}
 
   \section{Network Construction and Weighting}
   In order to construct directed signaling hypergraphs of biological pathways, we use pathway data from preexisting, curated protein-protein interaction networks, available publically. For this, pathway signaling information was downloaded from the curated Reactome pathway database (\cite{Croft2014}, \cite{Milacic2012}), and parsed using a Java script (\cite{AnnaCorrespondence}) into two flat files containing node and edge information necessary to construct the hypergraph (See Appendix B).\par
-  The networks generated from the Reactome database specify each hypernode as a combination of one or more proteins or small molecules. For simplicity, each hypernode was ``converted" into a regular node for the purpose of algorithm implementation, and the components' information was saved so that they could be reconstructed \textit{post hoc}. Additionally, each hyperedge contained information about whether the reaction that it represented was regulated either positively or negatively by one or more nodes. Positive regulators were added to the tail of their respective hypernodes, since they are assumed to be necessary reactants for the edge, and should therefore be considered part of the signaling network. Negative regulators, on the other hand, were excluded from the flat files, since the way that they act on reactions poses an interesting problem in modeling, since the current definition of PRHS assumes that all node prizes and edge weights are positive (see Future Directions).\par
-  From the edge files, hypergraphs were constructed using the Hypergraph Algorithms Package (HALP, \cite{halp}). Edge files gave enough information to create induced hypergraphs, which were then weighted based on information stored in node files. For the implementation PRHS to create meaninful subnetworks, it is important that the parent hypergraph have a meaningful, biologically informed weighting scheme applied. However, it is often the case that data are difficult to acquire and add to the hypergraph, so simple default settings were first applied to each parameter. By default, each node was given a prize of 1, and a dangling penalty of 5.  Additionally, each edge was given a default weight of 1, so that the algorithm would try to minimize the number of edges.
-
-  \section{Simulated Data}
-
-  To assess the efficacy of this ILP in generating the correct Prize-Rich Hypershrub, it is first necessary to perform a series of benchmarking tests on known datasets and hypergraphs.  This will allow us to determine if the algorithm is performing as expected, and generating results that can be corroborated manually.\par
-
-  \subsection{Simple Example Hypergraphs and Potential Special Cases}
-
-  \new{
-  Draw and describe:
-  \begin{itemize}
-    \item{Standard graph}
-    \item{Flower}
-    \item{Complete graph}
-    \item{Line graph}
-    \item{Disconnected graph}
-  \end{itemize}
-  }{To do}
+  The networks generated from the Reactome database specify each hypernode as a combination of one or more proteins or small molecules. For simplicity, each hypernode was ``converted" into a regular node for the purpose of algorithm implementation, and the components' information was saved so that they could be reconstructed \textit{post hoc}. Additionally, each hyperedge contained information about whether the reaction that it represented was regulated either positively or negatively by one or more nodes. Positive regulators were added to the tail of their respective nodes, since they are assumed to be necessary reactants for the edge, and should therefore be considered part of the signaling network. Negative regulators, on the other hand, were excluded from the flat files, since the way that they act on reactions poses an interesting problem in modeling, since the current definition of PRHS assumes that all node prizes and edge weights are positive (see Future Directions).\par
+  From the edge files, hypergraphs were constructed using the Hypergraph Algorithms Package (HALP, \cite{halp}). Edge files gave enough information to create induced hypergraphs, which were then weighted based on information stored in node files.\par
 
   \section{PRHS in Real Data}
-  \new{
-  Intro.
-  }{To do.}
+  To analyze how the prize rich hypershrub algorithm performs on real data, we implemented it in the Hedgehog signaling pathway discussed earlier. The hypergraph representation of the Hh pathway contained 82 unique hyperedges, representative of biological reactions and 413 unique nodes, each representative of a protein, complex, or small molecule. This means that there are, on average, 5 nodes incident on each hyperedge in the Hh pathway.
 
    \subsection{Human Cancer Data}
-   \new{
-   Explain the dataset and how it was applied. Finish applying it.
-   }{To do.}
+   To weight our hypergraph, we used a dataset available publically on the Gene Expression Omnibus (GEO), a database curated by the NCBI. The dataset analyzed contained gene expression from 26 patients with non-melanoma skin cancers divided into three groups (\cite{Jee2015}), sixteen BCC, ten SCC, and four Normal\footnote{For basal cell carcinoma, squamous cell carcinoma, and healthy patients, respectively.}. There were samples from both male and female patients. For our analysis, we excluded SCC samples, since disregulations in our pahtway of interest have been more heavily implicated with BCC. Additionally, the current form of the algorithm has been designed with differential expression between two sample types in mind, so using three types could cause unexpected results that we are not prepared to analyze at this time.\par
 
-  \section{Comparison to Standard Graphs}
-  \new{
+   For statistical analysis of differential expression, we used the GEO2R interactive web tool (\cite{Davis2007}), available through NCBI. We used this tool to compute the adjusted $p$ value corrected by Benjamini \& Hochberg false discovery rate (FDR) and log fold change between genes from the two different samples. From this differential expression was calculated for 47,324 unique Illumina IDs. Of these, 31,072 had valid gene names that could be mapped to UniprotKB identifiers (\cite{TheUniProtConsortium2014}), which themselves were mapped to Reactome IDs and used to apply prizes to the Hh hypergraph.\par
 
-  Either do this section or move it to future directions.
+   In total, 268 nodes were assigned prizes equal to the negative log of their FDR. We chose this metric for giving prizes to nodes since it quantifies the likelihood that a particular gene is differentially expressed between the two tissue samples, regardless of whether it was up or down regulated. Though this is a relatively coarse way of weighting nodes, it gave us a way to look at emergent hypershrubs based on high confidence changes. For the implementation PRHS to create meaninful subnetworks, it is important that the parent hypergraph have a meaningful, biologically informed weighting scheme applied. However, it is often the case that data are difficult to acquire and add to the hypergraph, so simple default settings were first applied to each parameter. Each hyperedge was given a default value of 1, for simplicity. To find the optimal default node prize and penalty, we tested a range of possible values for each parameter to find the largest subnetwork, as shown in Figure \ref{deleteIfThisDoesntWork}. Using this method, we find that the optimal combination of values is \emph{something if I can get the code to work}.
 
-  \emph{Make python file to convert to standard graphs!}
-
-  To test how well this algorithm is able to construct sub-hypergraphs that are more meaningful than their standard counterparts, we look at the same implementation on hypergraphs that have been converted to standard graphs. For this conversion, each hyperedge in the original hypergraph was replaced with a set of directed edges that corresponded to \emph{FINISH THIS \P}}{}
+   \subsection{Results}
 
 \chapter*{Conclusion}
          \addcontentsline{toc}{chapter}{Conclusion}
@@ -761,9 +724,37 @@ Figure out how to time CPLEX and make an analagous table here.
      \item{Computation of individual or multiple subnetworks.}
    \end{itemize}
 
+   \section{Signaling Networks in \emph{Arabidopsis thaliana}: A Case Study}
+
+   One of the greatest strengths of computational methods is that they are generally agnostic to where their inputs come from, making them good tools for studying more than just human systems. In addition to humans, there is a wealth of data available for other species that can also be studied using PPI database mining. One such species is \textit{Arabidopsis thaliana} (mouse-ear cress), a plant in the mustard family that is commonly used as a model for plant genetics. Researchers often use \textit{A. thaliana} to examine the effects of genetic manipulation on plants, since \textit{A. thaliana} has one of the best known genomes of any plant\footnote{It is like the \textit{Drosophila melanogaster} of the plant world.}. Because of this, there is a huge quantity of data available that make implementing the same kind of algorithms that are possible in human signaling pathways in \textit{A. thaliana}.
+
+   \begin{figure}[h]
+     \begin{center}
+       \includegraphics[width=\textwidth]{at_hh}
+     \caption[\textit{Arabidopsis thaliana} Hedgehog pathway]{The Reactome Hedgehog signaling pathway in \textit{A. thaliana}. For this pathway, and many others, the Reacome database is very sparse relative to the orthologous pathways in humans, and is therefore not very useful for implementing network algorithms, at this point.}
+     \label{fig:at_hh}
+     \end{center}
+   \end{figure}
+
+   Unfortunately, for many small-scale pathways (such as the Hedgehog pathway), there is not as much pathway data available in pathway databases, since much more research has been done on humans than on any other organism. Fortunately, however, there is enough pathway data available that the overall interactome can be searched and may yield useful outcomes.\par
+
+   \begin{figure}[h]
+     \begin{center}
+       \includegraphics[width=\textwidth]{at_interactome}
+     \caption[\textit{Arabidopsis thaliana} interactome]{The entire \textit{A. thaliana}  interactome, as displayed by the Reacome interactive pathway browser. This interactome is comparably dense to the human interactome seen in \ref{fig:human_interactome}, which makes it a better candidate for running network algorithms.}
+     \label{fig:at_interactome}
+     \end{center}
+   \end{figure}
+
+   Our ability to look at the entire interactome of species such as \textit{A. thaliana} allows us to investigate some of the global effects of genetic manipulation on signal transduction. This is especially useful in model organisms like \textit{A. thaliana}, since we can actually perform genetic manipulations on them quickly, safely, and ethically, unlike with human beings. Additionally, our ability to breed model organisms in the lab means that we can use specific datasets with large sample sizes. This is very useful compared to human datasets, which are generally based on small sample sizes, since human gene expression data is generally collected from pseudo-random, sparse cases when a person has a degenerate tissue type, such as a tumor, rather than under direct experimental manipulation.\par
+
    \section{Complexed Hypergraphs}
 
    We can define sets of two or more nodes as a hypernode, which are members of the power set of $V$.  These can be incorporated into a directed hypergraph to form a \textit{complexed directed hypergraph}.  We define a \textit{complexed directed hypergraph}, $\mathcal{H}$, as the triple $(V,U,E)$ in which $V$ is a finite set of vertices, $U \subseteq 2^V$ is a finite set of hypernodes, and $E \subseteq 2^U \times 2^U$ is a finite set of hyperedges such that, for every $e=(T(e),H(e)) \in E$, $T(e) \cap H(e) = \emptyset$ and $T(e)$, $H(e) \neq \emptyset$.\par
+
+   \section{Comparison to Standard Graphs}
+
+   To test how well this algorithm is able to construct sub-hypergraphs that are more meaningful than their standard counterparts, we can examine the same implementation on hypergraphs that have been converted to standard graphs. For this conversion, each hyperedge in the original hypergraph will be replaced with a set of directed edges that corresponded to all pairwise tail-to-head connections.
 
 
 %If you feel it necessary to include an appendix, it goes here.
@@ -894,8 +885,6 @@ End
 
         \end{lstlisting}
         \rule{\textwidth}{1pt}
-
-      \chapter{Biological Data}
 
       \chapter{Version Information}
 

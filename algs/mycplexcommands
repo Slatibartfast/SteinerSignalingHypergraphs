@@ -1,0 +1,4 @@
+read Signaling-by-Hedgehog.lp
+optimize
+write TEST.sol
+quit
