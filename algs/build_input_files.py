@@ -12,7 +12,7 @@ def main(argv):
 
 def createNodeFile(in_prefix, out_prefix,pz=0.75,pen=10, delim=';', sep='\t'):
 
-    inFileName = "/Users/bpotter/Desktop/Thesis/reactomeData/reactomeHypergraphs/"+in_prefix+"-hypernodes.txt"
+    inFileName = "/afs/reed.edu/user/b/p/bpotter/Thesis/reactomeData/reactomeHypergraphs/"+in_prefix+"-hypernodes.txt"
     inNodes = open(inFileName, 'r')
     outFileName = "../hypergraphs/"+out_prefix+"-nodes.txt"
     outNodes = open(outFileName, 'w')
@@ -54,7 +54,7 @@ def createNodeFile(in_prefix, out_prefix,pz=0.75,pen=10, delim=';', sep='\t'):
 
 def createEdgeFile(in_prefix, out_prefix, delim=';', sep='\t'):
 
-    inFileName = "/Users/bpotter/Desktop/Thesis/reactomeData/reactomeHypergraphs/"+in_prefix+"-hyperedges.txt"
+    inFileName = "/afs/reed.edu/user/b/p/bpotter/Thesis/reactomeData/reactomeHypergraphs/"+in_prefix+"-hyperedges.txt"
     inEdges = open(inFileName, 'r')
     outFileName = "../hypergraphs/"+out_prefix+"-edges.txt"
     outEdges = open(outFileName, 'w')

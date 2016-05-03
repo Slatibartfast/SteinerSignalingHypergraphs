@@ -5,34 +5,43 @@
 \BOOKMARK [2][-]{subsection.0.2.2}{Spanning Trees and Steiner Trees}{section.0.2}% 5
 \BOOKMARK [1][-]{section.0.3}{Optimization}{chapter*.8}% 6
 \BOOKMARK [2][-]{subsection.0.3.1}{Prize Collecting Steiner Trees}{section.0.3}% 7
-\BOOKMARK [1][-]{section.0.4}{Integer Linear Programming}{chapter*.8}% 8
-\BOOKMARK [1][-]{section.0.5}{Goals of this Thesis}{chapter*.8}% 9
-\BOOKMARK [0][-]{chapter.1}{Chapter 1: Cell Signaling Networks}{}% 10
-\BOOKMARK [1][-]{section.1.1}{PPI Databases}{chapter.1}% 11
-\BOOKMARK [1][-]{section.1.2}{Signaling by Hedgehog: A Case Study}{chapter.1}% 12
-\BOOKMARK [0][-]{chapter.2}{Chapter 2: Hypergraphs \046 Hyperpaths}{}% 13
-\BOOKMARK [1][-]{section.2.1}{Graphs and their Limitations}{chapter.2}% 14
-\BOOKMARK [1][-]{section.2.2}{Hypergraphs}{chapter.2}% 15
-\BOOKMARK [1][-]{section.2.3}{Hyperpaths \046 Connectivity}{chapter.2}% 16
-\BOOKMARK [2][-]{subsection.2.3.1}{Directed Hyperpaths}{section.2.3}% 17
-\BOOKMARK [0][-]{chapter.3}{Chapter 3: Hypershrubs}{}% 18
-\BOOKMARK [1][-]{section.3.1}{Definition of PRHS}{chapter.3}% 19
-\BOOKMARK [1][-]{section.3.2}{Implementation as an Integer Linear Program}{chapter.3}% 20
-\BOOKMARK [1][-]{section.3.3}{Roots and Leaves Problem}{chapter.3}% 21
-\BOOKMARK [0][-]{chapter.4}{Chapter 4: Methods and Results}{}% 22
-\BOOKMARK [1][-]{section.4.1}{Network Construction and Weighting}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.2}{Simulated Data}{chapter.4}% 24
-\BOOKMARK [2][-]{subsection.4.2.1}{Simple Example Hypergraphs and Potential Special Cases}{section.4.2}% 25
-\BOOKMARK [1][-]{section.4.3}{PRHS in Real Data}{chapter.4}% 26
-\BOOKMARK [2][-]{subsection.4.3.1}{Human Cancer Data}{section.4.3}% 27
-\BOOKMARK [2][-]{subsection.4.3.2}{Results}{section.4.3}% 28
-\BOOKMARK [1][-]{section.4.4}{Comparison to Standard Graphs}{chapter.4}% 29
-\BOOKMARK [0][-]{chapter*.44}{Conclusion}{}% 30
-\BOOKMARK [1][-]{section.5.1}{Future Directions}{chapter*.44}% 31
-\BOOKMARK [1][-]{section.5.2}{Signaling Networks in Arabidopsis thaliana: A Case Study}{chapter*.44}% 32
-\BOOKMARK [1][-]{section.5.3}{Complexed Hypergraphs}{chapter*.44}% 33
-\BOOKMARK [0][-]{appendix.A}{Appendix A: Benchmarking Graphs \046 Supplemental Data}{}% 34
-\BOOKMARK [0][-]{appendix.B}{Appendix B: Algorithms \046 Programs}{}% 35
-\BOOKMARK [0][-]{appendix.C}{Appendix C: Biological Data}{}% 36
-\BOOKMARK [0][-]{appendix.D}{Appendix D: Version Information}{}% 37
-\BOOKMARK [0][-]{appendix*.48}{References}{}% 38
+\BOOKMARK [2][-]{subsection.0.3.2}{Algorithmic Complexity}{section.0.3}% 8
+\BOOKMARK [1][-]{section.0.4}{Integer Linear Programming}{chapter*.8}% 9
+\BOOKMARK [1][-]{section.0.5}{Goals of this Thesis}{chapter*.8}% 10
+\BOOKMARK [0][-]{chapter.1}{Chapter 1: Cell Signaling Networks}{}% 11
+\BOOKMARK [1][-]{section.1.1}{PPI Databases}{chapter.1}% 12
+\BOOKMARK [1][-]{section.1.2}{Signaling by Hedgehog: A Case Study}{chapter.1}% 13
+\BOOKMARK [0][-]{chapter.2}{Chapter 2: Hypergraphs \046 Hyperpaths}{}% 14
+\BOOKMARK [1][-]{section.2.1}{Graphs and their Limitations}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.2}{Directed Hypergraphs}{chapter.2}% 16
+\BOOKMARK [1][-]{section.2.3}{Hyperpaths \046 Connectivity}{chapter.2}% 17
+\BOOKMARK [2][-]{subsection.2.3.1}{Directed Hyperpaths}{section.2.3}% 18
+\BOOKMARK [0][-]{chapter.3}{Chapter 3: Hypershrubs}{}% 19
+\BOOKMARK [1][-]{section.3.1}{Hyperwalks}{chapter.3}% 20
+\BOOKMARK [2][-]{subsection.3.1.1}{B-connectivity}{section.3.1}% 21
+\BOOKMARK [2][-]{subsection.3.1.2}{F-connectivity}{section.3.1}% 22
+\BOOKMARK [1][-]{section.3.2}{B-, F-, \046 BF-Hypershrubs}{chapter.3}% 23
+\BOOKMARK [2][-]{subsection.3.2.1}{B-Hypershrub}{section.3.2}% 24
+\BOOKMARK [2][-]{subsection.3.2.2}{F-Hypershrub}{section.3.2}% 25
+\BOOKMARK [2][-]{subsection.3.2.3}{BF-Hypershrub}{section.3.2}% 26
+\BOOKMARK [1][-]{section.3.3}{Prize-Collecting Subhypernetworks}{chapter.3}% 27
+\BOOKMARK [1][-]{section.3.4}{Implementation as an Integer Linear Program}{chapter.3}% 28
+\BOOKMARK [1][-]{section.3.5}{Roots and Leaves Problem}{chapter.3}% 29
+\BOOKMARK [0][-]{chapter.4}{Chapter 4: Implementation in Signaling by Hedgehog}{}% 30
+\BOOKMARK [1][-]{section.4.1}{Inputs to Prize-Collecting Subhypernetwork}{chapter.4}% 31
+\BOOKMARK [2][-]{subsection.4.1.1}{Network Construction}{section.4.1}% 32
+\BOOKMARK [2][-]{subsection.4.1.2}{Human Cancer Data}{section.4.1}% 33
+\BOOKMARK [1][-]{section.4.2}{Network Weighting}{chapter.4}% 34
+\BOOKMARK [2][-]{subsection.4.2.1}{Differential Expression-Based Weighting}{section.4.2}% 35
+\BOOKMARK [2][-]{subsection.4.2.2}{Default Parameters}{section.4.2}% 36
+\BOOKMARK [1][-]{section.4.3}{Results on Hedgehog Signaling}{chapter.4}% 37
+\BOOKMARK [2][-]{subsection.4.3.1}{Original Formulation}{section.4.3}% 38
+\BOOKMARK [2][-]{subsection.4.3.2}{Roots \046 Leaves Formulation}{section.4.3}% 39
+\BOOKMARK [0][-]{chapter*.67}{Conclusion}{}% 40
+\BOOKMARK [1][-]{section.5.1}{Future Directions}{chapter*.67}% 41
+\BOOKMARK [2][-]{subsection.5.1.1}{Signaling Networks in Arabidopsis thaliana: A Case Study}{section.5.1}% 42
+\BOOKMARK [2][-]{subsection.5.1.2}{Complexed Hypergraphs}{section.5.1}% 43
+\BOOKMARK [2][-]{subsection.5.1.3}{Comparison to Standard Graphs}{section.5.1}% 44
+\BOOKMARK [0][-]{appendix.A}{Appendix A: Examples of Files}{}% 45
+\BOOKMARK [0][-]{appendix.B}{Appendix B: Version Information}{}% 46
+\BOOKMARK [0][-]{appendix*.71}{References}{}% 47

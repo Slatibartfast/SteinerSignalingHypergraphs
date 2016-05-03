@@ -1,4 +1,4 @@
-read Signaling-by-Hedgehog.lp
+read outputFiles/Signaling-by-Hedgehog_DC.lp
 optimize
-write TEST.sol
+write outputFiles/TEST.sol
 quit

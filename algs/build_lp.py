@@ -195,10 +195,10 @@ def reactomeIdToUniprot(prefix):
         words = line.split(sep)
         if words[0][0] == "P":
             aliases = words[3].split(delim)
-            print(aliases)
+            #print(aliases)
             if len(aliases) > 1:
                 UP = aliases[1].split(delim2)
-            print(UP)
+            #print(UP)
 
             D[words[0]] = UP[1]
 
@@ -235,7 +235,7 @@ def uniprotToName(prefix):
 
     in_file.close()
 
-    print("up2n: ",D)
+    #print("up2n: ",D)
 
     return D
 
@@ -476,7 +476,7 @@ def build_lp_dc(Hypergraph,outputFile):
     for key in D:
         if D[key] == True:
             ts += 1
-    print("ts: ",ts)
+    #print("ts: ",ts)
 
 
     # Open a new text file (default 'text.lp').
