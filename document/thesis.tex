@@ -96,7 +96,7 @@ breaklines=true
 %If you have two advisors for some reason, you can use the following
 \altadvisor{James D. Fix}
 %%% Remember to use the correct department!
-\department{Interdisciplinary Committee for Mathematics and Biology}
+\department{Mathematics and Biology}
 % if you're writing a thesis in an interdisciplinary major,
 % uncomment the line below and change the text as appropriate.
 % check the Senior Handbook if unsure.
@@ -185,8 +185,8 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
 
  \begin{figure}[!h]
    \begin{center}
-     \includegraphics[width=\textwidth/2]{bioinformatics_venn}
-   \caption[Fields of bioinformatics.]{A venn diagram of the intersection between the fields of biology, computer science, and statistics. This thesis is primarily concerned with the field of computational biology. Image from \url{https://genomejigsaw.wordpress.com/2015/09/27/faq/}, Marek Cmero.}
+     \includegraphics[width=\textwidth/2]{bioinfo_venn}
+   \caption[Fields of bioinformatics.]{Fields of bioinformatics. A Venn diagram of the intersection between the fields of biology, computer science, and statistics. This thesis is primarily concerned with the field of computational biology.}
    \label{fig:bioinf_venn}
    \end{center}
  \end{figure}
@@ -198,7 +198,7 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
  \begin{figure}[!h]
    \begin{center}
      \includegraphics[width=4in]{Sonic_hedgehog_pathway}
-   \caption[Sonic hedgehog signal transduction.]{A traditional representation of the Sonic Hedgehog signaling pathway. By Fred the Oysteri. The source code of this SVG is valid. This vector graphics image was created with Adobe Illustrator., GFDL, \url{https://commons.wikimedia.org/w/index.php?curid=36313869}}
+   \caption[Sonic hedgehog signal transduction.]{Sonic hedgehog signal transduction. A traditional, hand-drawn representation of the Sonic Hedgehog signaling pathway. By Fred the Oysteri. The source code of this SVG is valid. This vector graphics image was created with Adobe Illustrator., GFDL, \url{https://commons.wikimedia.org/w/index.php?curid=36313869}}
    \label{fig:shh}
    \end{center}
  \end{figure}
@@ -212,7 +212,7 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
   \begin{figure}[!h]
     \begin{center}
       \includegraphics[width=\textwidth/2]{simple_graph_du}
-    \caption[Undirected \& Directed Graphs]{A simple undirected graph (left) and its directed counterpart (right). The highlighted edge has node $D$ as its tail and $C$ as its head.}
+    \caption[Undirected \& Directed Graphs.]{Undirected \& Directed Graphs. A simple undirected graph \textit{(left)} and its directed counterpart \textit{(right)}. The vertices of both are $V=\{A,B,C,D\}$, and the edges are $E=\{E_1,E_2,E_3,E_4\}$. The highlighted edge in the directed graph ($E_4$) has node $D$ as its tail and $C$ as its head.}
     \label{fig:simple_graph_du}
     \end{center}
   \end{figure}
@@ -242,7 +242,7 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
    \begin{figure}[!h]
      \begin{center}
        \includegraphics[width=\textwidth/2]{complete_graphs}
-     \caption[Complete Graphs \textit{k}-3 and \textit{k}-4.]{Complete graphs with three and four nodes.}
+     \caption[Complete Graphs \textit{k}-3 and \textit{k}-4.]{Complete Graphs \textit{k}-3 and \textit{k}-4. Complete graphs with three and four nodes. Note that in \textit{k}-4, there exist cliques of size one, two, three, and four.}
      \label{fig:complete_graphs}
      \end{center}
    \end{figure}
@@ -302,7 +302,7 @@ Since the discovery of cells by Robert Hooke in 1665, biologists have worked tir
    \begin{figure}[!h]
      \begin{center}
        \includegraphics[width=\textwidth]{graph1}
-     \caption[Spanning and Steiner trees.]{A graph \textit{(left)} along with a spanning tree \textit{(center)} and a Steiner tree \textit{(right)} within. In the Steiner tree, the red nodes are target nodes and the black nodes are the Steiner nodes.}
+     \caption[Spanning and Steiner trees.]{Spanning and Steiner trees. A graph \textit{(left)} along with a spanning tree \textit{(center)} and a Steiner tree \textit{(right)} within. In the Steiner tree, we see two subsets of nodes: red ``target" nodes, and black ``Steiner" nodes. The target nodes are given as an input to the Steiner tree problem, while the Steiner nodes are part of the solution, but not pre-determined.}
      \label{fig:graph1}
      \end{center}
    \end{figure}
@@ -352,7 +352,7 @@ Similarly, we can define a minimum weight Steiner tree:
   \begin{figure}[!h]
     \begin{center}
       \includegraphics[width=4in]{PCST}
-    \caption[Prize-Collecting Steiner Tree]{In protein-protein interaction networks, we want to find the smallest possible subgraph that captures as much prize as possible. One way to find this is by searching for a Prize-Collecting Steiner Tree. Image (c) Copyright by Ernest Fraenkel 2016, reprinted with permission.}
+    \caption[Prize-Collecting Steiner Tree.]{Prize-Collecting Steiner Tree. In protein-protein interaction networks, we want to find the smallest possible subgraph that captures as much prize as possible. One way to find this is by searching for a Prize-Collecting Steiner Tree. In this case, we do not have the pre-determined set of target nodes, such as in \ref{fig:graph1}. Rather, a subset of nodes have prizes. Image (c) Copyright by Ernest Fraenkel 2016, reprinted with permission.}
     \label{fig:PCST}
     \end{center}
   \end{figure}
@@ -418,7 +418,7 @@ Beyond individual signal transduction pathways, it is useful to think of the set
 \begin{figure}[h]
   \begin{center}
     \includegraphics[width=\textwidth]{human_interactome}
-  \caption[Human interactome]{The entire human interactome, as displayed by the Reactome interactive pathway browser. Each dot actually represents a discrete signaling pathway.}
+  \caption[The entire human interactome.]{The entire human interactome. In this case, we see the interactome as displayed by the Reactome interactive pathway browser. Each node actually represents a discrete signaling pathway, and edges represent shared proteins or interactions.}
   \label{fig:human_interactome}
   \end{center}
 \end{figure}
@@ -435,7 +435,7 @@ One example of a cell signaling pathway that has a variety of biological consequ
 \begin{figure}[h]
   \begin{center}
     \includegraphics[width=\textwidth]{Hh-Np_secretion}
-  \caption[Hedgehog secretion in \textit{Homo sapiens}]{Hh-Np secretion, as shown by \texttt{reactome.org} in \textit{Homo sapiens}.}
+  \caption[Hedgehog secretion in \textit{Homo sapiens}.]{Hedgehog secretion in \textit{Homo sapiens}. This part of the Hedgehog signaling pathway (as shown on \texttt{reactome.org}) represents only a small subset of the entire pathway. Here, proteins, complexes, and small molecules are represented by rounded rectangles, and various types of reactions are shown by arrows connecting the rectangles.}
   \label{fig:Hh-Np_secretion}
   \end{center}
 \end{figure}
@@ -455,7 +455,7 @@ Our ultimate goal will be to show why directed hypergraphs are a good candidate 
 \begin{figure}[h]
   \begin{center}
     \includegraphics[width=\textwidth]{anna_fig}
-  \caption[The issue with standard graphs.]{Standard graphs are not always the best tool for modeling biological events. Instead, we use hypergraphs, a generalization of standard graphs that allow for more nuanced modeling. Image (c) Copyright \cite{Ritz2014a}, reprinted with permission.}
+  \caption[The issue with standard graphs.]{The issue with standard graphs. Standard graphs are not always the best tool for modeling biological events \textit{(center)} because, when we represent complex reactions as standard graphs, there is information loss \textit{(left)}. Instead, we use hypergraphs \textit{(right)}, a generalization of standard graphs that allow for more nuanced modeling. Image (c) Copyright \cite{Ritz2014a}, reprinted with permission.}
   \label{fig:anna_fig}
   \end{center}
 \end{figure}
@@ -467,7 +467,7 @@ While standard\footnote{The term ``standard" is used to describe traditional gra
 \begin{figure}[thbp]
   \begin{center}
     \includegraphics[width=\textwidth/2]{example-standard-graph}
-  \caption[A standard graph]{An example of a standard graph. All edges represent directed, pairwise interactions between two nodes. Biologically, it is difficult to extract meaningful signaling pathway information from this graph, since protein complex formation and degradation is ambiguous.}
+  \caption[An example of a standard graph.]{An example of a standard graph. All edges represent directed, pairwise interactions between two nodes. Biologically, it is difficult to extract meaningful signaling pathway information from this graph, since events such as protein complex formation and degradation are ambiguous.}
   \label{fig:example-standard-graph}
   \end{center}
 \end{figure}
@@ -481,7 +481,7 @@ To resolve the issues presented by standard graphs, we instead use a generalizat
 \begin{figure}[h]
   \begin{center}
     \includegraphics[width=\textwidth/2]{undirected_hypergraph}
-  \caption[An example undirected hypergraph]{An example of an undirected hypergraph (\cite{sharpen}), where each edge is shown by a colored region, as well as the conversion of the hypergraph to a standard graph, where each hyperedge is shown as a node (white squares).}
+  \caption[An example undirected hypergraph.]{An example of an undirected hypergraph. In this example, each hyperedge is shown by a colored region, rather than with lines (\cite{sharpen}). Additionally, there is a conversion of the hypergraph to a standard graph, where each hyperedge is shown as a node (white squares).}
   \label{fig:undirected_hypergraph}
   \end{center}
 \end{figure}
@@ -493,7 +493,7 @@ We formally define a directed hypergraph, $\mathcal{H}$, as a pair $(V,E)$, wher
 \begin{figure}[thbp]
   \begin{center}
     \includegraphics[width=\textwidth/2]{example-hypergraph}
-  \caption[An example directed hypergraph]{An example of the hypergraph, $\mathcal{H}=(V,E)$ that corresponds to the standard graph shown in Figure \ref{fig:example-standard-graph}. Note that each edge now contains more specific information about the propogation of a signal through the network. For this example, $V=\{A,B,...,M\}$ and each hyperedge is shown by a compound arrow, for example the edge whose tail is node $A$ and whose tail is nodes $B$ and $D$.}
+  \caption[An example directed hypergraph.]{An example directed hypergraph. This hypergraph, $\mathcal{H}=(V,E)$ corresponds to the standard graph shown in Figure \ref{fig:example-standard-graph}. Note that each edge now contains more specific information about the propagation of a signal through the network. For this example, $V=\{A,B,...,M\}$ and each hyperedge is shown by a compound arrow, for example the edge whose tail is node $A$ and whose tail is nodes $B$ and $D$.}
   \label{fig:example-hypergraph}
   \end{center}
 \end{figure}
@@ -503,7 +503,7 @@ It is important to note that a standard directed graph is a special case of a di
 \begin{figure}[thbp]
   \begin{center}
     \includegraphics[width=\textwidth]{example-hypergraph-weighted}
-  \caption[A weighted hypergraph]{The same hypergraph as in \ref{fig:example-hypergraph}, now weighted with node prizes (inner color) and root penalties (outer color). Edge thickness corresponds with edge weight. Intuitively, to find the PCSHN for this hypergraph, we want to find the subnetwork that maximizes the amount of blue, and minimizes the amount of both red nodes and thick lines.}
+  \caption[A weighted hypergraph.]{A weighted hypergraph. This is the same hypergraph as in Figure \ref{fig:example-hypergraph}, now weighted with node prizes (inner color) and root penalties (outer color). Edge thickness corresponds with edge weight. Intuitively, to find the PCSHN for this hypergraph, we want to find the subnetwork that maximizes the amount of blue, and minimizes the amount of both red nodes and thick lines.}
   \label{fig:example-hypergraph-weighted}
   \end{center}
 \end{figure}
@@ -520,7 +520,7 @@ There are two types of hyperpaths that we find particularly interesting, as they
 \begin{figure}[!h]
   \begin{center}
     \includegraphics[width=\textwidth/2]{BF-hyperpaths}
-  \caption[Simple B-Hypergrah and F-Hypergraph.]{\textit{left }A very simple example of a B-hyperpath. \textit{right }A simple example of an F-hyperpath. Note that even though both of these paths contain only one hyperedge, there may be longer hyperpaths, as long as they follow the same structure.}
+  \caption[Simple B-Hypergrah and F-Hypergraph.]{Simple B-Hypergrah and F-Hypergraph. \textit{(left) }A very simple example of a B-hyperpath. \textit{(right) }A simple example of an F-hyperpath. Note that even though both of these paths contain only one hyperedge, there may be longer hyperpaths, as long as they follow the same branching or funneling structure.}
   \label{fig:BF-hyperpaths}
   \end{center}
 \end{figure}
@@ -558,7 +558,7 @@ We can now say that $s$ is \textit{B-connected} to some node $t$ if $t \in \math
 \begin{figure}[h]
   \begin{center}
     \includegraphics[width=\textwidth]{B-hypergraph}
-  \caption[B-connectivity.]{\textit{left }A hypergraph $s$ is B-connected to all nodes, when a loose head is added \textit{right} $s$ is no longer B-connected to the head of that edge (shown in red).}
+  \caption[B-connectivity.]{B-connectivity. \textit{(left) }A hypergraph in which node $s$ is B-connected to all nodes. When a loose head is added \textit{(right)} $s$ is no longer B-connected to the head of that edge (shown in red).}
   \label{fig:B-Hypergraph}
   \end{center}
 \end{figure}
@@ -643,7 +643,7 @@ We call the induced hypergraph of $A$ the BF-Hypershrub, $\mathcal{BF}$.\par
 \begin{figure}[!h]
   \begin{center}
     \includegraphics[width=3in]{BF-hypershrub}
-  \caption[Hypershrub.]{A Hypershrub, with edge set $A$. The roots, $D(A)$ are shown in chestnut and the leaves, $C(A)$ in kelly green. All of the black nodes represent $H(A) \cap T(A)$.}
+  \caption[A Hypershrub $\mathcal{S}$ with edge set $A$.]{A Hypershrub $\mathcal{S}$ with edge set $A$. The roots, $D(A)$ are shown in chestnut and the leaves, $C(A)$ in kelly green. All of the black nodes represent $H(A) \cap T(A)$.}
   \label{fig:BF-hypershrub}
   \end{center}
 \end{figure}
@@ -739,7 +739,7 @@ Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\al
     \end{tabular}%
     \par\vspace{0pt}
   \end{minipage}
-\caption[A small hypergraph, with node and edge data]{A simple hypergraph, and its associated node and edge weights.}
+\caption[A small hypergraph, with node and edge data.]{A small hypergraph, with node and hyperedge data. \textit{(left)} A hypergraph $\mathcal{H}$ where $V=\{A,B,C,D\}$ and $E=\{E_1,E_2\}$. Node $D$ is shown in red because it is treated as a ``target," that is, it cannot be a dangling node in the solution. \textit{(center)} A table showing prizes ($g_v$) and loose root penalties ($h_v$) for each node in $\mathcal{H}$. \textit{(right)} A table showing hyperedgeedge costs ($c_e$) for each hyperedge in $\mathcal{H}$.}
 \label{fig:dummy-before}
 \end{figure}
 
@@ -748,7 +748,7 @@ Here, the objective function \eqref{eq:ilpsum} tries combinations of nodes ($\al
 \begin{table}[!h]
 \begin{center}
   \label{tab:obj_values_dummy}
-  \caption[Objective values of dummy hypergraph.]{All of the possible solutions that satisfy all necessary linear constraints, and their corresponding objective values. We see that the induced subgraph from $E_1$ yields the optimal solution.}
+  \caption[Objective values of dummy hypergraph.]{Objective values of dummy hypergraph. All of the possible solutions that satisfy all necessary linear constraints, and their corresponding objective values. We see that the induced subgraph from $E_1$ yields the optimal solution.}
 \begin{tabular}{ |l|l|l| }%
   \hline%
   \multicolumn{3}{|c|}{Subgraphs} \\%
@@ -805,7 +805,7 @@ When we implement the ILP in a more complex hypergraph, such as the hypergraph s
 \begin{figure}[hp]
   \begin{center}
     \includegraphics[width=\textwidth]{example-hypergraph-weighted-after-ILP}
-  \caption[Output from ILP with disconnected sub-hypergraphs]{The output of our ILP, when it is run on the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}. The dashed arrows indicate a root node.}
+  \caption[Output from ILP with disconnected sub-hypergraphs.]{Output from ILP with disconnected sub-hypergraphs. The output of our ILP, when it is run on the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}. The dashed arrows indicate a root node.}
   \label{fig:example-hypergraph-weighted-after-ILP}
   \end{center}
 \end{figure}
@@ -831,7 +831,7 @@ Similarly to in the original constraint \eqref{eq:ilpdang1}, constraint \eqref{e
 \begin{figure}[hp]
   \begin{center}
     \includegraphics[width=\textwidth]{example-hypergraph-weighted_DC}
-  \caption[Output from ILP after Roots and Leaves.]{The output of our ILP, when it is run on the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}, also taking the Roots and Leaves problem into account.}
+  \caption[Output from ILP after Roots and Leaves.]{Output from ILP after Roots and Leaves. The output of our ILP, when it is run on the hypergraph shown in Figure \ref{fig:example-hypergraph-weighted}, also taking the Roots and Leaves problem into account.}
   \label{fig:example-hypergraph-weighted_DC}
   \end{center}
 \end{figure}
@@ -841,7 +841,7 @@ Similarly to in the original constraint \eqref{eq:ilpdang1}, constraint \eqref{e
 \begin{table}[!h]
 \begin{center}
   \label{tab:build_lp_runtimes}
-  \caption[Runtimes of ``build lp" programs.]{Four datasets of increasing size, and how long they take to be converted into \textit{.lp} files using both the original formulation (\textit{blp}) and the formulation that takes into account the roots and leaves problem (\textit{blprl}). Input files are the dummy hypergraph used in \ref{fig:dummy-before}, the example hypergraph from \ref{fig:example-hypergraph-weighted}, the Hedgehog signaling pathway, and the entire Reactome database for \textit{A. thaliana}. All times are in seconds.}
+  \caption[Three datasets of increasing size.]{Three datasets of increasing size, and how long they take to be converted into \textit{.lp} files using both the original formulation (\textit{blp}) and the formulation that takes into account the roots and leaves problem (\textit{blprl}). Input files are the dummy hypergraph used in \ref{fig:dummy-before}, the example hypergraph from \ref{fig:example-hypergraph-weighted}, and the Hedgehog signaling pathway. All times are in seconds.}
 \begin{tabular}{ |l||l|l|l|l|l|l| }%
   \hline%
   Hypergraph & Nodes & Edges & Time(\textit{blp}) & Time(\textit{blprl}) & Lines(\textit{blp}) & Lines(\textit{blprl}) \\%
@@ -900,14 +900,14 @@ To analyze how the Prize-Collecting Subhypernetwork formulation performs on real
    \begin{figure}
      \centering
      \includegraphics[width=0.8\linewidth]{Hh_nodes}
-     \caption{The number of nodes as a function of default node prize and root penalty included in the solution to the weighted subhypernetwork problem. }
+     \caption[Nodes included in the solution.]{Nodes included in the solution. After running the weighted subhypernetwork ILP with varying default node prizes and loose root penalties, we find different numbers of nodes that are included in the solution. We are particularly interested in the region between prizes of 2.5 and 7.5, and between penalties of 5 and 10, where there are more nodes included than one might expect.}
      \label{fig:Hh_nodes}
    \end{figure}%
 
    \begin{figure}
      \centering
      \includegraphics[width=0.8\linewidth]{Hh_hyperedges}
-     \caption{The number of hyperedges as a function of default node prize and root penalty included in the solution to the weighted subhypernetwork problem.}
+     \caption[Hyperedges included in the solution.]{Hyperedges included in the solution. After running the weighted subhypernetwork ILP with varying default node prizes and loose root penalties, we find different numbers of hyperedges that are included in the solution. We are particularly interested in the region between prizes of 2.5 and 7.5, and between penalties of 5 and 10, where there are more nodes included than one might expect. This region is shared between both node and hyperedge overlap, further indicating that it may be a place where some biologically interesting phenomenon may be taking place.}
      \label{fig:Hh_hyperedges}
    \end{figure}
 
@@ -938,7 +938,7 @@ To analyze how the Prize-Collecting Subhypernetwork formulation performs on real
     \begin{figure}[!h]
       \begin{center}
         \includegraphics[width=\textwidth]{Hh-signaling-output}
-      \caption[B-connectivity.]{A subset of the output hypergraph from out Roots and Leaves implementation of the weighted subhypernetwork ILP. Gray hyperedges show that the the node was in the head or tail of some other hyperedges in the solution, outside of the \textit{Hedgehog `on' state}. Node prizes are shown inside of the nodes.}
+      \caption[B-connectivity.]{B-connectivity. A subset of the output hypergraph from out Roots and Leaves implementation of the weighted subhypernetwork ILP. Gray hyperedges show that the the node was in the head or tail of some other hyperedges in the solution, outside of the \textit{Hedgehog `on' state}. Node prizes are shown inside of the nodes.}
       \label{fig:Hh-signaling-output}
       \end{center}
     \end{figure}
@@ -975,7 +975,7 @@ To analyze how the Prize-Collecting Subhypernetwork formulation performs on real
    \begin{figure}[h]
      \begin{center}
        \includegraphics[width=\textwidth]{at_hh}
-     \caption[\textit{Arabidopsis thaliana} Hedgehog pathway]{The Reactome Hedgehog signaling pathway in \textit{A. thaliana}. For this pathway, and many others, the Reactome database is very sparse relative to the orthologous pathways in humans, and is therefore not very useful for implementing network algorithms, at this point.}
+     \caption[\textit{Arabidopsis thaliana} Hedgehog pathway.]{\textit{Arabidopsis thaliana} Hedgehog pathway. For this pathway, and many others, the Reactome database is very sparse relative to the orthologous pathways in humans, and is therefore not very useful for implementing network algorithms, at this point.}
      \label{fig:at_hh}
      \end{center}
    \end{figure}
@@ -985,7 +985,7 @@ To analyze how the Prize-Collecting Subhypernetwork formulation performs on real
    \begin{figure}[h]
      \begin{center}
        \includegraphics[width=\textwidth]{at_interactome}
-     \caption[\textit{Arabidopsis thaliana} interactome]{The entire \textit{A. thaliana}  interactome, as displayed by the Reactome interactive pathway browser. This interactome is similar in size and structure to the human interactome seen in \ref{fig:human_interactome}, though somewhat smaller. This makes it a better candidate for running network algorithms that may not be optimized for a network as large as the human interactome.}
+     \caption[The entire \textit{A. thaliana} interactome.]{The entire \textit{A. thaliana}  interactome. This interactome is similar in size and structure to the human interactome seen in Figure \ref{fig:human_interactome}, though somewhat smaller. This makes it a better candidate for running network algorithms that may not be optimized for a network as large as the human interactome.}
      \label{fig:at_interactome}
      \end{center}
    \end{figure}
